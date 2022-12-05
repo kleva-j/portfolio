@@ -4,7 +4,7 @@ import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/',
+	base: '/portfolio/',
 	plugins: [react(), tsconfigPaths()],
 	build: {
 		sourcemap: true
