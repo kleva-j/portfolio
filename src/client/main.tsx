@@ -33,16 +33,7 @@ const router = createReactRouter({
 function MainApp() {
 	const [trpcClient] = useState(() =>
 		trpc.createClient({
-			links: [
-				httpBatchLink({
-					url: 'http://localhost:4000',
-					headers() {
-						return {
-							// authorization: getAuthCookie(),
-						};
-					}
-				})
-			]
+			links: [httpBatchLink({ url: 'http://localhost:4000' })]
 		})
 	);
 

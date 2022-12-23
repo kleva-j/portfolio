@@ -36,10 +36,7 @@ export const applyTheme = (theme: string): void => {
 	const root = document.documentElement;
 
 	Object.keys(themeObject).forEach((property) => {
-		if (property === 'name') {
-			return;
-		}
-
+		if (property === 'name') return;
 		root.style.setProperty(property, themeObject[property]);
 	});
 };

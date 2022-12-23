@@ -8,7 +8,7 @@ interface Props {
 	setTheme: (theme: string) => void;
 }
 
-export const ThemePalette = (props: Props) => {
+export const ThemeDropdown = (props: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleSelect = (item: string) => () => {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Logo } from '@app/components/Logo';
-import { ThemePalette } from '@app/components/ThemePalette';
+import { ThemeDropdown } from '@app/components/ThemeDropdown';
 import { UseAppContext } from '@app/context';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
@@ -13,8 +13,8 @@ type NavItem = {
 };
 
 const links: NavItem[] = [
-	{ to: '/works', label: 'Works' },
-	{ to: '/contact', label: 'Contact' }
+	{ to: '/portfolio/works', label: 'Works' },
+	{ to: '/portfolio/contact', label: 'Contact' }
 ];
 
 export const Navbar = () => {
@@ -25,7 +25,7 @@ export const Navbar = () => {
 		<header className="flex items-center justify-between py-3 px-5">
 			<Logo />
 			<div className="flex items-center gap-5">
-				<ThemePalette theme={theme} setTheme={setTheme} />
+				<ThemeDropdown theme={theme} setTheme={setTheme} />
 				<div className="hidden md:flex md:gap-3">
 					{links.map(({ label, to }) => (
 						<div key={label} className="flex items-center text-sm">
