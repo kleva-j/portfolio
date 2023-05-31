@@ -1,5 +1,4 @@
 import { Index } from '@app/components';
-import { Navbar } from '@app/components/Nav';
 import { DEFAULT_THEME } from 'src/themes';
 import { applyTheme } from 'src/themes/utils';
 
@@ -10,7 +9,7 @@ applyTheme(DEFAULT_THEME);
 function App() {
 	return (
 		<section className="relative border-[8px] border-secondary bg-primary h-screen">
-			<Navbar />
+			{/* <Navbar /> */}
 			<Index />
 		</section>
 	);
