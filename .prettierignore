@@ -1,3 +1,10 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Byte-exact vendored ThreeUI registered source — must not be reformatted.
+# Reflowing these breaks their verified SHA-256. See docs/THREEUI.md.
+public/landing-pages/complete-shelf-v2.html
+src/shaders/threeui.css
+src/shaders/landing-pages/LandingPageFrame.tsx
+src/shaders/landing-pages/LandingPages.tsx

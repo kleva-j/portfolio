@@ -15,6 +15,13 @@ export default [
     },
   },
   {
-    ignores: ["eslint.config.js", ".prettierrc"],
+    // Byte-exact vendored ThreeUI registered source — must not be rewritten by
+    // lint autofix. See docs/THREEUI.md.
+    ignores: [
+      "eslint.config.js",
+      ".prettierrc",
+      "src/shaders/landing-pages/LandingPageFrame.tsx",
+      "src/shaders/landing-pages/LandingPages.tsx",
+    ],
   },
 ]
