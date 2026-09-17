@@ -131,3 +131,12 @@
     @apply font-sans;
     }
 }
+
+/* Full-viewport stage for the ThreeUI landing-page frame, whose iframe fills
+   its container absolutely. */
+.shader-frame {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+}
