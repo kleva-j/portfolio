@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { FullWidthDivider } from "@/components/full-width-divider";
 
 export const Route = createFileRoute("/")({ component: App });
 
@@ -8,7 +10,8 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="flex min-h-svh p-6 max-w-4xl mx-auto border-x">
+      <FullWidthDivider />
+      <div className="mx-auto flex min-h-svh max-w-4xl border-x p-6">
         <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
           <div>
             <h1 className="font-medium">Project ready!</h1>
@@ -18,6 +21,8 @@ function App() {
           </div>
         </div>
       </div>
+      <FullWidthDivider />
+      <Footer />
     </div>
   );
 }
