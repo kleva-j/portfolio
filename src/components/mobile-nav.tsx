@@ -1,7 +1,7 @@
 import { Portal, PortalBackdrop } from "@/components/portal";
+import { XIcon, ListIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { navLinks } from "@/components/header";
-import { XIcon, MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export function MobileNav() {
         {open ? (
           <XIcon className="size-4.5" />
         ) : (
-          <MenuIcon className="size-4.5" />
+          <ListIcon className="size-4.5" />
         )}
       </Button>
       {open && (
@@ -33,7 +33,7 @@ export function MobileNav() {
               "ease-out data-[slot=open]:animate-in data-[slot=open]:zoom-in-97",
               "size-full p-4",
             )}
-            data-slot="open"
+            data-slot={open ? "open" : "closed"}
           >
             <div className="grid gap-y-2">
               {navLinks.map((link) => (

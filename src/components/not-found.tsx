@@ -1,5 +1,5 @@
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { HomeIcon, CompassIcon } from "lucide-react";
+import { HouseIcon, CompassIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 
@@ -30,7 +30,7 @@ export function NotFoundPage() {
             <EmptyContent>
               <div className="flex gap-2">
                 <Button render={<Link to="/" />} nativeButton={false}>
-                  <HomeIcon data-icon="inline-start" />
+                  <HouseIcon data-icon="inline-start" />
                   Go Home
                 </Button>
 

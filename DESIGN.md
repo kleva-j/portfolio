@@ -131,9 +131,9 @@ Reserve it — if everything is copper, nothing is.
 
 ## 8. Iconography
 
-- **`lucide-react`**, sized to the text it sits with (typically 16–20px),
-  `currentColor`, consistent stroke. Icons support labels; they don't replace
-  them for primary actions.
+- **`@phosphor-icons/react`**, sized to the text it sits with (typically 16–20px),
+  `currentColor`, consistent weight (default `regular`). Icons support labels; they
+  don't replace them for primary actions.
 
 ## 9. Components
 
