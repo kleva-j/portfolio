@@ -30,7 +30,7 @@ Read this before editing anything under `src/shaders/**` or the shelf HTML asset
 
 Everything below is registered ThreeUI source. **Never reformat, "clean up,"
 re-indent, or let Prettier/ESLint rewrite any of it.** The `.tsx` files are
-excluded from Prettier (`.prettierignore`) and ESLint (`eslint.config.js`) for
+excluded from Prettier (`.prettierignore`) and ESLint (`eslint.config.ts`) for
 exactly this reason — keep them there.
 
 Two groups, because two of the files are shipped verbatim and two are registered

@@ -41,6 +41,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6",
     "eslint": "^9",
+    "jiti": "^2.7.0",
     "jsdom": "^30",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",

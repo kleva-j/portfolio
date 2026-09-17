@@ -1,5 +1,3 @@
-//  @ts-check
-
 import { tanstackConfig } from "@tanstack/eslint-config"
 
 export default [
@@ -18,7 +16,7 @@ export default [
     // Byte-exact vendored ThreeUI registered source — must not be rewritten by
     // lint autofix. See docs/THREEUI.md.
     ignores: [
-      "eslint.config.js",
+      "eslint.config.ts",
       ".prettierrc",
       "src/shaders/landing-pages/LandingPageFrame.tsx",
       "src/shaders/landing-pages/LandingPages.tsx",
