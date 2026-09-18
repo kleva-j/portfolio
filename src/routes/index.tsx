@@ -28,8 +28,8 @@ function App() {
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
             Hi 👋🏻, I'm currently building PairSync, PairSync is an open-source,
             cross-platform, peer-to-peer (P2P) file and clipboard sharing
-            solution. I work across product engineering, software architecture and
-            mobile development.
+            solution. I work across product engineering, software architecture
+            and mobile development.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button render={<a href={contactHref} />} nativeButton={false}>
