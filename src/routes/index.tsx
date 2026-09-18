@@ -1,26 +1,73 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Header, contactHref } from "@/components/header";
+import { FeatureCard } from "@/components/feature-card";
+import { Button } from "@/components/ui/button";
+import { Footer } from "@/components/footer";
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [{ title: "Michael Obasi" }, { name: "description", content: "" }],
+  }),
+  component: App,
+});
 
 function App() {
   return (
     <div>
       <Header />
-      <FullWidthDivider />
-      <div className="mx-auto flex min-h-svh max-w-4xl border-x p-6">
-        <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-          <div>
-            <h1 className="font-medium">Project ready!</h1>
-            <p>You may now add components and start building.</p>
-            <p>We&apos;ve already added the button component for you.</p>
-            <Button className="mt-2">Button</Button>
+      <main
+        id="main-content"
+        className="mx-auto min-h-[calc(100svh-var(--header-height)-var(--footer-height))] max-w-3xl py-6"
+      >
+        <section className="px-6 sm:py-14">
+          <p className="text-sm text-muted-foreground">Software Engineer</p>
+          <h1 className="mt-4 font-heading text-4xl font-medium tracking-tight sm:text-4xl">
+            Hey, I'm Michael.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Hi 👋🏻, I'm currently building PairSync, PairSync is an open-source,
+            cross-platform, peer-to-peer (P2P) file and clipboard sharing
+            solution. I work across product engineering, software architecture and
+            mobile development.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button render={<a href={contactHref} />} nativeButton={false}>
+              Get in touch
+            </Button>
+            <Button
+              variant="outline"
+              render={<Link to="/design-arena" />}
+              nativeButton={false}
+            >
+              See the design arena
+            </Button>
           </div>
-        </div>
-      </div>
+        </section>
+
+        <section className="space-y-1">
+          <FeatureCard
+            title="Spotlight"
+            description="Recent shipped work, personal tools, and open source activity."
+          />
+          <div className="h-1 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
+          <FeatureCard
+            title="Career"
+            description="Overall I have 6+ years of experience in software development."
+          />
+          <div className="h-1 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
+          <FeatureCard
+            title="Selected Project"
+            description="Visualize your data with drag-and-drop widgets."
+          />
+          <div className="h-1 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
+          <FeatureCard
+            title="Writing"
+            description="Recent articles, essays, and technical writing."
+          />
+        </section>
+      </main>
+
       <FullWidthDivider />
       <Footer />
     </div>
