@@ -1,14 +1,10 @@
-import { FileTextIcon, EnvelopeSimpleIcon } from "@phosphor-icons/react";
+import { EnvelopeSimpleIcon } from "@phosphor-icons/react";
 import { FullWidthDivider } from "@/components/full-width-divider";
 import { Header, contactHref } from "@/components/header";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
-
-// TODO: replace with a self-hosted résumé (e.g. public/michael-obasi-cv.pdf) or
-// an external link before merge.
-const resumeHref = "/resume.pdf";
 
 // TODO: confirm the PairSync repository URL.
 const projectHref = "https://github.com/kleva-j/pairsync";
@@ -30,15 +26,19 @@ const experience = [
   ["2019 – 2021", "Software Engineer", "Andela"],
 ] as const;
 
+const pageTitle = "About — Michael Obasi";
+const pageDescription =
+  "Michael Obasi — a software engineer with 6+ years across product engineering, systems, and cross-platform mobile.";
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Michael Obasi" },
-      {
-        name: "description",
-        content:
-          "Michael Obasi — a software engineer with 6+ years across product engineering, systems, and cross-platform mobile.",
-      },
+      { title: pageTitle },
+      { name: "description", content: pageDescription },
+      { property: "og:title", content: pageTitle },
+      { property: "og:description", content: pageDescription },
+      { name: "twitter:title", content: pageTitle },
+      { name: "twitter:description", content: pageDescription },
     ],
   }),
   component: About,
@@ -84,15 +84,14 @@ function About() {
 
           <div className="mt-10 space-y-5 border-t border-border pt-8">
             <p className="text-lg leading-relaxed text-pretty">
-              I'm Michael — a software engineer with 6+ years across the stack.
-              I care about systems that are fast, legible, and kind to the
-              people who maintain them.
+              Hi 👋🏻, I'm Michael — a software engineer who loves exploring,
+              building and shiping new application that solves something. I
+              care about reliable systems that are fast, legible, and kind to the people
+              who maintain them.
             </p>
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
               My work spans product engineering at early-stage startups, backend
-              systems, and cross-platform mobile. I've taken consumer products
-              from zero to production and maintained open-source tooling other
-              developers rely on.
+              systems, and cross-platform mobile.
             </p>
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
               Right now I'm building{" "}
@@ -151,15 +150,6 @@ function About() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
-              <Button
-                variant="outline"
-                render={<a href={resumeHref} />}
-                nativeButton={false}
-              >
-                <FileTextIcon /> View full résumé
-              </Button>
-            </div>
           </div>
 
           <div className="mt-10 border-t border-border pt-8">
