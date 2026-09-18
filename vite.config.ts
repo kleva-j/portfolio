@@ -1,5 +1,6 @@
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { devtools } from "@tanstack/devtools-vite";
+import { nitro } from "nitro/vite";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 
@@ -23,7 +24,7 @@ const config = defineConfig({
       { find: /^@designcodeio\/threeui$/, replacement: threeuiEntry },
     ],
   },
-  plugins: [devtools(), tailwindcss(), tanstackStart(), viteReact()],
+  plugins: [devtools(), tailwindcss(), tanstackStart(), nitro(), viteReact()],
 });
 
 export default config;
