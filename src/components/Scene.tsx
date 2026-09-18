@@ -1,4 +1,5 @@
 import { CompleteShelfLandingPage } from "@designcodeio/threeui";
+
 import "@designcodeio/threeui/style.css";
 
 export function Scene() {
