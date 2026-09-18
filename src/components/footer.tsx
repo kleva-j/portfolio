@@ -2,6 +2,11 @@ import { LinkedinLogoIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
+const footerLinks = [
+  { label: "Writing", href: "/writing" },
+  { label: "About", href: "/about" },
+];
+
 const socialLinks = [
   {
     icon: <GithubLogoIcon weight="bold" />,
@@ -17,30 +22,22 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative mx-auto max-w-4xl *:px-4 *:md:px-6 lg:border-x">
-      <div className="flex items-center justify-between gap-4 py-4 text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} KLEVA-J</p>
+    <footer className="relative mx-auto max-w-3xl *:px-4 *:md:px-6 lg:border-x">
+      <div className="flex min-h-(--footer-height) items-center justify-between gap-4 text-sm text-muted-foreground">
+        <p>&copy; {new Date().getFullYear()} MICHAEL OBASI</p>
 
         <div className="flex items-center gap-3">
-          <p className="mr-2 inline-flex items-center gap-2">
-            <span>Built by</span>
-            <a
-              aria-label="Michael on GitHub"
-              className="inline-flex items-center gap-1 text-foreground/80 hover:text-foreground hover:underline"
-              href="https://github.com/kleva-j"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <img
-                alt="Michael"
-                className="size-4 rounded-full grayscale"
-                src="/images/michael.jpg"
-                height={16}
-                width={16}
-              />
-              <span>Michael</span>
-            </a>
-          </p>
+          <nav aria-label="Footer" className="flex items-center gap-4">
+            {footerLinks.map(({ href, label }) => (
+              <a
+                key={label}
+                className="transition-colors hover:text-foreground"
+                href={href}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
           <Separator orientation="vertical" className="my-auto h-6" />
           <div className="flex items-center">
             {socialLinks.map(({ href, label, icon }) => (

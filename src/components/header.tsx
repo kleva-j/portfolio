@@ -1,14 +1,12 @@
-import { MobileNav } from "@/components/mobile-nav";
+import { Link } from "@tanstack/react-router";
+
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/use-scroll";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-export const navLinks = [
-  { label: "Features", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "About", href: "#" },
-];
+export const contactHref = "mailto:kasmickleva@gmail.com";
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -20,31 +18,24 @@ export function Header() {
           scrolled,
       })}
     >
-      <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
-        <a
-          className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
-          href="#"
+      <nav className="mx-auto flex h-(--header-height) w-full max-w-4xl items-center justify-between px-4">
+        <Link
+          className="-mx-2 rounded-md px-2 py-1 transition-colors hover:text-primary"
+          to="/"
         >
-          <Logo className="h-4" />
-        </a>
-        <div className="hidden items-center gap-2 md:flex">
-          {navLinks.map((link) => (
-            <Button
-              key={link.label}
-              size="sm"
-              variant="ghost"
-              render={<a href={link.href} />}
-              nativeButton={false}
-            >
-              {link.label}
-            </Button>
-          ))}
-          <Button size="sm" variant="outline">
-            Sign In
+          <Logo />
+        </Link>
+        <div className="flex items-center gap-1">
+          <ModeToggle />
+          <Button
+            size="sm"
+            variant="outline"
+            render={<a href={contactHref} />}
+            nativeButton={false}
+          >
+            Get in touch
           </Button>
-          <Button size="sm">Get Started</Button>
         </div>
-        <MobileNav />
       </nav>
     </header>
   );
