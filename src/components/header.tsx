@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
 import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/use-scroll";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
@@ -27,14 +26,6 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-1">
           <ModeToggle />
-          <Button
-            size="sm"
-            variant="outline"
-            render={<a href={contactHref} />}
-            nativeButton={false}
-          >
-            Get in touch
-          </Button>
         </div>
       </nav>
     </header>

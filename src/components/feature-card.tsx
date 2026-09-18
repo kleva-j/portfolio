@@ -17,7 +17,6 @@ export function FeatureCard({
       className={cn(
         "relative flex flex-col justify-between gap-6 bg-background px-6 pt-8 pb-6 shadow-xs",
         // Gradient inspired by testimonials
-        "dark:bg-[radial-gradient(50%_80%_at_25%_0%,--theme(--color-foreground/.1),transparent)]",
         className,
       )}
       {...props}

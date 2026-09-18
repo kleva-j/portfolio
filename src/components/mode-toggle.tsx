@@ -1,3 +1,5 @@
+import type { ButtonProps } from "@/components/ui/button";
+
 import { DesktopIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 
 import { useTheme } from "@/components/theme-provider";
@@ -17,7 +19,7 @@ const icon = {
   system: DesktopIcon,
 } as const;
 
-export function ModeToggle({ className }: { className?: string }) {
+export function ModeToggle({ className, ...props }: ButtonProps) {
   const { theme, setTheme } = useTheme();
 
   const next = order[(order.indexOf(theme) + 1) % order.length];
@@ -30,8 +32,9 @@ export function ModeToggle({ className }: { className?: string }) {
       onClick={() => setTheme(next)}
       size="icon"
       variant="ghost"
+      {...props}
     >
-      <Icon />
+      <Icon weight="bold" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
