@@ -109,8 +109,11 @@ Reserve it — if everything is copper, nothing is.
 ## 6. Shape, borders & elevation
 
 - **Radius: `--radius: 0`.** Square corners everywhere by default. The `--radius-*`
-  steps in `@theme inline` scale _from_ this base, so raising the base later
-  reshapes the whole system from one value.
+  steps in `@theme inline` are **multiplicative** factors of this base
+  (`sm` ×0.6, `md` ×0.8, `lg` ×1, `xl` ×1.4, `2xl` ×1.8, `3xl` ×2.2, `4xl` ×2.6),
+  so at `--radius: 0` every step resolves to `0` and corners stay square
+  site-wide. Raising the base reshapes the whole system from one value while the
+  ratios between steps hold.
 - **Borders over shadows.** Separation comes from hairline `--border` rules and
   whitespace. Avoid drop shadows and heavy elevation; this is a flat, printed
   aesthetic.
