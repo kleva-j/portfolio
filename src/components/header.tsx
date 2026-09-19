@@ -5,8 +5,6 @@ import { useScroll } from "@/hooks/use-scroll";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-export const contactHref = "mailto:kasmickleva@gmail.com";
-
 export function Header() {
   const scrolled = useScroll(10);
 
