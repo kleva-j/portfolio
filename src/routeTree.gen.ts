@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as CanvasCrowdRouteImport } from './routes/canvas-crowd'
 import { Route as DesignArenaRouteImport } from './routes/design-arena'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CanvasCrowdRoute = CanvasCrowdRouteImport.update({
+  id: '/canvas-crowd',
+  path: '/canvas-crowd',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignArenaRoute = DesignArenaRouteImport.update({
   id: '/design-arena',
   path: '/design-arena',
@@ -32,30 +38,34 @@ const DesignArenaRoute = DesignArenaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/canvas-crowd': typeof CanvasCrowdRoute
   '/design-arena': typeof DesignArenaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/canvas-crowd': typeof CanvasCrowdRoute
   '/design-arena': typeof DesignArenaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/canvas-crowd': typeof CanvasCrowdRoute
   '/design-arena': typeof DesignArenaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/design-arena'
+  fullPaths: '/' | '/about' | '/canvas-crowd' | '/design-arena'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/design-arena'
-  id: '__root__' | '/' | '/about' | '/design-arena'
+  to: '/' | '/about' | '/canvas-crowd' | '/design-arena'
+  id: '__root__' | '/' | '/about' | '/canvas-crowd' | '/design-arena'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CanvasCrowdRoute: typeof CanvasCrowdRoute
   DesignArenaRoute: typeof DesignArenaRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/canvas-crowd': {
+      id: '/canvas-crowd'
+      path: '/canvas-crowd'
+      fullPath: '/canvas-crowd'
+      preLoaderRoute: typeof CanvasCrowdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/design-arena': {
       id: '/design-arena'
       path: '/design-arena'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CanvasCrowdRoute: CanvasCrowdRoute,
   DesignArenaRoute: DesignArenaRoute,
 }
 export const routeTree = rootRouteImport
