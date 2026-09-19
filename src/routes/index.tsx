@@ -5,6 +5,7 @@ import { FeatureCard } from "@/components/feature-card";
 import { CareerCard } from "@/components/career-card";
 import { Separator } from "@/components/ui/separator";
 import { DecorIcon } from "@/components/decor-icon";
+import { Projects } from "@/components/projects";
 import { Writings } from "@/components/writings";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
@@ -134,10 +135,7 @@ function App() {
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <CareerCard />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
-          <FeatureCard
-            title="Selected Project"
-            description="PairSync — cross-platform P2P file sync. Open source, written in Tauri & React-Native."
-          />
+          <Projects />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <Writings />
         </section>
