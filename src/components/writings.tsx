@@ -98,7 +98,7 @@ function WritingCard({
           aria-hidden="true"
           className="size-0.5 rounded-full bg-muted-foreground/60"
         />
-        <time className="tracking-normal tabular-nums">{date}</time>
+        <time className="font-mono tracking-normal tabular-nums">{date}</time>
       </div>
       <h3 className="mt-3 line-clamp-2 text-sm leading-snug font-medium text-foreground md:text-base">
         {title}

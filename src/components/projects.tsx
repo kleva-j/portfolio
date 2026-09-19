@@ -93,7 +93,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           <span className="hidden text-[11px] tracking-[0.1em] text-muted-foreground uppercase sm:inline">
             {role}
           </span>
-          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 text-[11px] text-muted-foreground tabular-nums">
+          <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] text-muted-foreground tabular-nums">
             {year}
             <ArrowUpRightIcon
               className="size-3.5 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary motion-reduce:transition-none"
