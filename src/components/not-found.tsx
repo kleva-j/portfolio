@@ -33,7 +33,7 @@ export function NotFoundPage() {
 
             <Button
               variant="outline"
-              render={<Link to="/design-arena" />}
+              render={<Link to="/arena/design-arena" />}
               nativeButton={false}
             >
               <CompassIcon data-icon="inline-start" />

@@ -1,7 +1,7 @@
 import { CrowdCanvas } from "@/components/ui/skiper-ui/crowd-canvas";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/canvas-crowd")({
+export const Route = createFileRoute("/arena/canvas-crowd")({
   component: RouteComponent,
 });
 

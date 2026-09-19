@@ -11,8 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as CanvasCrowdRouteImport } from './routes/canvas-crowd'
-import { Route as DesignArenaRouteImport } from './routes/design-arena'
+import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
+import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
+import { Route as ArenaDesignArenaRouteImport } from './routes/arena/design-arena'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -24,49 +25,74 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CanvasCrowdRoute = CanvasCrowdRouteImport.update({
-  id: '/canvas-crowd',
-  path: '/canvas-crowd',
+const ArenaActivityHeatmapRoute = ArenaActivityHeatmapRouteImport.update({
+  id: '/arena/activity-heatmap',
+  path: '/arena/activity-heatmap',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DesignArenaRoute = DesignArenaRouteImport.update({
-  id: '/design-arena',
-  path: '/design-arena',
+const ArenaCanvasCrowdRoute = ArenaCanvasCrowdRouteImport.update({
+  id: '/arena/canvas-crowd',
+  path: '/arena/canvas-crowd',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArenaDesignArenaRoute = ArenaDesignArenaRouteImport.update({
+  id: '/arena/design-arena',
+  path: '/arena/design-arena',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/canvas-crowd': typeof CanvasCrowdRoute
-  '/design-arena': typeof DesignArenaRoute
+  '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
+  '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
+  '/arena/design-arena': typeof ArenaDesignArenaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/canvas-crowd': typeof CanvasCrowdRoute
-  '/design-arena': typeof DesignArenaRoute
+  '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
+  '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
+  '/arena/design-arena': typeof ArenaDesignArenaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/canvas-crowd': typeof CanvasCrowdRoute
-  '/design-arena': typeof DesignArenaRoute
+  '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
+  '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
+  '/arena/design-arena': typeof ArenaDesignArenaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/canvas-crowd' | '/design-arena'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/arena/activity-heatmap'
+    | '/arena/canvas-crowd'
+    | '/arena/design-arena'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/canvas-crowd' | '/design-arena'
-  id: '__root__' | '/' | '/about' | '/canvas-crowd' | '/design-arena'
+  to:
+    | '/'
+    | '/about'
+    | '/arena/activity-heatmap'
+    | '/arena/canvas-crowd'
+    | '/arena/design-arena'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/arena/activity-heatmap'
+    | '/arena/canvas-crowd'
+    | '/arena/design-arena'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CanvasCrowdRoute: typeof CanvasCrowdRoute
-  DesignArenaRoute: typeof DesignArenaRoute
+  ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
+  ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
+  ArenaDesignArenaRoute: typeof ArenaDesignArenaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,18 +111,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/canvas-crowd': {
-      id: '/canvas-crowd'
-      path: '/canvas-crowd'
-      fullPath: '/canvas-crowd'
-      preLoaderRoute: typeof CanvasCrowdRouteImport
+    '/arena/activity-heatmap': {
+      id: '/arena/activity-heatmap'
+      path: '/arena/activity-heatmap'
+      fullPath: '/arena/activity-heatmap'
+      preLoaderRoute: typeof ArenaActivityHeatmapRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/design-arena': {
-      id: '/design-arena'
-      path: '/design-arena'
-      fullPath: '/design-arena'
-      preLoaderRoute: typeof DesignArenaRouteImport
+    '/arena/canvas-crowd': {
+      id: '/arena/canvas-crowd'
+      path: '/arena/canvas-crowd'
+      fullPath: '/arena/canvas-crowd'
+      preLoaderRoute: typeof ArenaCanvasCrowdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arena/design-arena': {
+      id: '/arena/design-arena'
+      path: '/arena/design-arena'
+      fullPath: '/arena/design-arena'
+      preLoaderRoute: typeof ArenaDesignArenaRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -105,8 +138,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CanvasCrowdRoute: CanvasCrowdRoute,
-  DesignArenaRoute: DesignArenaRoute,
+  ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
+  ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,
+  ArenaDesignArenaRoute: ArenaDesignArenaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

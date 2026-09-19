@@ -42,7 +42,7 @@ const projects: Project[] = [
     summary:
       "An interactive 3D bookshelf integrated into this site — a study in WebGL performance, instanced geometry, and authored camera work.",
     stack: ["Three.js", "WebGL", "GLSL"],
-    href: "/design-arena",
+    href: "/arena/design-arena",
   },
 ];
 
