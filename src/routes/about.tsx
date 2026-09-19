@@ -1,13 +1,11 @@
 import { EnvelopeSimpleIcon } from "@phosphor-icons/react";
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { Header, contactHref } from "@/components/header";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/site.config";
+import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
-
-// TODO: confirm the PairSync repository URL.
-const projectHref = "https://github.com/kleva-j/pairsync";
 
 // TODO: confirm the bio, current focus, and experience below are accurate — the
 // initial copy is carried over from the design mockup and may be placeholder.
@@ -85,9 +83,9 @@ function About() {
           <div className="mt-10 space-y-5 border-t border-border pt-8">
             <p className="text-lg leading-relaxed text-pretty">
               Hi 👋🏻, I'm Michael — a software engineer who loves exploring,
-              building and shiping new application that solves something. I
-              care about reliable systems that are fast, legible, and kind to the people
-              who maintain them.
+              building and shiping new application that solves something. I care
+              about reliable systems that are fast, legible, and kind to the
+              people who maintain them.
             </p>
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
               My work spans product engineering at early-stage startups, backend
@@ -96,7 +94,7 @@ function About() {
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
               Right now I'm building{" "}
               <a
-                href={projectHref}
+                href={siteConfig.externalLinks.project}
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-primary underline-offset-4 hover:underline"
@@ -168,7 +166,10 @@ function About() {
               and conversations about systems design. Email is the fastest way
               to reach me.
             </p>
-            <Button render={<a href={contactHref} />} nativeButton={false}>
+            <Button
+              render={<a href={siteConfig.mailto} />}
+              nativeButton={false}
+            >
               <EnvelopeSimpleIcon /> Send a message
             </Button>
           </div>

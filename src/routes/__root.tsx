@@ -1,13 +1,12 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { NotFoundPage } from "@/components/not-found";
+import { siteConfig } from "@/lib/site.config";
 
 import appCss from "../styles.css?url";
 
-const siteName = "Michael Obasi";
 const siteTitle = "Michael Obasi — Software Engineer";
 const siteDescription =
   "Michael Obasi is a software engineer. Selected work, writing, and a few interactive experiments.";
@@ -22,7 +21,7 @@ export const Route = createRootRoute({
       { name: "description", content: siteDescription },
       { name: "theme-color", content: "#c87046" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: siteName },
+      { property: "og:site_name", content: siteConfig.name },
       { property: "og:title", content: siteTitle },
       { property: "og:description", content: siteDescription },
       { property: "og:image", content: ogImage },
@@ -51,15 +50,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <ThemeProvider defaultTheme="system" storageKey="theme">
           {children}
         </ThemeProvider>
-        <TanStackDevtools
-          config={{ position: "bottom-right" }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <TanStackDevtools config={{ position: "bottom-right" }} />
         <Scripts />
       </body>
     </html>
