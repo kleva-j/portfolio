@@ -5,6 +5,7 @@ import { FeatureCard } from "@/components/feature-card";
 import { CareerCard } from "@/components/career-card";
 import { Separator } from "@/components/ui/separator";
 import { DecorIcon } from "@/components/decor-icon";
+import { Writings } from "@/components/writings";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
@@ -31,9 +32,9 @@ function App() {
       <Header />
       <main
         id="main-content"
-        className="mx-auto min-h-[calc(100svh-var(--header-height)-var(--footer-height))] max-w-3xl py-6"
+        className="lg-:px-0 mx-auto min-h-[calc(100svh-var(--header-height)-var(--footer-height))] max-w-3xl px-4 py-6"
       >
-        <section className="lg-:px-0 px-4 py-8 sm:py-14">
+        <section className="py-8 sm:py-14">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
             <div className="max-w-2xl">
               <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
@@ -99,7 +100,7 @@ function App() {
               </div>
             </div>
 
-            <div className="relative p-0.5">
+            <div className="relative hidden p-0.5 sm:block">
               <div className="absolute -inset-y-4 -inset-s-px w-px bg-border" />
               <div className="absolute -inset-y-4 -inset-e-px w-px bg-border" />
               <div className="absolute -inset-x-4 -top-px h-px bg-border" />
@@ -138,13 +139,9 @@ function App() {
             description="PairSync — cross-platform P2P file sync. Open source, written in Tauri & React-Native."
           />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
-          <FeatureCard
-            title="Writing"
-            description="Recent articles, essays, and technical writing."
-          />
+          <Writings />
         </section>
       </main>
-
       <FullWidthDivider />
       <Footer />
     </div>
