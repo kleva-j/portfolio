@@ -21,7 +21,7 @@ const projects: Project[] = [
     role: "Open source",
     summary:
       "Peer-to-peer file and clipboard sharing for macOS, Windows, and Linux — a Go core with native clients, no cloud, accounts, or relay servers.",
-    stack: ["Tauri", "React Native"],
+    stack: ["Tauri V2", "Rust", "React Native", "Expo", "Tailwind v4"],
     href: siteConfig.externalLinks.project,
     external: true,
   },
