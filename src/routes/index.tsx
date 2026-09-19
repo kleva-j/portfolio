@@ -1,7 +1,6 @@
 import { FullWidthDivider } from "@/components/full-width-divider";
 import { AsciiPortrait } from "@/components/ascii-portrait";
 import { createFileRoute } from "@tanstack/react-router";
-import { FeatureCard } from "@/components/feature-card";
 import { CareerCard } from "@/components/career-card";
 import { Separator } from "@/components/ui/separator";
 import { DecorIcon } from "@/components/decor-icon";
@@ -11,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { Arena } from "@/components/arena";
 import {
   EnvelopeSimpleIcon,
   LinkedinLogoIcon,
@@ -128,10 +128,7 @@ function App() {
         </section>
 
         <section className="space-y-1">
-          <FeatureCard
-            title="Arena"
-            description="Recent shipped work, personal tools, and open-source activity."
-          />
+          <Arena />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <CareerCard />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
