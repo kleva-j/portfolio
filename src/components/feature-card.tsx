@@ -2,14 +2,15 @@ import { DecorIcon } from "@/components/decor-icon";
 import { cn } from "@/lib/utils";
 
 type FeatureCardProps = React.ComponentProps<"div"> & {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 };
 
 export function FeatureCard({
   title,
   description,
   className,
+  children,
   ...props
 }: FeatureCardProps) {
   return (
@@ -33,12 +34,21 @@ export function FeatureCard({
       <DecorIcon className="size-3.5" position="bottom-right" />
       <DecorIcon className="size-3.5" position="top-right" />
 
-      <div className="relative z-10 space-y-2">
-        <h3 className="text-lg/[1.1] font-medium text-foreground">{title}</h3>
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          {description}
-        </p>
-      </div>
+      {(title || description) && (
+        <div className="relative z-10 space-y-2">
+          {title ? (
+            <h3 className="text-lg/[1.1] font-medium text-foreground">
+              {title}
+            </h3>
+          ) : null}
+          {description ? (
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+          ) : null}
+        </div>
+      )}
+      {children}
     </div>
   );
 }

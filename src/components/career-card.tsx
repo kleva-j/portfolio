@@ -11,7 +11,7 @@ import { CareerTimeline } from "./career-timeline";
 import { FeatureCard } from "./feature-card";
 
 export const CareerCard = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <FeatureCard
