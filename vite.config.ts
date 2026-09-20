@@ -1,8 +1,8 @@
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { devtools } from "@tanstack/devtools-vite";
-import { nitro } from "nitro/vite";
+import { defineConfig, loadEnv } from "vite";
 import { fileURLToPath } from "node:url";
-import { defineConfig } from "vite";
+import { nitro } from "nitro/vite";
 
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -16,19 +16,18 @@ const threeuiStyle = fileURLToPath(
   new URL("./src/shaders/threeui.css", import.meta.url),
 );
 
-// Inline the deployment platform's assigned origin into VITE_SITE_URL at build
-// time so the client bundle carries the correct canonical/OG origin (Vercel,
-// Cloudflare Pages, …). Skipped when VITE_SITE_URL is already set — Vite inlines
-// that itself. The value is consumed by resolveSiteUrl() in
+// The env dir is this config file's directory (the project root). Deriving it
+// from import.meta.url avoids referencing the Node `process` global, which isn't
+// typed under `types: ["vite/client"]`.
+const envDir = fileURLToPath(new URL(".", import.meta.url));
+
+// Deployment platforms expose the assigned origin under different names. Fall
+// back through them so the client bundle carries the correct canonical/OG origin
+// (Vercel, Cloudflare Pages, …). Consumed by resolveSiteUrl() in
 // src/lib/site.config.ts, which normalizes the protocol and trailing slash.
-// `process` is read via globalThis so this file needs no Node type globals.
-function buildTimeSiteUrl(): string | undefined {
-  const env = (
-    globalThis as {
-      process?: { env?: Record<string, string | undefined> };
-    }
-  ).process?.env;
-  if (!env || env.VITE_SITE_URL) return undefined;
+function platformSiteUrl(
+  env: Record<string, string | undefined>,
+): string | undefined {
   return (
     env.SITE_URL ?? // generic manual override
     env.VERCEL_PROJECT_PRODUCTION_URL ?? // Vercel: stable production domain
@@ -37,20 +36,28 @@ function buildTimeSiteUrl(): string | undefined {
   );
 }
 
-const siteUrl = buildTimeSiteUrl();
+const config = defineConfig(({ mode }) => {
+  // loadEnv(mode, dir, "") loads every key from the mode's .env* files AND merges
+  // all of process.env (an empty prefix matches everything), so an explicit
+  // VITE_SITE_URL — whether set in .env.production or the ambient build env —
+  // always wins. Only inject the platform fallback when none is present; the
+  // widened annotation keeps index access typed as string | undefined.
+  const env: Record<string, string | undefined> = loadEnv(mode, envDir, "");
+  const siteUrl = env.VITE_SITE_URL ? undefined : platformSiteUrl(env);
 
-const config = defineConfig({
-  define: siteUrl
-    ? { "import.meta.env.VITE_SITE_URL": JSON.stringify(siteUrl) }
-    : {},
-  resolve: {
-    tsconfigPaths: true,
-    alias: [
-      { find: "@designcodeio/threeui/style.css", replacement: threeuiStyle },
-      { find: /^@designcodeio\/threeui$/, replacement: threeuiEntry },
-    ],
-  },
-  plugins: [devtools(), tailwindcss(), tanstackStart(), nitro(), viteReact()],
+  return {
+    define: siteUrl
+      ? { "import.meta.env.VITE_SITE_URL": JSON.stringify(siteUrl) }
+      : {},
+    resolve: {
+      tsconfigPaths: true,
+      alias: [
+        { find: "@designcodeio/threeui/style.css", replacement: threeuiStyle },
+        { find: /^@designcodeio\/threeui$/, replacement: threeuiEntry },
+      ],
+    },
+    plugins: [devtools(), tailwindcss(), tanstackStart(), nitro(), viteReact()],
+  };
 });
 
 export default config;
