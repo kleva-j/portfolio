@@ -4,21 +4,23 @@ import { useState, useEffect } from "react";
 
 import { MarkdownContent, StreamingMarkdown } from "@/components/markdown";
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { getArticle } from "@/content/writing";
+import { getArticle, getArticleMeta } from "@/content/writing";
+import { absoluteUrl } from "@/lib/site.config";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const Route = createFileRoute("/writing/$slug")({
-  loader: ({ params }) => {
-    const article = getArticle(params.slug);
+  loader: async ({ params }) => {
+    const article = await getArticle(params.slug);
     if (!article) throw notFound();
     return article;
   },
   head: ({ params }) => {
-    const article = getArticle(params.slug);
+    const article = getArticleMeta(params.slug);
     if (!article) return {};
     const title = `${article.title} — Michael Obasi`;
+    const canonical = absoluteUrl(`/writing/${article.slug}`);
     return {
       meta: [
         { title },
@@ -26,9 +28,11 @@ export const Route = createFileRoute("/writing/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: article.description },
+        { property: "og:url", content: canonical },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: article.description },
       ],
+      links: [{ rel: "canonical", href: canonical }],
     };
   },
   component: ArticlePage,
@@ -55,6 +59,15 @@ function StreamingDemo() {
   const [length, setLength] = useState(0);
 
   useEffect(() => {
+    // Respect reduced-motion: reveal the finished sample at once instead of
+    // running the per-character timer, which CSS `motion-reduce` can't stop.
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion) {
+      setLength(streamed.length);
+      return;
+    }
     if (length >= streamed.length) return;
     const timeout = window.setTimeout(() => setLength((n) => n + 1), 16);
     return () => window.clearTimeout(timeout);
@@ -77,7 +90,11 @@ function StreamingDemo() {
       </p>
       <div className="mt-6 border border-border">
         <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-2.5">
-          <span className="flex items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-muted-foreground uppercase">
+          <span
+            role="status"
+            aria-live="polite"
+            className="flex items-center gap-2 font-mono text-[11px] tracking-[0.08em] text-muted-foreground uppercase"
+          >
             <span
               aria-hidden="true"
               className={
@@ -120,11 +137,11 @@ function ArticlePage() {
         <article className="py-8 sm:py-14">
           <Link
             to="/writing"
-            className="inline-flex items-center gap-1.5 text-xs font-medium tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-primary"
+            className="group inline-flex items-center gap-1.5 text-xs font-medium tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-primary"
           >
             <ArrowLeftIcon
               weight="bold"
-              className="size-3.5 transition-transform group-hover:-translate-x-0.5"
+              className="size-3.5 transition-transform group-hover:-translate-x-0.5 motion-reduce:transition-none"
             />
             Writing
           </Link>
