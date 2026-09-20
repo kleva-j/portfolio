@@ -1,3 +1,11 @@
+---
+title: "Designing PairSync's sync protocol without a server"
+date: Jun 2026
+dateTime: 2026-06
+category: Engineering
+description: "How I built conflict-free file and clipboard sync over a direct peer connection — no cloud, no relay, no accounts."
+---
+
 Most sync tools start with a server. It is the obvious place to put the source
 of truth, resolve conflicts, and fan out changes. PairSync starts from the
 opposite constraint: no cloud, no relay, no accounts. Two devices, a direct

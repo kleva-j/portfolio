@@ -1,3 +1,11 @@
+---
+title: "Cross-platform without Electron"
+date: Oct 2025
+dateTime: 2025-10
+category: Engineering
+description: "Why I moved to a native core with thin platform clients, and what that traded away."
+---
+
 Electron is the default answer to "one codebase, every desktop." It is also a
 Chromium runtime shipped with every app. For PairSync — a tool that should feel
 native, launch fast, and sip memory while it waits in the background — that

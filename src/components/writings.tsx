@@ -1,26 +1,25 @@
-import type { ArticleMeta } from "@/content/writing";
+import type { PostMeta } from "@/content/writing/posts";
 
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 
 import { CollapsibleCard } from "@/components/collapsible-card";
 import { GridFiller } from "@/components/grid-filler";
-import { articles } from "@/content/writing";
 import { cn } from "@/lib/utils";
 
-export const Writings = () => {
+export const Writings = ({ posts }: { posts: PostMeta[] }) => {
   return (
     <CollapsibleCard
       title="Writings"
       description="Recent articles, essays, and technical writing."
     >
       <div className="grid grid-cols-1 gap-px border-t bg-border sm:grid-cols-2 md:grid-cols-3">
-        {articles.map((article) => (
+        {posts.map((article) => (
           <WritingCard article={article} key={article.slug} />
         ))}
         <GridFiller
           className="bg-background"
-          totalItems={articles.length}
+          totalItems={posts.length}
           smColumns={2}
           mdColumns={3}
         />
@@ -33,7 +32,7 @@ function WritingCard({
   article,
   className,
 }: {
-  article: ArticleMeta;
+  article: PostMeta;
   className?: string;
 }) {
   return (

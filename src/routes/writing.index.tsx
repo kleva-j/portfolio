@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { articles } from "@/content/writing";
+import { getPosts } from "@/content/writing/posts";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -12,6 +12,7 @@ const pageDescription =
   "Essays and technical writing on engineering decisions, design, and the tools behind PairSync.";
 
 export const Route = createFileRoute("/writing/")({
+  loader: async () => await getPosts(),
   head: () => ({
     meta: [
       { title: pageTitle },
@@ -26,6 +27,8 @@ export const Route = createFileRoute("/writing/")({
 });
 
 function WritingIndex() {
+  const articles = Route.useLoaderData();
+
   return (
     <div>
       <Header />

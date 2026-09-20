@@ -16,6 +16,20 @@ import { css } from "@tanstack/highlight/languages/css";
 import { js } from "@tanstack/highlight/languages/js";
 import { ts } from "@tanstack/highlight/languages/ts";
 
+import { markdownRendererClassName } from "@/lib/markdown-theme";
+
+/**
+ * HEAVY MODULE. Eagerly builds the highlighter (tokenizer + grammars + themes)
+ * at load. It must never be imported from the eager client graph. Two importers
+ * are allowed:
+ *   - `posts.server.ts` (server-only), which renders post HTML on the server; and
+ *   - `streaming-demo.tsx`, a `React.lazy` client component whose entire point is
+ *     to run the tokenizer client-side — it deliberately pulls this into an
+ *     isolated, demo-only lazy chunk, never the initial client bundle.
+ * Anything reachable from the initial client bundle must import
+ * `markdown-theme.ts` instead.
+ */
+
 /**
  * Syntax highlighting is kept as an explicit, external integration — TanStack
  * Markdown bundles no tokenizer, grammars, or themes. Only the languages this
@@ -35,9 +49,7 @@ export const highlightMarkdownCode: CodeHighlighter =
   createTanStackMarkdownHighlighter(highlighter);
 
 /** Wrapper class the highlight theme selectors are scoped to. */
-const RENDERER_CLASS = "markdown-renderer";
-
-export const markdownRendererClassName = RENDERER_CLASS;
+const RENDERER_CLASS = markdownRendererClassName;
 
 /**
  * Deterministic light/dark token theme, scoped to the renderer wrapper. Dark
