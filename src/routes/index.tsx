@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { DecorIcon } from "@/components/decor-icon";
 import { Projects } from "@/components/projects";
 import { Writings } from "@/components/writings";
+import { getPosts } from "@/content/writing/posts";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
@@ -24,10 +25,13 @@ const meta = [
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta }),
+  loader: async () => ({ posts: await getPosts() }),
   component: App,
 });
 
 function App() {
+  const { posts } = Route.useLoaderData();
+
   return (
     <div>
       <Header />
@@ -134,7 +138,7 @@ function App() {
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <Projects />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
-          <Writings />
+          <Writings posts={posts} />
         </section>
       </main>
       <FullWidthDivider />
