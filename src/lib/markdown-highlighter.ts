@@ -19,9 +19,15 @@ import { ts } from "@tanstack/highlight/languages/ts";
 import { markdownRendererClassName } from "@/lib/markdown-theme";
 
 /**
- * SERVER-ONLY. This module eagerly builds the highlighter (tokenizer +
- * grammars + themes) at load, so it must never enter the client graph. Import
- * it only from server code: `posts.server.ts` and the lazy streaming demo.
+ * HEAVY MODULE. Eagerly builds the highlighter (tokenizer + grammars + themes)
+ * at load. It must never be imported from the eager client graph. Two importers
+ * are allowed:
+ *   - `posts.server.ts` (server-only), which renders post HTML on the server; and
+ *   - `streaming-demo.tsx`, a `React.lazy` client component whose entire point is
+ *     to run the tokenizer client-side — it deliberately pulls this into an
+ *     isolated, demo-only lazy chunk, never the initial client bundle.
+ * Anything reachable from the initial client bundle must import
+ * `markdown-theme.ts` instead.
  */
 
 /**
