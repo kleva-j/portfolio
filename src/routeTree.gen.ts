@@ -14,6 +14,8 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
 import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
 import { Route as ArenaDesignArenaRouteImport } from './routes/arena/design-arena'
+import { Route as WritingIndexRouteImport } from './routes/writing.index'
+import { Route as WritingSlugRouteImport } from './routes/writing.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +42,16 @@ const ArenaDesignArenaRoute = ArenaDesignArenaRouteImport.update({
   path: '/arena/design-arena',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WritingIndexRoute = WritingIndexRouteImport.update({
+  id: '/writing/',
+  path: '/writing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WritingSlugRoute = WritingSlugRouteImport.update({
+  id: '/writing/$slug',
+  path: '/writing/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/writing': typeof WritingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +78,8 @@ export interface FileRoutesById {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/writing/$slug': typeof WritingSlugRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,6 +89,8 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/writing/$slug'
+    | '/writing/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -78,6 +98,8 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/writing/$slug'
+    | '/writing'
   id:
     | '__root__'
     | '/'
@@ -85,6 +107,8 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/writing/$slug'
+    | '/writing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,6 +117,8 @@ export interface RootRouteChildren {
   ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
   ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
   ArenaDesignArenaRoute: typeof ArenaDesignArenaRoute
+  WritingSlugRoute: typeof WritingSlugRoute
+  WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -132,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArenaDesignArenaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/writing/': {
+      id: '/writing/'
+      path: '/writing'
+      fullPath: '/writing/'
+      preLoaderRoute: typeof WritingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/$slug': {
+      id: '/writing/$slug'
+      path: '/writing/$slug'
+      fullPath: '/writing/$slug'
+      preLoaderRoute: typeof WritingSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -141,6 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
   ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,
   ArenaDesignArenaRoute: ArenaDesignArenaRoute,
+  WritingSlugRoute: WritingSlugRoute,
+  WritingIndexRoute: WritingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
