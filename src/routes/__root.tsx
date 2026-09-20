@@ -1,6 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
+import { ConstructionBanner } from "@/components/construction-banner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NotFoundPage } from "@/components/not-found";
 import { siteConfig } from "@/lib/site.config";
@@ -48,6 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider defaultTheme="system" storageKey="theme">
+          <ConstructionBanner />
           {children}
         </ThemeProvider>
         <TanStackDevtools config={{ position: "bottom-right" }} />
