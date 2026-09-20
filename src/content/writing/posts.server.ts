@@ -100,11 +100,18 @@ function parseFrontmatter(
   };
 }
 
-// ~200 wpm, rounded, floor of one minute. Measured on the body only (the
-// frontmatter block is stripped first).
+// ~200 wpm, rounded up, with a two-minute floor so short editorial posts still
+// read credibly. Measured on the body only (frontmatter is stripped first).
+const WORDS_PER_MINUTE = 200;
+const MIN_READING_MINUTES = 2;
+
 function readingTime(body: string): string {
   const words = body.trim().split(/\s+/).filter(Boolean).length;
-  return `${Math.max(1, Math.round(words / 200))} min read`;
+  const minutes = Math.max(
+    MIN_READING_MINUTES,
+    Math.ceil(words / WORDS_PER_MINUTE),
+  );
+  return `${minutes} min read`;
 }
 
 function stripFrontmatter(source: string): string {
