@@ -16,6 +16,14 @@ import { css } from "@tanstack/highlight/languages/css";
 import { js } from "@tanstack/highlight/languages/js";
 import { ts } from "@tanstack/highlight/languages/ts";
 
+import { markdownRendererClassName } from "@/lib/markdown-theme";
+
+/**
+ * SERVER-ONLY. This module eagerly builds the highlighter (tokenizer +
+ * grammars + themes) at load, so it must never enter the client graph. Import
+ * it only from server code: `posts.server.ts` and the lazy streaming demo.
+ */
+
 /**
  * Syntax highlighting is kept as an explicit, external integration — TanStack
  * Markdown bundles no tokenizer, grammars, or themes. Only the languages this
@@ -35,9 +43,7 @@ export const highlightMarkdownCode: CodeHighlighter =
   createTanStackMarkdownHighlighter(highlighter);
 
 /** Wrapper class the highlight theme selectors are scoped to. */
-const RENDERER_CLASS = "markdown-renderer";
-
-export const markdownRendererClassName = RENDERER_CLASS;
+const RENDERER_CLASS = markdownRendererClassName;
 
 /**
  * Deterministic light/dark token theme, scoped to the renderer wrapper. Dark

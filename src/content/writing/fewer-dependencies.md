@@ -1,3 +1,12 @@
+---
+title: "Reaching for fewer dependencies"
+date: Dec 2025
+dateTime: 2025-12
+category: Notes
+description: "Every package is a small bet on someone else's roadmap. A few heuristics I now use before adding one."
+demo: true
+---
+
 Every package you add is a small, quiet bet on someone else's roadmap. Sometimes
 that bet pays for itself in an afternoon. Sometimes it compounds into a migration
 you never chose. Here is the checklist I now run before reaching for a dependency

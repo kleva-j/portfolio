@@ -1,3 +1,11 @@
+---
+title: "Shipping a Three.js showcase without tanking performance"
+date: Feb 2026
+dateTime: 2026-02
+category: Engineering
+description: "Lessons from the interactive bookshelf: instancing, texture atlases, and knowing when to stop rendering."
+---
+
 The interactive bookshelf on this site is the one place I let the design go loud.
 A real-time Three.js scene is also the fastest way to tank a page's performance,
 so the interesting work was not making it look good — it was making it look good
