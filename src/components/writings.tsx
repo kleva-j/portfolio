@@ -1,10 +1,11 @@
+import type { ArticleMeta } from "@/content/writing";
+
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 
 import { CollapsibleCard } from "@/components/collapsible-card";
 import { GridFiller } from "@/components/grid-filler";
 import { articles } from "@/content/writing";
-import type { Article } from "@/content/writing";
 import { cn } from "@/lib/utils";
 
 export const Writings = () => {
@@ -32,7 +33,7 @@ function WritingCard({
   article,
   className,
 }: {
-  article: Article;
+  article: ArticleMeta;
   className?: string;
 }) {
   return (
