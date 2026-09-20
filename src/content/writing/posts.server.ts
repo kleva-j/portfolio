@@ -53,11 +53,15 @@ const externalLinks: MarkdownExtension = {
   },
 };
 
+// Heading permalink marker. The renderer defaults to `aria-hidden`/`tabIndex:-1`,
+// which would hide the anchor from assistive tech and keyboard focus and leave
+// the `.heading-anchor:focus-visible` reveal in styles.css unreachable. Set both
+// explicitly so the permalink stays keyboard-focusable and announced.
 const headingAnchors = {
   content: "#",
   className: "heading-anchor",
-  ariaHidden: true,
-  tabIndex: -1,
+  ariaHidden: false,
+  tabIndex: 0,
 } as const;
 
 function escapeAttr(value: string): string {
