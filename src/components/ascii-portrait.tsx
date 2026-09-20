@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 
-import { AsciiArt } from "@/components/ui/ascii-art";
 import { cn } from "@/lib/utils";
 
-// The ASCII conversion runs canvas image processing on the main thread. The
-// portrait is only shown from the `sm` breakpoint up (see index.tsx), so avoid
-// mounting it — and paying that cost — on viewports where it is never visible.
+// AsciiArt pulls in framer-motion and runs canvas image processing, so load it
+// as its own chunk. The portrait is only shown from the `sm` breakpoint up (see
+// index.tsx); gating the mount on a min-width query keeps that code — and its
+// main-thread work — off mobile and out of the initial bundle.
+const AsciiArt = lazy(() =>
+  import("@/components/ui/ascii-art").then((m) => ({ default: m.AsciiArt })),
+);
+
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
 
@@ -39,16 +43,18 @@ export function AsciiPortrait({ className }: { className?: string }) {
       />
       {/* ASCII interpretation — layered on top via z-index */}
       {showAscii && (
-        <AsciiArt
-          src="/images/michael.jpg"
-          resolution={80}
-          color="var(--color-foreground)"
-          backgroundColor="transparent"
-          animationStyle="fade"
-          animationDuration={1.2}
-          animateOnView={false}
-          className="pointer-events-none z-10 size-full"
-        />
+        <Suspense fallback={null}>
+          <AsciiArt
+            src="/images/michael.jpg"
+            resolution={80}
+            color="var(--color-foreground)"
+            backgroundColor="transparent"
+            animationStyle="fade"
+            animationDuration={1.2}
+            animateOnView={false}
+            className="pointer-events-none z-10 size-full"
+          />
+        </Suspense>
       )}
     </div>
   );

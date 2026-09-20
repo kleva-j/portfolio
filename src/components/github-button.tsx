@@ -1,72 +1,34 @@
 import { GithubLogoIcon, StarIcon } from "@phosphor-icons/react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
-const MotionButton = motion.create(Button);
+import { Button } from "@/components/ui/button";
 
 export function GithubStarButton() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <MotionButton
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.96 }}
+    <Button
       variant="outline"
-      className="rounded"
+      className="group rounded transition-transform duration-150 ease-out hover:scale-[1.02] active:scale-[0.97] motion-reduce:transition-none"
     >
-      <div className="relative flex h-4 w-4 shrink-0 items-center justify-center">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {!isHovered ? (
-            <motion.div
-              key="icon1"
-              initial={{ y: -15, opacity: 0, scale: 0.8 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: -15, opacity: 0, scale: 0.8 }}
-              transition={{ type: "spring", stiffness: 600, damping: 25 }}
-              className="absolute inset-0 flex items-center justify-center"
+      <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
+        {/* GitHub mark — default state, slides up and out on hover */}
+        <GithubLogoIcon className="absolute h-4 w-4 transition-all duration-200 ease-out group-hover:-translate-y-4 group-hover:opacity-0 motion-reduce:transition-none" />
+
+        {/* Star + sparkle — hidden until hover, then slides up into place */}
+        <span className="absolute flex translate-y-4 items-center justify-center opacity-0 transition-all duration-200 ease-out group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none">
+          <StarIcon className="h-4 w-4 text-yellow-400" />
+          <span className="absolute -top-3 -right-2 scale-0 -rotate-45 opacity-0 transition-all delay-75 duration-200 ease-out group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 motion-reduce:transition-none">
+            <svg
+              className="h-2.5 w-2.5 text-yellow-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
             >
-              <GithubLogoIcon className="h-4 w-4" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="icon2"
-              initial={{ y: 15, opacity: 0, scale: 0.8 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 15, opacity: 0, scale: 0.8 }}
-              transition={{ type: "spring", stiffness: 600, damping: 25 }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <StarIcon className="h-4 w-4 text-yellow-400" />
-              <motion.div
-                initial={{ opacity: 0, scale: 0, rotate: -45, y: 10 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
-                exit={{ opacity: 0, scale: 0, rotate: 45, y: 10 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 600,
-                  damping: 25,
-                  delay: 0.05,
-                }}
-                className="absolute -top-3 -right-2"
-              >
-                <svg
-                  className="h-2.5 w-2.5 text-yellow-200"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 2l2.4 7.6H22l-6.2 4.5 2.4 7.6-6.2-4.5-6.2 4.5 2.4-7.6L2 9.6h7.6z" />
-                </svg>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              <path d="M12 2l2.4 7.6H22l-6.2 4.5 2.4 7.6-6.2-4.5-6.2 4.5 2.4-7.6L2 9.6h7.6z" />
+            </svg>
+          </span>
+        </span>
+      </span>
       <span className="text-[13px] font-medium tracking-tight">
         Star on GitHub
       </span>
-    </MotionButton>
+    </Button>
   );
 }
