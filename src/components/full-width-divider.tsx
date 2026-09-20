@@ -16,11 +16,8 @@ export function FullWidthDivider({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute h-px bg-border",
-        // full-bleed (default)
         "data-[contained=false]:inset-s-1/2 data-[contained=false]:w-screen data-[contained=false]:-translate-x-1/2",
-        // contained
         "data-[contained=true]:inset-x-0 data-[contained=true]:w-full",
-        // position
         position &&
           "data-[position=bottom]:-bottom-px data-[position=top]:-top-px",
         className,

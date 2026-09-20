@@ -2,13 +2,11 @@ import { createContext, useCallback, useContext, useState } from "react";
 import { useRender } from "@base-ui/react/use-render";
 import { cn } from "@/lib/utils";
 
-// Types
 type TimelineContextValue = {
   activeStep: number;
   setActiveStep: (step: number) => void;
 };
 
-// Context
 const TimelineContext = createContext<TimelineContextValue | undefined>(
   undefined,
 );
@@ -21,7 +19,6 @@ const useTimeline = () => {
   return context;
 };
 
-// Components
 interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue?: number;
   value?: number;
@@ -68,7 +65,6 @@ function Timeline({
   );
 }
 
-// TimelineContent
 function TimelineContent({
   className,
   ...props
@@ -82,7 +78,6 @@ function TimelineContent({
   );
 }
 
-// TimelineDate
 interface TimelineDateProps extends React.ComponentProps<"time"> {
   render?: useRender.RenderProp;
 }
@@ -105,7 +100,6 @@ function TimelineDate({
   });
 }
 
-// TimelineHeader
 function TimelineHeader({
   className,
   ...props
@@ -115,7 +109,6 @@ function TimelineHeader({
   );
 }
 
-// TimelineIndicator
 function TimelineIndicator({
   className,
   children,
@@ -136,7 +129,6 @@ function TimelineIndicator({
   );
 }
 
-// TimelineItem
 interface TimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
   step: number;
 }
@@ -157,7 +149,6 @@ function TimelineItem({ step, className, ...props }: TimelineItemProps) {
   );
 }
 
-// TimelineSeparator
 function TimelineSeparator({
   className,
   ...props
@@ -175,7 +166,6 @@ function TimelineSeparator({
   );
 }
 
-// TimelineTitle
 function TimelineTitle({
   className,
   ...props

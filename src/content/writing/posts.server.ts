@@ -1,9 +1,5 @@
-// SERVER-ONLY. Pulls in the Markdown parser, the docs extensions, and the
-// syntax highlighter (tokenizer + grammars + themes) at module load, and reads
-// every post body through `import.meta.glob`. It must never enter the client
-// graph — reach it only through the server functions in `posts.ts` (dynamic
-// `import()` inside a `createServerFn().handler`, whose body is stripped from
-// the client bundle).
+// Server-only: pulls the Markdown parser, extensions, and highlighter at load.
+// Reach it only through the server functions in `posts.ts`, never the client.
 import type { MarkdownExtension } from "@tanstack/markdown";
 
 import { docsMarkdownExtensions } from "@tanstack/markdown/extensions/docs";
@@ -15,22 +11,16 @@ import { highlightMarkdownCode } from "@/lib/markdown-highlighter";
 export type PostMeta = {
   slug: string;
   title: string;
-  /** Display date, e.g. "Dec 2025". */
   date: string;
-  /** Machine-readable date for the `datetime` attribute and sorting. */
   dateTime: string;
   category: string;
   description: string;
   readingTime: string;
-  /** Show the live streaming-renderer demo at the end of the article. */
   demo?: boolean;
 };
 
-/** Post metadata plus its server-rendered HTML. */
 export type Post = PostMeta & { html: string };
 
-// Every post body, eagerly read as a raw string. This runs on the server only,
-// so the bodies never ship to the client; the rendered HTML does.
 const sources = import.meta.glob<string>("./*.md", {
   query: "?raw",
   import: "default",
@@ -39,9 +29,8 @@ const sources = import.meta.glob<string>("./*.md", {
 
 const parseExtensions = docsMarkdownExtensions();
 
-// Hardens external links at render time. `urlTransform` can rewrite the href
-// but cannot add `target`/`rel`, so this render hook emits the anchor itself
-// and falls back to the core renderer for everything else.
+// Harden external links: emit the anchor with target/rel that urlTransform
+// cannot add, falling back to the core renderer otherwise.
 const externalLinks: MarkdownExtension = {
   name: "external-links",
   renderHtml(node, ctx) {
@@ -53,10 +42,8 @@ const externalLinks: MarkdownExtension = {
   },
 };
 
-// Heading permalink marker. The renderer defaults to `aria-hidden`/`tabIndex:-1`,
-// which would hide the anchor from assistive tech and keyboard focus and leave
-// the `.heading-anchor:focus-visible` reveal in styles.css unreachable. Set both
-// explicitly so the permalink stays keyboard-focusable and announced.
+// Keep aria-hidden/tabIndex explicit so the permalink stays focusable and
+// announced (the renderer defaults them off).
 const headingAnchors = {
   content: "#",
   className: "heading-anchor",
@@ -72,10 +59,6 @@ function escapeAttr(value: string): string {
     .replace(/>/g, "&gt;");
 }
 
-// Flat `key: value` frontmatter. Values may be double-quoted (used for any
-// field containing a colon, em dash, or apostrophe). Content is authored and
-// controlled, so this stays intentionally small rather than pulling in a YAML
-// parser.
 function parseFrontmatter(
   raw: string,
   slug: string,
@@ -104,8 +87,7 @@ function parseFrontmatter(
   };
 }
 
-// ~200 wpm, rounded up, with a two-minute floor so short editorial posts still
-// read credibly. Measured on the body only (frontmatter is stripped first).
+// ~200 wpm, rounded up, with a two-minute floor. Measured on the body only.
 const WORDS_PER_MINUTE = 200;
 const MIN_READING_MINUTES = 2;
 
@@ -135,8 +117,7 @@ function stripHtml(post: Post): PostMeta {
   };
 }
 
-// Parse + render every post once at module load. Highlighting runs here, on the
-// server. Newest first via ISO-string compare on `dateTime`.
+// Parse + render every post once at load, newest first.
 function buildPosts(): Map<string, Post> {
   const posts: Post[] = [];
 
@@ -167,12 +148,10 @@ function buildPosts(): Map<string, Post> {
 
 const postsBySlug = buildPosts();
 
-/** Post metadata for list/index rendering (no rendered HTML). */
 export function listPosts(): PostMeta[] {
   return [...postsBySlug.values()].map(stripHtml);
 }
 
-/** A single post with its rendered HTML, or `undefined` for an unknown slug. */
 export function readPost(slug: string): Post | undefined {
   return postsBySlug.get(slug);
 }

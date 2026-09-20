@@ -17,18 +17,15 @@ export function FeatureCard({
     <div
       className={cn(
         "relative flex flex-col justify-between gap-6 bg-background px-6 pt-8 pb-6 shadow-xs",
-        // Gradient inspired by testimonials
         className,
       )}
       {...props}
     >
-      {/* Extended Borders */}
       <div className="absolute -inset-y-4 -inset-s-px w-px bg-border" />
       <div className="absolute -inset-y-4 -inset-e-px w-px bg-border" />
       <div className="absolute -inset-x-4 -top-px h-px bg-border" />
       <div className="absolute -inset-s-4 -inset-e-4 -bottom-px h-px bg-border" />
 
-      {/* Corner Decor */}
       <DecorIcon className="size-3.5" position="top-left" />
       <DecorIcon className="size-3.5" position="bottom-left" />
       <DecorIcon className="size-3.5" position="bottom-right" />

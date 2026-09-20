@@ -7,8 +7,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
 
-// TODO: confirm the bio, current focus, and experience below are accurate — the
-// initial copy is carried over from the design mockup and may be placeholder.
+// TODO: confirm the bio, current focus, and experience below are accurate.
 const focus = [
   ["PairSync", "Cross-platform P2P sync — open source. Go + Swift."],
   [

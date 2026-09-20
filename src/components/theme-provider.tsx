@@ -57,18 +57,14 @@ function applyTheme(theme: Theme, animate: boolean) {
     return;
   }
 
-  // Prefer the View Transitions API: it cross-fades a rasterized snapshot of
-  // the page, so text glyphs never re-rasterize mid-animation (which is what
-  // makes text flicker when the `color` property is transitioned directly).
+  // View Transitions cross-fades a page snapshot, so text never re-rasterizes.
   const doc = document as ViewTransitionDocument;
   if (typeof doc.startViewTransition === "function") {
     doc.startViewTransition(() => commitTheme(resolved));
     return;
   }
 
-  // Fallback (e.g. Firefox): fade themed colors via a temporary class. This
-  // path re-rasterizes text, but Firefox uses grayscale antialiasing so it
-  // does not exhibit the subpixel flicker.
+  // Fallback (e.g. Firefox): fade themed colors via a temporary class.
   const root = document.documentElement;
   root.classList.add("theme-transition");
   if (transitionTimeout) clearTimeout(transitionTimeout);
@@ -85,8 +81,7 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
   const [mounted, setMounted] = useState(false);
-  // Animate only changes the user (or the OS) initiates, never the initial
-  // sync from storage, which already matches the pre-hydration paint.
+  // Animate only user/OS-initiated changes, not the initial sync from storage.
   const animateNext = useRef(false);
 
   useEffect(() => {

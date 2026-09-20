@@ -30,8 +30,6 @@ export const Route = createFileRoute("/writing/$slug")({
         { name: "twitter:description", content: loaderData.description },
       ],
       links: [{ rel: "canonical", href: canonical }],
-      // The highlight theme travels with the loader data so `createThemeCss`
-      // stays server-only. React 19 dedupes the hoisted style across articles.
       styles: [{ children: loaderData.css }],
     };
   },

@@ -13,10 +13,6 @@ import { markdownRendererClassName } from "@/lib/markdown-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// This module is the ONLY place the tokenizer runs on the client, so it is
-// loaded lazily (React.lazy) and only on articles that opt into the demo. The
-// article route injects the highlight-theme CSS via `head().styles`, so no
-// `<style>` is emitted here.
 const streamingExtensions = [streamingMarkdownExtension()];
 
 const components = {
@@ -54,9 +50,6 @@ function StreamingMarkdown({
   );
 }
 
-// A short streamed response, revealed one character at a time. Each update
-// reparses the accumulated slice — no incremental parser state — so incomplete
-// trailing blocks stay predictable until they complete.
 const streamed = [
   "## Streaming, statelessly",
   "",
@@ -75,8 +68,7 @@ function StreamingDemo() {
   const [length, setLength] = useState(0);
 
   useEffect(() => {
-    // Respect reduced-motion: reveal the finished sample at once instead of
-    // running the per-character timer, which CSS `motion-reduce` can't stop.
+    // Reduced motion: reveal the finished sample instead of running the timer.
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;

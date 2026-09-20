@@ -1,17 +1,10 @@
 const name = "Michael Obasi";
 const description = "Michael Obasi — software engineer.";
 
-// Production origin used to build absolute canonical/OG URLs. Deployment targets
-// (Vercel, Cloudflare Pages, …) assign this dynamically, so it is resolved from
-// the environment instead of being hard-coded, in priority order:
-//
-//   1. VITE_SITE_URL — explicit override, inlined into the client + server
-//      bundle at build time. Set this for a stable canonical across every
-//      environment (recommended, and required for correct client-side values).
-//   2. Platform-provided origins, read from the server runtime environment.
-//   3. http://localhost:3000 — local dev fallback.
-//
-// A value without a protocol is assumed https; trailing slashes are dropped.
+// Canonical origin for absolute canonical/OG URLs. Resolved from the env so it
+// works across platforms: VITE_SITE_URL (explicit, build-time inlined) →
+// platform origin (server runtime) → localhost. Protocol defaults to https;
+// trailing slashes are dropped.
 function normalizeOrigin(value: string): string {
   const withProtocol = /^[a-z][a-z0-9+.-]*:\/\//i.test(value)
     ? value
@@ -23,9 +16,8 @@ function resolveSiteUrl(): string {
   const explicit = import.meta.env.VITE_SITE_URL;
   if (explicit) return normalizeOrigin(explicit);
 
-  // Read `process.env` without depending on Node globals in the type surface.
-  // On the client `globalThis.process` is undefined, so this yields the
-  // localhost fallback there; the meaningful (SSR) value resolves on the server.
+  // `globalThis.process` is undefined on the client, so this yields localhost
+  // there; the meaningful value resolves on the server.
   const env = (
     globalThis as {
       process?: { env?: Record<string, string | undefined> };
@@ -42,7 +34,6 @@ function resolveSiteUrl(): string {
   return "http://localhost:3000";
 }
 
-// Canonical production origin. Resolved once at module load.
 const url = resolveSiteUrl();
 
 export const siteConfig = {
@@ -65,7 +56,6 @@ export const siteConfig = {
   mailto: "mailto:kasmickleva@gmail.com",
 };
 
-/** Build an absolute URL on the canonical origin from a root-relative path. */
 export function absoluteUrl(path: string): string {
   return new URL(path, siteConfig.url).toString();
 }

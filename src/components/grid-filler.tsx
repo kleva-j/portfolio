@@ -1,25 +1,11 @@
 import { cn } from "@/lib/utils";
 
 type GridFillerProps = React.ComponentProps<"div"> & {
-  /**
-   * The number of items in the grid.
-   */
   totalItems: number;
-  /**
-   * Number of columns for all screens. Breakpoint props override this.
-   */
+  /** Applies to all screens; breakpoint props override it. */
   columns?: number;
-  /**
-   * Number of columns for small screens.
-   */
   smColumns?: number;
-  /**
-   * Number of columns for medium screens.
-   */
   mdColumns?: number;
-  /**
-   * Number of columns for large screens.
-   */
   lgColumns?: number;
 };
 

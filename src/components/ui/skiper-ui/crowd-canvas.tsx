@@ -42,7 +42,6 @@ interface Peep {
   render: (ctx: CanvasRenderingContext2D) => void;
 }
 
-// Utils
 const randomRange = (min: number, max: number) =>
   min + Math.random() * (max - min);
 const randomIndex = <T,>(array: T[]) => randomRange(0, array.length) | 0;
@@ -53,7 +52,6 @@ const removeRandomFromArray = <T,>(array: T[]) =>
   removeFromArray(array, randomIndex(array));
 const getRandomFromArray = <T,>(array: T[]) => array[randomIndex(array) | 0];
 
-// Tween factories
 const resetPeep = ({ stage, peep }: { stage: Stage; peep: Peep }): WalkProps => {
   const direction = Math.random() > 0.5 ? 1 : -1;
   const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());

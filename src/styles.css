@@ -49,9 +49,8 @@
 }
 
 :root {
-  /* Fixed chrome heights. The home page `main` region fills the viewport
-     minus these, and the Header/Footer are sized from them so the calc can
-     never drift out of sync. */
+  /* Fixed chrome heights; the home `main` fills the viewport minus these, and
+     Header/Footer are sized from them so the calc can't drift. */
   --header-height: 3.5rem;
   --footer-height: 4rem;
   --background: oklch(1 0 0);
@@ -138,16 +137,9 @@
   }
 }
 
-/* Theme switching animates in two ways, both flicker-free:
-
-   1. Modern browsers use the View Transitions API (see theme-provider.tsx),
-      which cross-fades a rasterized snapshot of the page. Text is never
-      re-rendered mid-animation, so glyphs don't shimmer/flicker. These rules
-      just tune the cross-fade timing.
-   2. Browsers without View Transitions fall back to fading themed colors via
-      the temporary `.theme-transition` class on <html>. It's present only for
-      the duration of a switch, so it never delays first paint or interferes
-      with ordinary hover/focus transitions. */
+/* Flicker-free theme switching: modern browsers cross-fade a page snapshot via
+   the View Transitions API; others fall back to the temporary `.theme-transition`
+   class on <html>. */
 @media (prefers-reduced-motion: no-preference) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
@@ -167,8 +159,7 @@
   }
 }
 
-/* Full-viewport stage for the ThreeUI landing-page frame, whose iframe fills
-   its container absolutely. */
+/* Full-viewport stage for the ThreeUI landing-page iframe. */
 .shader-frame {
   position: fixed;
   inset: 0;
@@ -176,10 +167,8 @@
   height: 100dvh;
 }
 
-/* Editorial prose for TanStack Markdown output (see components/markdown.tsx).
-   Scoped to `.md-prose`; the sibling `.markdown-renderer` class carries the
-   syntax-highlight token theme. Semantic tokens only, hairline rules over
-   shadows, square corners (radius 0), monospace for code and metadata. */
+/* Editorial prose for TanStack Markdown output, scoped to `.md-prose`; the
+   sibling `.markdown-renderer` carries the syntax-highlight token theme. */
 @layer components {
   .md-prose {
     color: var(--foreground);
@@ -299,8 +288,7 @@
     border-radius: var(--radius);
   }
 
-  /* Fenced code blocks. Background/foreground come from the highlight theme
-     (`.markdown-renderer pre.tm-code`); this owns layout only. */
+  /* Fenced code blocks; colors come from the highlight theme, this owns layout. */
   .md-prose pre {
     overflow-x: auto;
     padding: 1rem 1.15rem;

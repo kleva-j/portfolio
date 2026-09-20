@@ -66,31 +66,19 @@ const resolveCssColor = (
 
 type AsciiArtProps = {
   src: string;
-  /** Number of ASCII columns (character resolution). Higher = more detail. */
   resolution?: number;
-  /** Charset preset name ("standard", "blocks", "binary", etc.) or custom character string */
   charset?: CharsetPreset | string;
-  /** Text color for the ASCII art (ignored if colored=true) */
+  /** Ignored when `colored` is true. */
   color?: string;
-  /** Background color */
   backgroundColor?: string;
-  /** Convert to inverted colors (dark bg, light text) */
   inverted?: boolean;
-  /** Enable colored ASCII (uses image colors) */
   colored?: boolean;
-  /** Enable animation on load */
   animated?: boolean;
-  /** Animation style */
   animationStyle?: "fade" | "typewriter" | "matrix" | "none";
-  /** Duration for fade animation in seconds */
   animationDuration?: number;
-  /** Font family for ASCII characters */
   fontFamily?: string;
-  /** Container className - use this to control size (e.g., w-full, h-64) */
   className?: string;
-  /** Only animate when in view */
   animateOnView?: boolean;
-  /** How the image should fit within the ASCII grid */
   objectFit?: "cover" | "contain" | "fill";
 };
 
