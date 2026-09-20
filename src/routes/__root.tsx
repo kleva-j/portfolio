@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { NotFoundPage } from "@/components/not-found";
 import { siteConfig } from "@/lib/site.config";
 
+import interLatinWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
 
 const siteTitle = "Michael Obasi — Software Engineer";
@@ -33,6 +34,13 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: ogImage },
     ],
     links: [
+      {
+        rel: "preload",
+        href: interLatinWoff2,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
