@@ -406,3 +406,66 @@
     transition: none;
   }
 }
+
+/* BJORK UI periodic-table tokens. The component sets `data-bjork-theme` on its
+   container from its resolved theme, so these tokens and the JS-driven category
+   palettes always agree — including when an explicit `theme` prop overrides the
+   site theme. Values are the registry defaults; scoped so this vendored
+   cream/copper design system never leaks into the site's semantic tokens. */
+[data-bjork-theme="light"] {
+  --bjork-accent: #ec7d43;
+  --bjork-accent-muted: rgba(236, 125, 67, 0.2);
+  --bjork-accent-soft: rgba(236, 125, 67, 0.1);
+  --bjork-border: #eee6db;
+  --bjork-border-muted: #f5ede2;
+  --bjork-border-strong: #e1d7c8;
+  --bjork-field: rgba(255, 252, 246, 0.96);
+  --bjork-shadow-menu:
+    inset 0 1px 0 rgba(88, 72, 49, 0.04),
+    inset 0 12px 24px rgba(88, 72, 49, 0.022),
+    inset 1px 0 0 rgba(88, 72, 49, 0.024),
+    inset -1px 0 0 rgba(255, 255, 255, 0.62),
+    0 22px 44px -26px rgba(66, 52, 33, 0.22);
+  --bjork-shadow-soft:
+    inset 0 1px 0 rgba(88, 72, 49, 0.045),
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.86);
+  --bjork-shadow-surface:
+    inset 0 7px 14px rgba(88, 72, 49, 0.045),
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.92),
+    inset 1px 0 0 rgba(88, 72, 49, 0.026),
+    inset -1px 0 0 rgba(255, 255, 255, 0.68),
+    0 14px 22px -9px rgba(66, 52, 33, 0.11);
+  --bjork-surface: #fffcf6;
+  --bjork-surface-hover: #f5efe3;
+  --bjork-text-faint: rgba(23, 23, 23, 0.22);
+  --bjork-text-medium: rgba(23, 23, 23, 0.72);
+  --bjork-text-muted: rgba(23, 23, 23, 0.52);
+  --bjork-text-soft: rgba(23, 23, 23, 0.36);
+  --bjork-text-strong: rgba(23, 23, 23, 0.9);
+}
+
+[data-bjork-theme="dark"] {
+  --bjork-accent: #ec5c13;
+  --bjork-accent-muted: rgba(236, 92, 19, 0.24);
+  --bjork-accent-soft: rgba(236, 92, 19, 0.12);
+  --bjork-border: #232323;
+  --bjork-border-muted: #1c1c1c;
+  --bjork-border-strong: #343434;
+  --bjork-field: rgba(18, 18, 18, 0.95);
+  --bjork-shadow-menu:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    inset 0 12px 24px rgba(255, 255, 255, 0.018),
+    inset 0 -18px 26px rgba(0, 0, 0, 0.24), 0 22px 42px -22px rgba(0, 0, 0, 0.9);
+  --bjork-shadow-soft: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --bjork-shadow-surface:
+    inset 0 7px 14px rgba(255, 255, 255, 0.03),
+    inset 0 0.5px 0.5px rgba(255, 255, 255, 0.06),
+    0 14px 20px -6px rgba(0, 0, 0, 0.45);
+  --bjork-surface: #121212;
+  --bjork-surface-hover: #161616;
+  --bjork-text-faint: rgba(237, 237, 237, 0.22);
+  --bjork-text-medium: rgba(237, 237, 237, 0.72);
+  --bjork-text-muted: rgba(237, 237, 237, 0.52);
+  --bjork-text-soft: rgba(237, 237, 237, 0.36);
+  --bjork-text-strong: rgba(237, 237, 237, 0.9);
+}

@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
 import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
 import { Route as ArenaDesignArenaRouteImport } from './routes/arena/design-arena'
+import { Route as ArenaPeriodicTableRouteImport } from './routes/arena/periodic-table'
 import { Route as WritingIndexRouteImport } from './routes/writing.index'
 import { Route as WritingSlugRouteImport } from './routes/writing.$slug'
 
@@ -42,6 +43,11 @@ const ArenaDesignArenaRoute = ArenaDesignArenaRouteImport.update({
   path: '/arena/design-arena',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArenaPeriodicTableRoute = ArenaPeriodicTableRouteImport.update({
+  id: '/arena/periodic-table',
+  path: '/arena/periodic-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WritingIndexRoute = WritingIndexRouteImport.update({
   id: '/writing/',
   path: '/writing/',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/arena/periodic-table': typeof ArenaPeriodicTableRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/arena/periodic-table': typeof ArenaPeriodicTableRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing': typeof WritingIndexRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
+  '/arena/periodic-table': typeof ArenaPeriodicTableRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/arena/periodic-table'
     | '/writing/$slug'
     | '/writing/'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/arena/periodic-table'
     | '/writing/$slug'
     | '/writing'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
+    | '/arena/periodic-table'
     | '/writing/$slug'
     | '/writing/'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
   ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
   ArenaDesignArenaRoute: typeof ArenaDesignArenaRoute
+  ArenaPeriodicTableRoute: typeof ArenaPeriodicTableRoute
   WritingSlugRoute: typeof WritingSlugRoute
   WritingIndexRoute: typeof WritingIndexRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArenaDesignArenaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/arena/periodic-table': {
+      id: '/arena/periodic-table'
+      path: '/arena/periodic-table'
+      fullPath: '/arena/periodic-table'
+      preLoaderRoute: typeof ArenaPeriodicTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/writing/': {
       id: '/writing/'
       path: '/writing'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
   ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,
   ArenaDesignArenaRoute: ArenaDesignArenaRoute,
+  ArenaPeriodicTableRoute: ArenaPeriodicTableRoute,
   WritingSlugRoute: WritingSlugRoute,
   WritingIndexRoute: WritingIndexRoute,
 }
