@@ -12,5 +12,8 @@ dist-ssr
 __unconfig*
 todos.json
 
+# local-only planning docs (not tracked)
+docs/*-plan.md
+
 # typescript
 *.tsbuildinfo
