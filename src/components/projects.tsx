@@ -17,12 +17,62 @@ type Project = {
 const projects: Project[] = [
   {
     name: "PairSync",
+    year: "2026",
+    role: "Open source",
+    summary:
+      "Peer-to-peer file and clipboard sharing for desktop and mobile over the local network — no cloud, accounts, or relay servers.",
+    stack: ["Tauri", "Rust", "React Native", "Expo", "XState"],
+    href: siteConfig.externalLinks.project,
+    external: true,
+  },
+  {
+    name: "clinicore",
+    year: "2026",
+    role: "Full-stack",
+    summary:
+      "A full-stack clinic management system — patients, appointments, treatments, and staff, with role-based access, consent, and audit logging.",
+    stack: ["TanStack Start", "oRPC", "Better Auth", "Drizzle", "Postgres"],
+    href: "https://clinicore-web.vercel.app",
+    external: true,
+  },
+  {
+    name: "Summarly",
+    year: "2026",
+    role: "Full-stack",
+    summary:
+      "A content summarizer with accounts and voice interaction, turning long-form material into concise, listenable briefings.",
+    stack: ["Next.js 15", "Convex", "Clerk", "ElevenLabs"],
+    href: "https://summarly-seven.vercel.app",
+    external: true,
+  },
+  {
+    name: "Notemark",
     year: "2025",
     role: "Open source",
     summary:
-      "Peer-to-peer file and clipboard sharing for macOS, Windows, and Linux — a Go core with native clients, no cloud, accounts, or relay servers.",
-    stack: ["Tauri V2", "Rust", "React Native", "Expo", "Tailwind v4"],
-    href: siteConfig.externalLinks.project,
+      "Cross-platform markdown notes for web, desktop, and mobile, with AI assistance and a shared sync core.",
+    stack: ["Turborepo", "Hono", "oRPC", "Tauri", "Expo"],
+    href: `${siteConfig.externalLinks.github}/notemark-monorepo`,
+    external: true,
+  },
+  {
+    name: "DevGrade",
+    year: "2026",
+    role: "Full-stack",
+    summary:
+      "A developer skills-assessment tool — framework competency quizzes scored across normalized proficiency pillars.",
+    stack: ["TanStack Start", "Drizzle", "XState", "shadcn/ui"],
+    href: "https://dev-grade.vercel.app",
+    external: true,
+  },
+  {
+    name: "Chapel Hymn Book",
+    year: "2026",
+    role: "Mobile",
+    summary:
+      "An offline mobile hymnal for browsing and reading hymns anywhere, with no connection required.",
+    stack: ["Expo", "Drizzle", "SQLite", "Effect"],
+    href: `${siteConfig.externalLinks.github}/Chapel-Hymn-Book`,
     external: true,
   },
   {
@@ -34,15 +84,6 @@ const projects: Project[] = [
     stack: ["TanStack Start", "React 19", "Tailwind v4"],
     href: `${siteConfig.externalLinks.github}/portfolio`,
     external: true,
-  },
-  {
-    name: "Working Volumes",
-    year: "2026",
-    role: "Showcase",
-    summary:
-      "An interactive 3D bookshelf integrated into this site — a study in WebGL performance, instanced geometry, and authored camera work.",
-    stack: ["Three.js", "WebGL", "GLSL"],
-    href: "/arena/design-arena",
   },
 ];
 
