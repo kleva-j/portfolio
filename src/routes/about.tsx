@@ -19,13 +19,29 @@ const focus = [
   ["Writing", "Occasional long-form on engineering decisions and tooling."],
 ] as const;
 
-const experience = [
-  ["2026 – present", "Independent Engineer", "PairSync"],
-  ["2026", "Software Engineer (Contract)", "Screenstack.tech"],
-  ["2022", "Software Engineer", "Aduro Creative"],
-  ["2021", "Frontend Engineer", "LawPavilion"],
-  ["2019", "Frontend Engineer", "Tulaa"],
-] as const;
+type Role = {
+  period: string;
+  role: string;
+  company: string;
+  current?: boolean;
+};
+
+const experience: Role[] = [
+  {
+    period: "2026 – present",
+    role: "Freelance/Independent Engineer",
+    company: "Self-employed",
+    current: true,
+  },
+  {
+    period: "2026",
+    role: "Software Engineer (Contract)",
+    company: "Screenstack.tech",
+  },
+  { period: "2022", role: "Software Engineer", company: "Aduro Creative" },
+  { period: "2021", role: "Frontend Engineer", company: "LawPavilion" },
+  { period: "2019", role: "Frontend Engineer", company: "Tulaa" },
+];
 
 const pageTitle = "About — Michael Obasi";
 const pageDescription =
@@ -53,7 +69,7 @@ function SectionLabel({
   return (
     <h2
       className={cn(
-        "mb-4 flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.12em] text-muted-foreground uppercase",
+        "mb-4 flex items-center gap-2.5 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase",
         className,
       )}
     >
@@ -84,17 +100,18 @@ function About() {
           </h1>
 
           <div className="mt-10 space-y-5 border-t border-border pt-8">
-            <p className="text-lg leading-relaxed text-pretty">
+            <p className="max-w-prose text-lg leading-relaxed text-pretty">
               Hi 👋🏻, I'm Michael — a software engineer who loves exploring,
-              building and shiping new application that solves something. I care
-              about reliable systems that are fast, legible, and kind to the
-              people who maintain them.
+              building, and shipping applications that solve real problems. I'm
+              passionate about crafting thoughtful digital experiences — built
+              on clean architecture, intuitive design, and code that lasts.
             </p>
-            <p className="text-base leading-relaxed text-pretty text-muted-foreground">
-              My work spans frontend and full-stack product engineering, from
-              Angular CRMs to React apps and cross-platform mobile.
+            <p className="max-w-prose text-base leading-relaxed text-pretty text-muted-foreground">
+              I've spent the last several years building product across the
+              stack — from data-heavy enterprise CRMs to consumer web apps and
+              cross-platform mobile that runs everywhere.
             </p>
-            <p className="text-base leading-relaxed text-pretty text-muted-foreground">
+            <p className="max-w-prose text-base leading-relaxed text-pretty text-muted-foreground">
               Right now I'm building{" "}
               <a
                 href={siteConfig.externalLinks.project}
@@ -116,7 +133,7 @@ function About() {
                 <li key={title} className="flex gap-3">
                   <span
                     aria-hidden="true"
-                    className="mt-[0.55rem] size-1 shrink-0 bg-primary/70"
+                    className="mt-2 size-1 shrink-0 bg-primary/70"
                   />
                   <p className="text-sm leading-relaxed">
                     <span className="font-medium text-foreground">{title}</span>
@@ -133,12 +150,17 @@ function About() {
           <div className="mt-10 border-t border-border pt-8">
             <SectionLabel index="02">Experience</SectionLabel>
             <ul className="grid gap-5">
-              {experience.map(([period, role, company]) => (
+              {experience.map(({ period, role, company, current }) => (
                 <li
                   key={period}
                   className="grid gap-0.5 sm:grid-cols-[9rem_1fr] sm:items-baseline sm:gap-x-6"
                 >
-                  <span className="text-[13px] text-muted-foreground tabular-nums">
+                  <span
+                    className={cn(
+                      "font-mono text-[13px] tabular-nums",
+                      current ? "text-primary" : "text-muted-foreground",
+                    )}
+                  >
                     {period}
                   </span>
                   <p className="text-sm leading-relaxed">
