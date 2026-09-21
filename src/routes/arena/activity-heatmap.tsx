@@ -75,7 +75,8 @@ function RouteComponent() {
             A collection of activity-monitor components — single-hue
             contribution grids where magnitude reads as the strength of one
             color. Hover any tile for its date and exact count; on the Heat
-            Calendar, click to pin a cell and drag a range for its total.
+            Calendar, click one cell and then another to select a range and view
+            its total.
           </p>
         </div>
 

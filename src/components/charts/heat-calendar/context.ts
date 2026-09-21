@@ -64,7 +64,11 @@ export function useHeatCalendarModel({
   };
   const gridRef = useRef<HTMLDivElement>(null);
   const tooltipId = useId();
-  const [step, setStep] = useState<number | null>(null);
+  // the legend filter: hover/focus previews a level, a click pins it. Keeping
+  // the two apart means activation never clears the level the pointer just set.
+  const [hoverStep, setHoverStep] = useState<number | null>(null);
+  const [pinnedStep, setPinnedStep] = useState<number | null>(null);
+  const step = hoverStep ?? pinnedStep;
   // the entrance wave owns the cells until it has landed; the ripple takes over after
   const [settled, setSettled] = useState(false);
   useEffect(() => {
@@ -207,7 +211,9 @@ export function useHeatCalendarModel({
     pinned,
     spanEnd,
     step,
-    setStep,
+    pinnedStep,
+    setHoverStep,
+    setPinnedStep,
     settled,
     start,
     end,

@@ -214,9 +214,16 @@ export function Tooltip({
   // ThemeToggle does — then runs the tooltip's instead of its own. Composing
   // with `props.onClick` cannot save it either, because a component element's
   // props hold nothing the component does internally.
-  const trigger = isValidElement(children)
-    ? cloneElement(children as ReactElement<Record<string, unknown>>, {
-        "aria-describedby": id,
+  const triggerEl = isValidElement(children)
+    ? (children as ReactElement<Record<string, unknown>>)
+    : null;
+  const prevDescribedBy = triggerEl?.props["aria-describedby"];
+  const trigger = triggerEl
+    ? cloneElement(triggerEl, {
+        "aria-describedby":
+          typeof prevDescribedBy === "string" && prevDescribedBy
+            ? `${prevDescribedBy} ${id}`
+            : id,
       })
     : null;
 

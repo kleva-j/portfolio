@@ -126,13 +126,13 @@ export function HeatCalendarGrid({
                 }
               >
                 <motion.span
-                  className="pointer-events-none absolute inset-0.5 block rounded-[4px]"
+                  className="pointer-events-none absolute inset-0.5 block rounded-lg"
                   style={{
                     background: fill(b),
                     boxShadow: isEnd
                       ? "0 0 0 2px var(--background), 0 0 0 3.5px var(--foreground)"
                       : "none",
-                    transition: "box-shadow 150ms",
+                    transition: reduce ? "none" : "box-shadow 150ms",
                   }}
                   // the diagonal wave: each cell arrives (w + d) steps after the corner;
                   // once settled, the ripple spreads out from the hovered cell by distance

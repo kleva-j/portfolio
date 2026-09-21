@@ -55,7 +55,7 @@ export function NumberTicker({
     const formatted = format
       ? format(rounded)
       : locale
-        ? rounded.toLocaleString()
+        ? rounded.toLocaleString("en-US")
         : rounded.toString();
     return pad ? formatted.padStart(pad, "0") : formatted;
   }, [value, pad, format, locale]);

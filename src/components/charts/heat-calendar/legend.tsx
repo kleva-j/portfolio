@@ -4,8 +4,17 @@ import { useHeatCalendar } from "./context";
 import { fmtRange, STEPS } from "./utils";
 
 export function HeatCalendarLegend({ className }: { className?: string }) {
-  const { start, end, step, setStep, fill, canHover, reduce } =
-    useHeatCalendar();
+  const {
+    start,
+    end,
+    step,
+    pinnedStep,
+    setHoverStep,
+    setPinnedStep,
+    fill,
+    canHover,
+    reduce,
+  } = useHeatCalendar();
   return (
     <div
       className={cn(
@@ -18,24 +27,24 @@ export function HeatCalendarLegend({ className }: { className?: string }) {
           ? `${fmtRange.format(start)} – ${fmtRange.format(end)}`
           : "\u00a0"}
       </span>
-      {/* hovering a step keeps only cells of that level lit, so the legend doubles as a filter */}
+      {/* hovering a step previews only cells of that level; a click pins the filter so it holds after the pointer leaves */}
       <span
         className="flex items-center gap-1"
-        onPointerLeave={() => setStep(null)}
+        onPointerLeave={() => setHoverStep(null)}
       >
         <span className="me-0.5 text-xs text-muted-foreground">less</span>
         {STEPS.map((s, i) => (
           <button
             type="button"
             aria-label={`Show activity level ${i}`}
-            aria-pressed={step === i}
+            aria-pressed={pinnedStep === i}
             key={s}
             onPointerEnter={() => {
-              if (canHover) setStep(i);
+              if (canHover) setHoverStep(i);
             }}
-            onFocus={() => setStep(i)}
-            onBlur={() => setStep(null)}
-            onClick={() => setStep(step === i ? null : i)}
+            onFocus={() => setHoverStep(i)}
+            onBlur={() => setHoverStep(null)}
+            onClick={() => setPinnedStep(pinnedStep === i ? null : i)}
             className="size-3 rounded-[3px] transition-transform duration-150"
             style={{
               background: fill(i),

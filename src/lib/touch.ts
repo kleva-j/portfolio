@@ -34,11 +34,34 @@ export const TOUCH_GESTURE_CONTENT_CLASS =
  * can copy.
  */
 export function holdSelection(element: HTMLElement) {
+  const prevUserSelect = element.style.getPropertyValue("user-select");
+  const prevUserSelectPriority =
+    element.style.getPropertyPriority("user-select");
+  const prevWebkit = element.style.getPropertyValue("-webkit-user-select");
+  const prevWebkitPriority = element.style.getPropertyPriority(
+    "-webkit-user-select",
+  );
   element.style.setProperty("user-select", "none");
   element.style.setProperty("-webkit-user-select", "none");
   return () => {
-    element.style.removeProperty("user-select");
-    element.style.removeProperty("-webkit-user-select");
+    if (prevUserSelect) {
+      element.style.setProperty(
+        "user-select",
+        prevUserSelect,
+        prevUserSelectPriority,
+      );
+    } else {
+      element.style.removeProperty("user-select");
+    }
+    if (prevWebkit) {
+      element.style.setProperty(
+        "-webkit-user-select",
+        prevWebkit,
+        prevWebkitPriority,
+      );
+    } else {
+      element.style.removeProperty("-webkit-user-select");
+    }
   };
 }
 
