@@ -24,6 +24,7 @@
   "registries": {
     "@efferd": "https://efferd.com/r/{style}/{name}.json",
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
-    "@skiper-ui": "https://skiper-ui.com/registry/{name}.json"
+    "@skiper-ui": "https://skiper-ui.com/registry/{name}.json",
+    "@beui": "https://beui.dev/r/{name}.json"
   }
 }
