@@ -2,12 +2,10 @@ import { FullWidthDivider } from "@/components/full-width-divider";
 import { AsciiPortrait } from "@/components/ascii-portrait";
 import { createFileRoute } from "@tanstack/react-router";
 import { CareerCard } from "@/components/career-card";
-import { Separator } from "@/components/ui/separator";
 import { DecorIcon } from "@/components/decor-icon";
 import { Projects } from "@/components/projects";
 import { Writings } from "@/components/writings";
 import { getPosts } from "@/content/writing/posts";
-import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -22,6 +20,20 @@ const meta = [
   { title: siteConfig.title },
   { name: "description", content: siteConfig.description },
 ];
+
+const heroLinks = [
+  {
+    label: "GitHub",
+    href: siteConfig.externalLinks.github,
+    icon: GithubLogoIcon,
+  },
+  {
+    label: "LinkedIn",
+    href: siteConfig.externalLinks.linkedin,
+    icon: LinkedinLogoIcon,
+  },
+  { label: "Email", href: siteConfig.mailto, icon: EnvelopeSimpleIcon },
+] as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta }),
@@ -45,8 +57,13 @@ function App() {
               <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
                 Software engineer · Lagos, Nigeria
               </p>
-              <h1 className="mt-5 font-heading text-4xl leading-[1.1] font-medium tracking-tight text-balance sm:text-5xl">
-                Michael Obasi. I design and ship web products.
+              <h1 className="mt-5 font-heading tracking-tight text-balance">
+                <span className="block text-4xl leading-[1.05] font-medium text-foreground sm:text-5xl">
+                  Michael Obasi.
+                </span>
+                <span className="mt-3 block text-2xl leading-snug font-normal text-foreground/70 sm:text-3xl">
+                  I sweat the small things so the product doesn't.
+                </span>
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-pretty">
                 I'm currently building{" "}
@@ -59,49 +76,28 @@ function App() {
                   PairSync
                 </a>{" "}
                 — an open-source, peer-to-peer file and clipboard sharing
-                tool. I work across frontend, full-stack, and mobile, with a
-                focus on fast, thoughtful products.
+                tool. I work across frontend, full-stack, and mobile,
+                opinionated about the small things, because that's where good
+                products live.
               </p>
-              <div className="mt-4 flex items-center">
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-md"
-                  render={<a aria-label="Email" href={siteConfig.mailto} />}
-                  nativeButton={false}
-                >
-                  <EnvelopeSimpleIcon weight="bold" />
-                </Button>
-
-                <Separator orientation="vertical" className="my-auto h-6" />
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-md"
-                  render={
-                    <a
-                      aria-label="GitHub"
-                      href={siteConfig.externalLinks.github}
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                {heroLinks.map(({ href, label, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                    {...(href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    <Icon
+                      weight="bold"
+                      className="size-4 text-muted-foreground/70 transition-colors group-hover:text-primary"
                     />
-                  }
-                  nativeButton={false}
-                >
-                  <GithubLogoIcon weight="bold" />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-md"
-                  render={
-                    <a
-                      aria-label="LinkedIn"
-                      href={siteConfig.externalLinks.linkedin}
-                    />
-                  }
-                  nativeButton={false}
-                >
-                  <LinkedinLogoIcon weight="bold" />
-                </Button>
+                    {label}
+                  </a>
+                ))}
               </div>
             </div>
 
