@@ -6,7 +6,7 @@ export const CareerCard = () => {
   return (
     <CollapsibleCard
       title="Career"
-      description="6+ years of experience across product engineering, architecture, and mobile."
+      description="6+ years across frontend, full-stack, and product engineering — from Angular CRMs to React apps and peer-to-peer tooling."
       contentClassName="border-t p-6"
     >
       <CareerTimeline />

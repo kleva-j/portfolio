@@ -23,45 +23,54 @@ const items: CareerItem[] = [
   {
     id: 1,
     date: "2019",
-    role: "Software Engineer",
-    company: "Andela",
+    role: "Frontend Engineer",
+    company: "Tulaa",
     description:
-      "Started my engineering career building web products for distributed teams and international clients across React front-ends and Node.js services.",
-    stack: ["React", "Node.js", "JavaScript"],
+      "Built an Angular CRM serving 25,000+ users and cut load time by ~30% with lazy-loaded microservices, while leading and mentoring the frontend team.",
+    stack: ["Angular 8", "TypeScript", "Data viz"],
   },
   {
     id: 2,
     date: "2021",
-    role: "Software Engineer",
-    company: "Finch (YC S21)",
+    role: "Frontend Engineer",
+    company: "LawPavilion",
     description:
-      "Joined an early-stage product team, shipping features end to end and helping shape engineering practices as the team grew.",
-    stack: ["TypeScript", "React", "PostgreSQL"],
+      "Engineered a performance-focused Angular architecture with lazy-loading and web-worker offloading to bring down load times across the app.",
+    stack: ["Angular", "TypeScript", "RxJS"],
   },
   {
     id: 3,
-    date: "2023",
-    role: "Senior Software Engineer",
-    company: "Contract",
+    date: "2022",
+    role: "Software Engineer",
+    company: "Aduro Creative",
     description:
-      "Stepped into a senior role leading architecture on backend systems and mentoring engineers, then went independent to consult and build my own products.",
-    stack: ["Node.js", "TypeScript", "PostgreSQL"],
+      "Built React apps for clients including a medical-education platform, and drove accessibility initiatives across the UI.",
+    stack: ["React", "TypeScript", "Accessibility"],
   },
   {
     id: 4,
+    date: "2026",
+    role: "Software Engineer",
+    company: "Screenstack.tech (Contract)",
+    description:
+      "Full-stack contractor working end to end: shipped frontend interfaces and backend services, designed and modeled the database, shaped the product's UI/UX, established engineering workflows, and mentored teammates.",
+    stack: ["React", "Node.js", "TypeScript", "PostgreSQL"],
+  },
+  {
+    id: 5,
     date: "Present",
     role: "Independent Engineer",
     company: "PairSync",
     description:
-      "Building peer-to-peer file and clipboard sharing for macOS, iOS, and Linux — a Go core with native clients, no cloud, no accounts, no relay servers.",
-    stack: ["Go", "Tauri", "React Native"],
+      "Building peer-to-peer file and clipboard sharing for desktop and mobile — no cloud, no accounts, no relay servers.",
+    stack: ["Rust", "Tauri", "React Native", "Expo"],
     current: true,
   },
 ];
 
 export function CareerTimeline() {
   return (
-    <Timeline defaultValue={4}>
+    <Timeline defaultValue={5}>
       {items.map((item) => (
         <TimelineItem
           className="sm:group-data-[orientation=vertical]/timeline:ms-32"
