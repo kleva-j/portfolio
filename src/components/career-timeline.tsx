@@ -22,21 +22,22 @@ type CareerItem = {
 const items: CareerItem[] = [
   {
     id: 1,
-    date: "2019",
-    role: "Frontend Engineer",
-    company: "Tulaa",
+    date: "Present",
+    role: "Independent Engineer",
+    company: "PairSync",
     description:
-      "Built an Angular CRM serving 25,000+ users and cut load time by ~30% with lazy-loaded microservices, while leading and mentoring the frontend team.",
-    stack: ["Angular 8", "TypeScript", "Data viz"],
+      "Building peer-to-peer file and clipboard sharing for desktop and mobile — no cloud, no accounts, no relay servers.",
+    stack: ["Rust", "Tauri", "React Native", "Expo"],
+    current: true,
   },
   {
     id: 2,
-    date: "2021",
-    role: "Frontend Engineer",
-    company: "LawPavilion",
+    date: "2026",
+    role: "Software Engineer",
+    company: "Screenstack.tech (Contract)",
     description:
-      "Engineered a performance-focused Angular architecture with lazy-loading and web-worker offloading to bring down load times across the app.",
-    stack: ["Angular", "TypeScript", "RxJS"],
+      "Full-stack contractor working end to end: shipped frontend interfaces and backend services, designed and modeled the database, shaped the product's UI/UX, established engineering workflows, and mentored teammates.",
+    stack: ["React", "Node.js", "TypeScript", "PostgreSQL"],
   },
   {
     id: 3,
@@ -49,28 +50,27 @@ const items: CareerItem[] = [
   },
   {
     id: 4,
-    date: "2026",
-    role: "Software Engineer",
-    company: "Screenstack.tech (Contract)",
+    date: "2021",
+    role: "Frontend Engineer",
+    company: "LawPavilion",
     description:
-      "Full-stack contractor working end to end: shipped frontend interfaces and backend services, designed and modeled the database, shaped the product's UI/UX, established engineering workflows, and mentored teammates.",
-    stack: ["React", "Node.js", "TypeScript", "PostgreSQL"],
+      "Engineered a performance-focused Angular architecture with lazy-loading and web-worker offloading to bring down load times across the app.",
+    stack: ["Angular", "TypeScript", "RxJS"],
   },
   {
     id: 5,
-    date: "Present",
-    role: "Independent Engineer",
-    company: "PairSync",
+    date: "2019",
+    role: "Frontend Engineer",
+    company: "Tulaa",
     description:
-      "Building peer-to-peer file and clipboard sharing for desktop and mobile — no cloud, no accounts, no relay servers.",
-    stack: ["Rust", "Tauri", "React Native", "Expo"],
-    current: true,
+      "Built an Angular CRM serving 25,000+ users and cut load time by ~30% with lazy-loaded microservices, while leading and mentoring the frontend team.",
+    stack: ["Angular 8", "TypeScript", "Data viz"],
   },
 ];
 
 export function CareerTimeline() {
   return (
-    <Timeline defaultValue={5}>
+    <Timeline defaultValue={items.length}>
       {items.map((item) => (
         <TimelineItem
           className="sm:group-data-[orientation=vertical]/timeline:ms-32"
