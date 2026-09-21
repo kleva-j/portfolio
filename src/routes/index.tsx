@@ -75,10 +75,9 @@ function App() {
                 >
                   PairSync
                 </a>{" "}
-                — an open-source, peer-to-peer file and clipboard sharing
-                tool. I work across frontend, full-stack, and mobile,
-                opinionated about the small things, because that's where good
-                products live.
+                — an open-source, peer-to-peer file and clipboard sharing tool.
+                I work across frontend, full-stack, and mobile, opinionated
+                about the small things, because that's where good products live.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                 {heroLinks.map(({ href, label, icon: Icon }) => (
@@ -86,7 +85,7 @@ function App() {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                    className="group inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary"
                     {...(href.startsWith("http")
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}

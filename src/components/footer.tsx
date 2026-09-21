@@ -20,7 +20,7 @@ function Dot() {
   return (
     <span
       aria-hidden="true"
-      className="size-0.5 rounded-full bg-muted-foreground/40"
+      className="inline-block size-0.5 shrink-0 rounded-full bg-muted-foreground/40 align-middle"
     />
   );
 }

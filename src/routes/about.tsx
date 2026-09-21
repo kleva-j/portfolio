@@ -29,14 +29,19 @@ type Role = {
 const experience: Role[] = [
   {
     period: "2026 – present",
-    role: "Freelance/Independent Engineer",
-    company: "Self-employed",
+    role: "Independent Engineer",
+    company: "PairSync",
     current: true,
   },
   {
     period: "2026",
     role: "Software Engineer (Contract)",
     company: "Screenstack.tech",
+  },
+  {
+    period: "2023 – 2026",
+    role: "Freelance Software Engineer",
+    company: "Self-employed",
   },
   { period: "2022", role: "Software Engineer", company: "Aduro Creative" },
   { period: "2021", role: "Frontend Engineer", company: "LawPavilion" },
