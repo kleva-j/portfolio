@@ -4,6 +4,7 @@ date: Jun 2026
 dateTime: 2026-06
 category: Engineering
 description: "How I built conflict-free file and clipboard sync over a direct peer connection — no cloud, no relay, no accounts."
+draft: true
 ---
 
 Most sync tools start with a server. It is the obvious place to put the source

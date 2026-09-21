@@ -4,6 +4,7 @@ date: Apr 2026
 dateTime: 2026-04
 category: Design
 description: "Notes on letting typography and whitespace carry the UI, and cutting every border that wasn't doing real work."
+draft: true
 ---
 
 This site has almost no chrome. No cards stacked on cards, no drop shadows
