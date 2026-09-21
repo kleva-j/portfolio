@@ -1627,9 +1627,9 @@ export function PeriodicTable({
     }),
   };
 
-  const anchorSpring = shouldReduceMotion
-    ? { duration: 0.12 }
-    : { type: "spring" as const, stiffness: 480, damping: 38, mass: 0.8 };
+  const anchorSpring = shouldAnimate
+    ? { type: "spring" as const, stiffness: 480, damping: 38, mass: 0.8 }
+    : { duration: 0 };
 
   const activeCategory = anchor
     ? getElementCategoryPalette(anchor.element.category, isDark)
@@ -1642,7 +1642,7 @@ export function PeriodicTable({
       onMouseLeave={clearAnchor}
       onClick={clearAnchor}
       className={cn(
-        "relative mx-auto w-full max-w-[1060px] rounded-[20px] border",
+        "relative mx-auto w-full max-w-265 rounded-[20px] border",
         "border-[var(--bjork-border)] bg-[var(--bjork-surface)] p-4 shadow-[var(--bjork-shadow-surface)] sm:p-5",
         className,
       )}
@@ -1772,22 +1772,32 @@ export function PeriodicTable({
                     : { opacity: 0, transition: { duration: 0.1 } }
                 }
                 transition={
-                  shouldReduceMotion
-                    ? { duration: 0.15 }
-                    : {
+                  shouldAnimate
+                    ? {
                         type: "spring",
                         stiffness: 420,
                         damping: 30,
                         mass: 0.7,
                       }
+                    : { duration: 0 }
                 }
                 className="w-[228px] rounded-[16px] border border-[var(--bjork-border-muted)] bg-[var(--bjork-surface)] p-4 text-[var(--bjork-text-medium)] shadow-[var(--bjork-shadow-menu)]"
               >
                 <motion.div
                   key={anchor.element.number}
-                  initial={{ opacity: 0, filter: "blur(3px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  transition={{ duration: 0.14, ease: "easeOut" }}
+                  initial={
+                    shouldAnimate ? { opacity: 0, filter: "blur(3px)" } : false
+                  }
+                  animate={
+                    shouldAnimate
+                      ? { opacity: 1, filter: "blur(0px)" }
+                      : { opacity: 1 }
+                  }
+                  transition={
+                    shouldAnimate
+                      ? { duration: 0.14, ease: "easeOut" }
+                      : { duration: 0 }
+                  }
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-[var(--bjork-accent)] tabular-nums">
