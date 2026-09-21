@@ -44,7 +44,9 @@ export function useBjorkTableIsDark(
   const activeTheme =
     forcedTheme ?? previewTheme ?? documentTheme ?? resolvedTheme;
 
-  return activeTheme !== "light";
+  // Dark only when a dark theme is actually resolved; an unresolved theme
+  // (undefined) falls back to light, matching the default scoped tokens.
+  return activeTheme === "dark";
 }
 
 export function getBjorkTablePalette(isDark: boolean) {

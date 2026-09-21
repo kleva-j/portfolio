@@ -1638,6 +1638,7 @@ export function PeriodicTable({
   return (
     <div
       ref={containerRef}
+      data-bjork-theme={isDark ? "dark" : "light"}
       onMouseLeave={clearAnchor}
       onClick={clearAnchor}
       className={cn(
@@ -1887,14 +1888,19 @@ function ElementCell({
       initial={shouldAnimate ? "hidden" : "visible"}
       animate="visible"
       variants={shouldAnimate ? variants : undefined}
-      whileHover={{ scale: 1.14, y: -2 }}
-      whileTap={{ scale: 0.94 }}
-      transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      whileHover={shouldAnimate ? { scale: 1.14, y: -2 } : undefined}
+      whileTap={shouldAnimate ? { scale: 0.94 } : undefined}
+      transition={
+        shouldAnimate
+          ? { type: "spring", stiffness: 500, damping: 28 }
+          : { duration: 0 }
+      }
       onMouseEnter={() => onEnter(element)}
       onMouseLeave={onLeave}
       onFocus={() => onEnter(element)}
       onBlur={onLeave}
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
         onEnter(element);
         onSelect?.(element);
       }}

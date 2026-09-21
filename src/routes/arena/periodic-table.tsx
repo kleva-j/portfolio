@@ -55,7 +55,7 @@ function RouteComponent() {
         >
           <Frame>
             <MountGate minH="min-h-[520px]">
-              <div className="bjork-scope w-full overflow-x-auto">
+              <div className="w-full overflow-x-auto">
                 <PeriodicTable className="min-w-[880px]" />
               </div>
             </MountGate>

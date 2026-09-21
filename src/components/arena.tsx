@@ -47,9 +47,9 @@ export const Arena = () => {
             Interactive experiments and signature showcases — open one to play.
           </p>
         </div>
-        <ul className="grid grid-cols-1 divide-x divide-y divide-border border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-px border-t border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {showcases.map((showcase) => (
-            <li key={showcase.name}>
+            <li key={showcase.name} className="bg-background">
               <ShowcaseCard showcase={showcase} />
             </li>
           ))}
