@@ -115,7 +115,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
   const { name, year, role, summary, stack, href, external } = project;
 
   const linkProps = external
-    ? { href, target: "_blank" as const, rel: "noreferrer" }
+    ? { href, target: "_blank" as const, rel: "noopener noreferrer" }
     : { href };
 
   return (
