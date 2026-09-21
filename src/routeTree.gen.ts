@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
 import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
 import { Route as ArenaDesignArenaRouteImport } from './routes/arena/design-arena'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArenaActivityHeatmapRoute = ArenaActivityHeatmapRouteImport.update({
@@ -62,6 +68,7 @@ const WritingSlugRoute = WritingSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ProjectsRoute: typeof ProjectsRoute
   ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
   ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
   ArenaDesignArenaRoute: typeof ArenaDesignArenaRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/arena/activity-heatmap': {
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ProjectsRoute: ProjectsRoute,
   ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
   ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,
   ArenaDesignArenaRoute: ArenaDesignArenaRoute,
