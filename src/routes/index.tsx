@@ -43,13 +43,13 @@ function App() {
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
             <div className="max-w-2xl">
               <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
-                Software Engineer
+                Software engineer · Lagos, Nigeria
               </p>
               <h1 className="mt-5 font-heading text-4xl leading-[1.1] font-medium tracking-tight text-balance sm:text-5xl">
-                Hey, I'm Michael.
+                Michael Obasi. I design and ship web products.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-pretty">
-                Hi 👋🏻, I'm currently building{" "}
+                I'm currently building{" "}
                 <a
                   href={siteConfig.externalLinks.project}
                   target="_blank"
@@ -58,9 +58,9 @@ function App() {
                 >
                   PairSync
                 </a>{" "}
-                — an open-source, cross-platform, peer-to-peer file and
-                clipboard sharing tool. I work across product engineering,
-                software architecture, and mobile development.
+                — an open-source, peer-to-peer file and clipboard sharing
+                tool. I work across frontend, full-stack, and mobile, with a
+                focus on fast, thoughtful products.
               </p>
               <div className="mt-4 flex items-center">
                 <Button
@@ -132,11 +132,11 @@ function App() {
         </section>
 
         <section className="space-y-1">
+          <Projects />
+          <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <Arena />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <CareerCard />
-          <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
-          <Projects />
           <div className="h-8 w-full bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)] opacity-50" />
           <Writings posts={posts} />
         </section>

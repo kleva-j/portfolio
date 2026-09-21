@@ -7,9 +7,11 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
 
-// TODO: confirm the bio, current focus, and experience below are accurate.
 const focus = [
-  ["PairSync", "Cross-platform P2P sync — open source. Go + Swift."],
+  [
+    "PairSync",
+    "Peer-to-peer file and clipboard sharing — open source. Tauri, Rust, Expo.",
+  ],
   [
     "Design system",
     "Personal component library built on Tailwind v4 + Base UI.",
@@ -18,14 +20,16 @@ const focus = [
 ] as const;
 
 const experience = [
-  ["2023 – present", "Senior Software Engineer", "Independent / PairSync"],
-  ["2021 – 2023", "Software Engineer", "Finch (YC S21)"],
-  ["2019 – 2021", "Software Engineer", "Andela"],
+  ["2026 – present", "Independent Engineer", "PairSync"],
+  ["2026", "Software Engineer (Contract)", "Screenstack.tech"],
+  ["2022", "Software Engineer", "Aduro Creative"],
+  ["2021", "Frontend Engineer", "LawPavilion"],
+  ["2019", "Frontend Engineer", "Tulaa"],
 ] as const;
 
 const pageTitle = "About — Michael Obasi";
 const pageDescription =
-  "Michael Obasi — a software engineer with 6+ years across product engineering, systems, and cross-platform mobile.";
+  "Michael Obasi — a software engineer with 6+ years across frontend, full-stack, and cross-platform mobile.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -87,21 +91,21 @@ function About() {
               people who maintain them.
             </p>
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
-              My work spans product engineering at early-stage startups, backend
-              systems, and cross-platform mobile.
+              My work spans frontend and full-stack product engineering, from
+              Angular CRMs to React apps and cross-platform mobile.
             </p>
             <p className="text-base leading-relaxed text-pretty text-muted-foreground">
               Right now I'm building{" "}
               <a
                 href={siteConfig.externalLinks.project}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="font-medium text-primary underline-offset-4 hover:underline"
               >
                 PairSync
               </a>{" "}
-              — a fully peer-to-peer file and clipboard sharing tool for macOS,
-              iOS, and Linux. No cloud, no accounts, no relay servers.
+              — a peer-to-peer file and clipboard sharing tool for desktop and
+              mobile. No cloud, no accounts, no relay servers.
             </p>
           </div>
 
