@@ -4,6 +4,7 @@ date: Oct 2025
 dateTime: 2025-10
 category: Engineering
 description: "Why I moved to a native core with thin platform clients, and what that traded away."
+draft: true
 ---
 
 Electron is the default answer to "one codebase, every desktop." It is also a

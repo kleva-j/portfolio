@@ -17,6 +17,7 @@ export type PostMeta = {
   description: string;
   readingTime: string;
   demo?: boolean;
+  draft?: boolean;
 };
 
 export type Post = PostMeta & { html: string };
@@ -84,6 +85,7 @@ function parseFrontmatter(
     category: fields.get("category") ?? "",
     description: fields.get("description") ?? "",
     demo: fields.get("demo") === "true" ? true : undefined,
+    draft: fields.get("draft") === "true" ? true : undefined,
   };
 }
 
@@ -114,6 +116,7 @@ function stripHtml(post: Post): PostMeta {
     description: post.description,
     readingTime: post.readingTime,
     demo: post.demo,
+    draft: post.draft,
   };
 }
 

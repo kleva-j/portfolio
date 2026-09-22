@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { DraftTag } from "@/components/draft-badge";
 import { getPosts } from "@/content/writing/posts";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
@@ -54,16 +55,21 @@ function WritingIndex() {
                 <Link
                   to="/writing/$slug"
                   params={{ slug: article.slug }}
-                  className="group flex flex-col gap-2 border-b border-border py-7 transition-colors hover:bg-accent/30 focus-visible:bg-accent/30 focus-visible:outline-none sm:flex-row sm:items-baseline sm:gap-8"
+                  className="group flex flex-col gap-2 border-b border-border py-7 transition-colors hover:bg-accent/30 focus-visible:bg-accent/30 focus-visible:outline-none sm:flex-row sm:gap-8"
                 >
-                  <div className="flex items-center gap-2 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase sm:w-40 sm:shrink-0 sm:flex-col sm:items-start sm:gap-1.5">
-                    <span className="text-primary/80">{article.category}</span>
-                    <time
-                      dateTime={article.dateTime}
-                      className="font-mono tracking-normal tabular-nums"
-                    >
-                      {article.date}
-                    </time>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase sm:w-36 sm:shrink-0 sm:flex-col sm:items-start sm:justify-between sm:gap-4">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:flex-col sm:items-start sm:gap-1.5">
+                      <span className="text-primary/80">
+                        {article.category}
+                      </span>
+                      <time
+                        dateTime={article.dateTime}
+                        className="font-mono tracking-normal tabular-nums"
+                      >
+                        {article.date}
+                      </time>
+                    </div>
+                    {article.draft ? <DraftTag /> : null}
                   </div>
                   <div className="min-w-0">
                     <h2 className="flex items-start gap-1.5 text-lg leading-snug font-medium text-foreground">

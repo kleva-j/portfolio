@@ -5,6 +5,7 @@ dateTime: 2025-12
 category: Notes
 description: "Every package is a small bet on someone else's roadmap. A few heuristics I now use before adding one."
 demo: true
+draft: true
 ---
 
 Every package you add is a small, quiet bet on someone else's roadmap. Sometimes

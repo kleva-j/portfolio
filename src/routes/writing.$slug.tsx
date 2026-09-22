@@ -3,9 +3,10 @@ import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { lazy, Suspense } from "react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { DraftNotice } from "@/components/draft-badge";
 import { ArticleHtml } from "@/components/markdown";
-import { absoluteUrl } from "@/lib/site.config";
 import { getPost } from "@/content/writing/posts";
+import { absoluteUrl } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
@@ -74,6 +75,8 @@ function ArticlePage() {
             />
             <span>{post.readingTime}</span>
           </div>
+
+          {post.draft ? <DraftNotice className="mt-8" /> : null}
 
           <div className="mt-10 max-w-[68ch] border-t border-border pt-10">
             <ArticleHtml html={post.html} />
