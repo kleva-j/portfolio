@@ -27,10 +27,17 @@ export function Header() {
     >
       <nav className="mx-auto flex h-(--header-height) w-full max-w-4xl items-center justify-between px-4">
         <Link
+          aria-label="Michael Obasi, home"
           className="-mx-2 inline-flex h-8 items-center rounded-md px-2 transition-colors hover:text-primary"
           to="/"
         >
-          <Logo />
+          <span
+            aria-hidden="true"
+            className="font-heading text-base font-medium tracking-tight text-foreground sm:hidden"
+          >
+            MO
+          </span>
+          <Logo aria-hidden="true" className="hidden sm:inline-flex" />
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">
           <nav

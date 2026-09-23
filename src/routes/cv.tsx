@@ -237,18 +237,18 @@ function Resume() {
                   >
                     <Icon className="size-4" />
                     {label}
+                    {label === "Email" ? (
+                      <span className="hidden print:inline">
+                        {" "}
+                        {href.replace(/^mailto:/, "")}
+                      </span>
+                    ) : null}
                   </a>
                 ))}
               </div>
             </div>
             <Button
-              render={
-                <a
-                  href={siteConfig.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
+              render={<a href={siteConfig.resume} download />}
               nativeButton={false}
               className="shrink-0 self-start sm:self-auto print:hidden"
             >
