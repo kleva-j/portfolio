@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as CvRouteImport } from './routes/cv'
+import { Route as HowIWorkRouteImport } from './routes/how-i-work'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
 import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
@@ -27,6 +29,16 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowIWorkRoute = HowIWorkRouteImport.update({
+  id: '/how-i-work',
+  path: '/how-i-work',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -68,6 +80,8 @@ const WritingSlugRoute = WritingSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cv': typeof CvRoute
+  '/how-i-work': typeof HowIWorkRoute
   '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
@@ -79,6 +93,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cv': typeof CvRoute
+  '/how-i-work': typeof HowIWorkRoute
   '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
@@ -91,6 +107,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cv': typeof CvRoute
+  '/how-i-work': typeof HowIWorkRoute
   '/projects': typeof ProjectsRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
@@ -104,6 +122,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/cv'
+    | '/how-i-work'
     | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
@@ -115,6 +135,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/cv'
+    | '/how-i-work'
     | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
@@ -126,6 +148,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/cv'
+    | '/how-i-work'
     | '/projects'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
@@ -138,6 +162,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CvRoute: typeof CvRoute
+  HowIWorkRoute: typeof HowIWorkRoute
   ProjectsRoute: typeof ProjectsRoute
   ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
   ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
@@ -161,6 +187,20 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-i-work': {
+      id: '/how-i-work'
+      path: '/how-i-work'
+      fullPath: '/how-i-work'
+      preLoaderRoute: typeof HowIWorkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -218,6 +258,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CvRoute: CvRoute,
+  HowIWorkRoute: HowIWorkRoute,
   ProjectsRoute: ProjectsRoute,
   ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
   ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,

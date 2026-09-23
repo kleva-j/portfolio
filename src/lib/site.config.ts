@@ -48,6 +48,7 @@ export const siteConfig = {
     projects: "/projects",
     writing: "/writing",
   },
+  resume: "/michael-obasi-resume.pdf",
   externalLinks: {
     linkedin: "https://www.linkedin.com/in/michael-obasi-808806140/",
     project: "https://github.com/kleva-j/pairsync",

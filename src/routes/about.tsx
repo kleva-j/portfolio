@@ -1,6 +1,10 @@
-import { EnvelopeSimpleIcon } from "@phosphor-icons/react";
+import {
+  ArrowUpRightIcon,
+  DownloadSimpleIcon,
+  EnvelopeSimpleIcon,
+} from "@phosphor-icons/react";
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
@@ -132,7 +136,44 @@ function About() {
           </div>
 
           <div className="mt-10 border-t border-border pt-8">
-            <SectionLabel index="01">Current focus</SectionLabel>
+            <SectionLabel index="01">How I work</SectionLabel>
+            <div className="space-y-4">
+              <p className="max-w-prose text-base leading-relaxed text-pretty text-foreground">
+                I'm a product engineer who ships cross-platform software end to
+                end. My instinct is to collapse a problem into shared, typed
+                domain logic — state machines, schemas, contracts — then let a
+                single codebase reach web, mobile, and desktop at once instead
+                of rebuilding it three times.
+              </p>
+              <p className="max-w-prose text-base leading-relaxed text-pretty text-muted-foreground">
+                Recently that's looked like PairSync (P2P file sharing, no
+                cloud), ClinicCore (compliant clinic management), and Notemark
+                (notes everywhere, end-to-end type-safe). I reach for tools like
+                Drizzle, Zod, and XState because I want behavior that's legible
+                and hard to break.
+              </p>
+              <p className="max-w-prose text-base leading-relaxed text-pretty text-muted-foreground">
+                I invest in the boring infrastructure early — tests, CI, typed
+                boundaries — because that's what keeps shipping fast from
+                turning into shipping regressions. I care about the small
+                things, since that's usually where a product feels considered
+                instead of assembled.
+              </p>
+            </div>
+            <Link
+              to="/how-i-work"
+              className="group mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Read the full version
+              <ArrowUpRightIcon
+                weight="bold"
+                className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+              />
+            </Link>
+          </div>
+
+          <div className="mt-10 border-t border-border pt-8">
+            <SectionLabel index="02">Current focus</SectionLabel>
             <ul className="grid gap-3.5">
               {focus.map(([title, description]) => (
                 <li key={title} className="flex gap-3">
@@ -153,7 +194,7 @@ function About() {
           </div>
 
           <div className="mt-10 border-t border-border pt-8">
-            <SectionLabel index="02">Experience</SectionLabel>
+            <SectionLabel index="03">Experience</SectionLabel>
             <ul className="grid gap-5">
               {experience.map(({ period, role, company, current }) => (
                 <li
@@ -181,7 +222,7 @@ function About() {
           </div>
 
           <div className="mt-10 border-t border-border pt-8">
-            <SectionLabel index="03">Get in touch</SectionLabel>
+            <SectionLabel index="04">Get in touch</SectionLabel>
             <div className="mb-5 flex items-center gap-2.5">
               <span
                 aria-hidden="true"
@@ -196,12 +237,27 @@ function About() {
               and conversations about systems design. Email is the fastest way
               to reach me.
             </p>
-            <Button
-              render={<a href={siteConfig.mailto} />}
-              nativeButton={false}
-            >
-              <EnvelopeSimpleIcon /> Send a message
-            </Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                render={<a href={siteConfig.mailto} />}
+                nativeButton={false}
+              >
+                <EnvelopeSimpleIcon /> Send a message
+              </Button>
+              <Button
+                variant="outline"
+                render={
+                  <a
+                    href={siteConfig.resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                nativeButton={false}
+              >
+                <DownloadSimpleIcon /> View résumé
+              </Button>
+            </div>
           </div>
         </section>
       </main>
