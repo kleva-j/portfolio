@@ -4,6 +4,14 @@ import { siteConfig } from "@/lib/site.config";
 
 type FooterLink = { label: string; href: string; external?: boolean };
 
+// Year the site/brand started; the copyright renders as a range up to now.
+const startYear = 2018;
+
+function copyrightYears() {
+  const year = new Date().getFullYear();
+  return year > startYear ? `${startYear}\u2013${year}` : `${year}`;
+}
+
 const links: FooterLink[] = [
   { label: "Writing", href: "/writing" },
   { label: "About", href: "/about" },
@@ -30,7 +38,7 @@ export function Footer() {
     <footer className="relative mx-auto max-w-3xl *:px-4 *:md:px-6 lg:border-x">
       <div className="flex min-h-(--footer-height) flex-wrap items-center justify-center gap-x-3 gap-y-2 py-4 text-xs text-muted-foreground sm:py-0">
         <p className="font-medium tracking-wide text-accent-foreground">
-          &copy; {new Date().getFullYear()} Michael Obasi
+          &copy; {copyrightYears()} Michael Obasi
         </p>
 
         <span className="hidden sm:block">

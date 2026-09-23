@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 import { Separator } from "@/components/ui/separator";
 import { ModeToggle } from "@/components/mode-toggle";
+import { siteConfig } from "@/lib/site.config";
 import { useScroll } from "@/hooks/use-scroll";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,9 @@ const navLinks = [
   { to: "/writing", label: "Writing" },
   { to: "/about", label: "About" },
 ] as const;
+
+const navLinkClass =
+  "inline-flex h-8 items-center rounded-md px-2.5 text-muted-foreground transition-colors hover:text-foreground";
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -37,12 +41,20 @@ export function Header() {
               <Link
                 key={to}
                 to={to}
-                className="inline-flex h-8 items-center rounded-md px-2.5 text-muted-foreground transition-colors hover:text-foreground"
+                className={navLinkClass}
                 activeProps={{ className: "text-primary" }}
               >
                 {label}
               </Link>
             ))}
+            <a
+              href={siteConfig.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={navLinkClass}
+            >
+              Résumé
+            </a>
           </nav>
           <Separator orientation="vertical" className="py-4" />
           <ModeToggle />
