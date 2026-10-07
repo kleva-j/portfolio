@@ -22,12 +22,6 @@ export type PostMeta = {
 
 export type Post = PostMeta & { html: string };
 
-const sources = import.meta.glob<string>("./*.md", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-});
-
 const parseExtensions = docsMarkdownExtensions();
 
 // Harden external links: emit the anchor with target/rel that urlTransform
@@ -106,19 +100,11 @@ function stripFrontmatter(source: string): string {
   return source.replace(/^---\n[\s\S]*?\n---\n?/, "");
 }
 
-function stripHtml(post: Post): PostMeta {
-  return {
-    slug: post.slug,
-    title: post.title,
-    date: post.date,
-    dateTime: post.dateTime,
-    category: post.category,
-    description: post.description,
-    readingTime: post.readingTime,
-    demo: post.demo,
-    draft: post.draft,
-  };
-}
+const sources = import.meta.glob<string>("./*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
 
 // Parse + render every post once at load, newest first.
 function buildPosts(): Map<string, Post> {
@@ -150,6 +136,20 @@ function buildPosts(): Map<string, Post> {
 }
 
 const postsBySlug = buildPosts();
+
+function stripHtml(post: Post): PostMeta {
+  return {
+    slug: post.slug,
+    title: post.title,
+    date: post.date,
+    dateTime: post.dateTime,
+    category: post.category,
+    description: post.description,
+    readingTime: post.readingTime,
+    demo: post.demo,
+    draft: post.draft,
+  };
+}
 
 export function listPosts(): PostMeta[] {
   return [...postsBySlug.values()].map(stripHtml);

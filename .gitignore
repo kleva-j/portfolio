@@ -17,3 +17,7 @@ docs/*-plan.md
 
 # typescript
 *.tsbuildinfo
+achievements.**
+resume.**
+resume-aduro.**
+Michael-**
