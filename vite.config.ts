@@ -4,6 +4,7 @@ import { devtools } from "@tanstack/devtools-vite";
 import { defineConfig, loadEnv } from "vite";
 import { fileURLToPath } from "node:url";
 
+import contentCollections from "@content-collections/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -57,6 +58,7 @@ const config = defineConfig(({ mode }) => {
       ],
     },
     plugins: [
+      contentCollections(),
       devtools(),
       tailwindcss(),
       cloudflare({ viteEnvironment: { name: "ssr" } }),

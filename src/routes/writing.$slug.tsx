@@ -1,11 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { lazy, Suspense } from "react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { markdownHighlightCss } from "@/lib/markdown-highlighter";
+import { getPost } from "@/content/writing/posts-collections";
 import { DraftNotice } from "@/components/draft-badge";
 import { ArticleHtml } from "@/components/markdown";
-import { getPost } from "@/content/writing/posts";
 import { absoluteUrl } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -14,7 +15,11 @@ import { Footer } from "@/components/footer";
 const StreamingDemo = lazy(() => import("@/components/streaming-demo"));
 
 export const Route = createFileRoute("/writing/$slug")({
-  loader: async ({ params }) => await getPost({ data: params.slug }),
+  loader: ({ params }) => {
+    const post = getPost(params.slug);
+    if (!post) throw notFound();
+    return post;
+  },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const title = `${loaderData.title} — Michael Obasi`;
@@ -31,7 +36,7 @@ export const Route = createFileRoute("/writing/$slug")({
         { name: "twitter:description", content: loaderData.description },
       ],
       links: [{ rel: "canonical", href: canonical }],
-      styles: [{ children: loaderData.css }],
+      styles: [{ children: markdownHighlightCss }],
     };
   },
   component: ArticlePage,
@@ -79,14 +84,14 @@ function ArticlePage() {
           {post.draft ? <DraftNotice className="mt-8" /> : null}
 
           <div className="mt-10 max-w-[68ch] border-t border-border pt-10">
-            <ArticleHtml html={post.html} />
+            <ArticleHtml html={String(post.html)} />
           </div>
 
-          {post.demo ? (
+          {post.demo && (
             <Suspense fallback={null}>
               <StreamingDemo />
             </Suspense>
-          ) : null}
+          )}
         </article>
       </main>
       <FullWidthDivider />

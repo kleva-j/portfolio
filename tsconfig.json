@@ -14,7 +14,8 @@
     "types": ["vite/client"],
     "paths": {
       "@/*": ["./src/*"],
-      "@designcodeio/threeui": ["./src/shaders/landing-pages/index.ts"]
+      "@designcodeio/threeui": ["./src/shaders/landing-pages/index.ts"],
+      "content-collections": ["./.content-collections/generated"]
     },
 
     /* Bundler mode */

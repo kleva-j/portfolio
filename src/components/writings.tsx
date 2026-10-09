@@ -1,4 +1,4 @@
-import type { PostMeta } from "@/content/writing/posts";
+import type { Post as PostMeta } from "@/content/writing/posts-collections";
 
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
@@ -29,13 +29,12 @@ export const Writings = ({ posts }: { posts: PostMeta[] }) => {
   );
 };
 
-function WritingCard({
-  article,
-  className,
-}: {
+type WritingCardProps = {
   article: PostMeta;
   className?: string;
-}) {
+};
+
+function WritingCard({ article, className }: WritingCardProps) {
   return (
     <Link
       to="/writing/$slug"

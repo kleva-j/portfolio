@@ -4,7 +4,7 @@ date: Feb 2026
 dateTime: 2026-02
 category: Engineering
 description: "Lessons from the interactive bookshelf: instancing, texture atlases, and knowing when to stop rendering."
-draft: true
+draft: false
 ---
 
 The interactive bookshelf on this site is the one place I let the design go loud.

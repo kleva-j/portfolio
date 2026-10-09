@@ -1,10 +1,10 @@
 ---
 title: "Reaching for fewer dependencies"
 date: Dec 2025
-dateTime: 2025-12
+dateTime: 2025-12-06
 category: Notes
 description: "Every package is a small bet on someone else's roadmap. A few heuristics I now use before adding one."
-demo: true
+demo: false
 draft: true
 ---
 

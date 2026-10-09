@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { getPosts } from "@/content/writing/posts-collections";
 import { DraftTag } from "@/components/draft-badge";
-import { getPosts } from "@/content/writing/posts";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -13,7 +13,7 @@ const pageDescription =
   "Essays and technical writing on engineering decisions, design, and the tools behind PairSync.";
 
 export const Route = createFileRoute("/writing/")({
-  loader: async () => await getPosts(),
+  loader: () => getPosts(),
   head: () => ({
     meta: [
       { title: pageTitle },
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/writing/")({
 });
 
 function WritingIndex() {
-  const articles = Route.useLoaderData();
+  const posts = Route.useLoaderData();
 
   return (
     <div>
@@ -50,31 +50,29 @@ function WritingIndex() {
           </p>
 
           <ul className="mt-12 border-t border-border">
-            {articles.map((article) => (
-              <li key={article.slug}>
+            {posts.map((post) => (
+              <li key={post.slug}>
                 <Link
                   to="/writing/$slug"
-                  params={{ slug: article.slug }}
+                  params={{ slug: post.slug }}
                   className="group flex flex-col gap-2 border-b border-border py-7 transition-colors hover:bg-accent/30 focus-visible:bg-accent/30 focus-visible:outline-none sm:flex-row sm:gap-8"
                 >
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase sm:w-36 sm:shrink-0 sm:flex-col sm:items-start sm:justify-between sm:gap-4">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:flex-col sm:items-start sm:gap-1.5">
-                      <span className="text-primary/80">
-                        {article.category}
-                      </span>
+                      <span className="text-primary/80">{post.category}</span>
                       <time
-                        dateTime={article.dateTime}
+                        dateTime={post.dateTime}
                         className="font-mono tracking-normal tabular-nums"
                       >
-                        {article.date}
+                        {post.date}
                       </time>
                     </div>
-                    {article.draft ? <DraftTag /> : null}
+                    {post.draft ? <DraftTag /> : null}
                   </div>
                   <div className="min-w-0">
                     <h2 className="flex items-start gap-1.5 text-lg leading-snug font-medium text-foreground">
                       <span className="transition-colors group-hover:text-primary">
-                        {article.title}
+                        {post.title}
                       </span>
                       <ArrowUpRightIcon
                         weight="bold"
@@ -82,10 +80,10 @@ function WritingIndex() {
                       />
                     </h2>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {article.description}
+                      {post.description}
                     </p>
                     <span className="mt-3 inline-block font-mono text-[11px] tracking-normal text-muted-foreground/80 tabular-nums">
-                      {article.readingTime}
+                      {post.readingTime}
                     </span>
                   </div>
                 </Link>
