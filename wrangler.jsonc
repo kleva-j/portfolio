@@ -8,10 +8,11 @@
     "logs": {
       "enabled": true,
       "invocation_logs": true,
-      "persist": true
+      "persist": true,
     },
     "traces": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
+  "previews": {},
 }
