@@ -60,7 +60,17 @@ const config = defineConfig(({ mode }) => {
       devtools(),
       tailwindcss(),
       cloudflare({ viteEnvironment: { name: "ssr" } }),
-      tanstackStart(),
+      tanstackStart({
+        prerender: {
+          enabled: true,
+          crawlLinks: true, // Discovers all linkable pages
+        },
+        sitemap: {
+          enabled: true,
+          host:
+            platformSiteUrl(env) ?? "https://portfolio.kasmickleva.workers.dev",
+        },
+      }),
       viteReact(),
     ],
   };
