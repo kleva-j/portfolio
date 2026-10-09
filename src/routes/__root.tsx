@@ -1,6 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { Analytics } from "@vercel/analytics/react";
 
 import { ConstructionBanner } from "@/components/construction-banner";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -62,7 +61,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           {children}
         </ThemeProvider>
         <TanStackDevtools config={{ position: "bottom-right" }} />
-        <Analytics />
         <Scripts />
       </body>
     </html>
