@@ -2,7 +2,7 @@ import type { Post as PostMeta } from "content-collections";
 
 import { allPosts } from "content-collections";
 
-export type Post = Omit<PostMeta, "html">;
+export type Post = Omit<PostMeta, "html" | "isMdx" | "mdx">;
 
 export function getPosts(): Post[] {
   return allPosts

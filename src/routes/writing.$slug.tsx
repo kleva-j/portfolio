@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { MDXContent } from '@content-collections/mdx/react';
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { lazy, Suspense } from "react";
 
@@ -84,7 +85,11 @@ function ArticlePage() {
           {post.draft ? <DraftNotice className="mt-8" /> : null}
 
           <div className="mt-10 max-w-[68ch] border-t border-border pt-10">
-            <ArticleHtml html={String(post.html)} />
+            {post.mdx ? (
+              <MDXContent code={post.mdx} />
+            ) : (
+              <ArticleHtml html={String(post.html)} />
+            )}
           </div>
 
           {post.demo && (

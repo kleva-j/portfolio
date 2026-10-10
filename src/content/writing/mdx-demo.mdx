@@ -1,0 +1,48 @@
+---
+title: "Interactive Content with MDX"
+date: "Oct 2026"
+dateTime: "2026-10-09"
+category: "Engineering"
+description: "Exploring interactive content possibilities with MDX in the portfolio."
+demo: false
+draft: false
+---
+
+MDX allows us to embed React components directly in our content. This opens up
+possibilities for interactive examples, live demos, and richer content experiences.
+
+## Interactive Counter Example
+
+Here's a simple interactive counter embedded in the post:
+
+```tsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div className="p-4 bg-muted rounded-lg">
+      <p className="text-sm mb-2">Click count: {count}</p>
+      <button
+        onClick={() => setCount(c => c + 1)}
+        className="px-3 py-1 bg-primary text-primary-foreground rounded text-sm"
+      >
+        Increment
+      </button>
+    </div>
+  );
+}
+
+<Counter />
+```
+
+# Hello, world!
+
+Below is an example of markdown in JSX.
+```html
+<div style={{backgroundColor: 'violet', padding: '1rem'}}>
+  Try and change the background color to `tomato`.
+</div>
+```
+
+### Superlative

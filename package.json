@@ -43,6 +43,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.62.5",
     "@content-collections/core": "^0.15.3",
+    "@content-collections/mdx": "^0.2.2",
     "@content-collections/vite": "^0.3.1",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
