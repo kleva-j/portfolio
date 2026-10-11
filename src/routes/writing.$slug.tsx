@@ -12,6 +12,8 @@ import { absoluteUrl } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
+import "@/styles/editor.css";
+
 // Client tokenizer, loaded only for articles that opt into the streaming demo.
 const StreamingDemo = lazy(() => import("@/components/streaming-demo"));
 
