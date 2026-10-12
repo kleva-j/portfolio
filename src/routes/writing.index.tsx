@@ -1,12 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
-import { FullWidthDivider } from "@/components/full-width-divider";
 import { getPosts } from "@/content/writing/posts-collections";
-import { DraftTag } from "@/components/draft-badge";
-import { siteConfig } from "@/lib/site.config";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { absoluteUrl } from "@/lib/site.config";
 
 const pageTitle = "Writing — Michael Obasi";
 const pageDescription =
@@ -23,43 +19,120 @@ export const Route = createFileRoute("/writing/")({
       { name: "twitter:title", content: pageTitle },
       { name: "twitter:description", content: pageDescription },
     ],
+    links: [{ rel: "canonical", href: absoluteUrl("/writing") }],
   }),
   component: WritingIndex,
 });
 
 function WritingIndex() {
   const posts = Route.useLoaderData();
+  const latestPost = posts.at(0);
+  const otherPosts = posts.slice(1);
 
   return (
-    <div>
-      <Header />
-      <main
-        id="main-content"
-        className="mx-auto min-h-[calc(100svh-var(--header-height)-var(--footer-height))] max-w-3xl px-6 py-6"
-      >
-        <section className="py-8 sm:py-14">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Writing
-          </p>
-          <h1 className="mt-5 font-heading text-3xl leading-[1.1] font-medium tracking-tight text-balance sm:text-4xl">
-            Notes on building, deciding, and shipping.
+    <main
+      id="main-content"
+      className="mx-auto min-h-[calc(100svh-var(--header-height)-var(--footer-height))] max-w-5xl px-6 py-6"
+    >
+      <section className="py-8 sm:py-14">
+        <header className="border-b border-border pb-10 sm:pb-12">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <p className="text-xs font-medium tracking-[0.18em] text-primary uppercase">
+              Writing / Field notes
+            </p>
+            <div className="flex items-center gap-4">
+              <p className="font-mono text-[11px] text-muted-foreground tabular-nums">
+                {String(posts.length).padStart(2, "0")} published
+              </p>
+              <a
+                href="/rss.xml"
+                className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase transition-colors hover:text-primary"
+              >
+                RSS
+              </a>
+            </div>
+          </div>
+          <h1 className="mt-7 max-w-3xl font-heading text-4xl leading-[1.04] font-medium tracking-[-0.045em] text-balance sm:text-6xl">
+            Notes from the work.
           </h1>
-          <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-muted-foreground">
-            Occasional long-form on the engineering and design choices behind my
-            work — mostly {siteConfig.name.split(" ")[0]}'s corner of the stack.
+          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Long-form thinking on engineering, product decisions, and the
+            systems behind what I build.
           </p>
+        </header>
 
-          <ul className="mt-12 border-t border-border">
-            {posts.map((post) => (
-              <li key={post.slug}>
-                <Link
-                  to="/writing/$slug"
-                  params={{ slug: post.slug }}
-                  className="group flex flex-col gap-2 border-b border-border py-7 transition-colors hover:bg-accent/30 focus-visible:bg-accent/30 focus-visible:outline-none sm:flex-row sm:gap-8"
+        {latestPost ? (
+          <section
+            aria-labelledby="latest-writing"
+            className="border-b border-border py-8 sm:py-10"
+          >
+            <p className="text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
+              Latest writing
+            </p>
+            <Link
+              to="/writing/$slug"
+              params={{ slug: latestPost.slug }}
+              className="group mt-5 grid gap-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:grid-cols-[minmax(0,1fr)_10rem] sm:gap-10"
+            >
+              <div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">
+                  <span className="text-primary">{latestPost.category}</span>
+                  <span aria-hidden="true" className="size-1 bg-border" />
+                  <time
+                    dateTime={latestPost.dateTime}
+                    className="font-mono tracking-normal tabular-nums"
+                  >
+                    {latestPost.date}
+                  </time>
+                </div>
+                <h2
+                  id="latest-writing"
+                  className="mt-4 max-w-3xl font-heading text-3xl leading-[1.08] font-medium tracking-[-0.035em] text-balance text-foreground transition-colors group-hover:text-primary sm:text-5xl"
                 >
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase sm:w-36 sm:shrink-0 sm:flex-col sm:items-start sm:justify-between sm:gap-4">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:flex-col sm:items-start sm:gap-1.5">
-                      <span className="text-primary/80">{post.category}</span>
+                  {latestPost.title}
+                </h2>
+                <p className="mt-4 max-w-[62ch] text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {latestPost.description}
+                </p>
+              </div>
+              <div className="flex items-end justify-between border-t border-border pt-3 text-xs text-muted-foreground sm:flex-col sm:items-end sm:justify-between sm:border-t-0 sm:border-l sm:pt-0 sm:pl-5">
+                <span className="font-mono tabular-nums">
+                  {latestPost.readingTime}
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-medium text-foreground transition-colors group-hover:text-primary">
+                  Read article
+                  <ArrowUpRightIcon
+                    weight="bold"
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+                  />
+                </span>
+              </div>
+            </Link>
+          </section>
+        ) : (
+          <p className="border-b border-border py-10 text-sm text-muted-foreground">
+            New writing is on its way.
+          </p>
+        )}
+
+        {otherPosts.length > 0 ? (
+          <section aria-labelledby="more-writing" className="pt-8 sm:pt-10">
+            <h2
+              id="more-writing"
+              className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase"
+            >
+              More writing
+            </h2>
+            <ul className="mt-5 border-t border-border">
+              {otherPosts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    to="/writing/$slug"
+                    params={{ slug: post.slug }}
+                    className="group -mx-3 flex flex-col gap-3 border-b border-border px-3 py-6 transition-colors hover:bg-accent/30 focus-visible:bg-accent/30 sm:flex-row sm:items-start sm:gap-8"
+                  >
+                    <div className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase sm:w-36 sm:flex-col sm:items-start sm:gap-1.5">
+                      <span className="text-primary">{post.category}</span>
                       <time
                         dateTime={post.dateTime}
                         className="font-mono tracking-normal tabular-nums"
@@ -67,33 +140,30 @@ function WritingIndex() {
                         {post.date}
                       </time>
                     </div>
-                    {post.draft ? <DraftTag /> : null}
-                  </div>
-                  <div className="min-w-0">
-                    <h2 className="flex items-start gap-1.5 text-lg leading-snug font-medium text-foreground">
-                      <span className="transition-colors group-hover:text-primary">
-                        {post.title}
-                      </span>
-                      <ArrowUpRightIcon
-                        weight="bold"
-                        className="mt-1 size-3.5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary motion-reduce:transition-none"
-                      />
-                    </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {post.description}
-                    </p>
-                    <span className="mt-3 inline-block font-mono text-[11px] tracking-normal text-muted-foreground/80 tabular-nums">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="flex items-start gap-1.5 text-lg leading-snug font-medium text-foreground">
+                        <span className="transition-colors group-hover:text-primary">
+                          {post.title}
+                        </span>
+                        <ArrowUpRightIcon
+                          weight="bold"
+                          className="mt-1 size-3.5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary motion-reduce:transition-none"
+                        />
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {post.description}
+                      </p>
+                    </div>
+                    <span className="font-mono text-[11px] text-muted-foreground tabular-nums sm:pt-1">
                       {post.readingTime}
                     </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
-      <FullWidthDivider />
-      <Footer />
-    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+      </section>
+    </main>
   );
 }

@@ -52,7 +52,8 @@
   .md-prose ol,
   .md-prose blockquote,
   .md-prose table,
-  .md-prose pre {
+  .md-prose pre,
+  .prose-ui pre.tm-code {
     margin: 0 0 1.25rem;
   }
 
@@ -121,7 +122,8 @@
   }
 
   /* Fenced code blocks; colors come from the highlight theme, this owns layout. */
-  .md-prose pre {
+  .md-prose pre,
+  .prose-ui pre.tm-code {
     overflow-x: auto;
     padding: 1rem 1.15rem;
     border: 1px solid var(--border);
@@ -130,7 +132,8 @@
     line-height: 1.7;
     tab-size: 2;
   }
-  .md-prose pre code {
+  .md-prose pre code,
+  .prose-ui pre.tm-code code {
     font-family: var(
       --font-mono,
       ui-monospace,

@@ -1,0 +1,47 @@
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.css";
+
+.prose-ui {
+  --p-font-family: var(--font-sans);
+  --p-font-family-heading: var(--font-heading);
+  --p-font-family-mono: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace
+  );
+  --p-color-text-strong: var(--foreground);
+  --p-color-text: var(--foreground);
+  --p-color-text-muted: var(--muted-foreground);
+  --p-color-text-accent: var(--primary);
+  --p-color-bg: var(--background);
+  --p-color-bg-surface1: var(--muted);
+  --p-color-bg-surface2: var(--muted);
+  --p-color-bg-accent: color-mix(in oklch, var(--primary) 10%, transparent);
+  --p-color-border: var(--border);
+  --p-color-border-subtle: var(--border);
+  --p-border-radius: var(--radius);
+  --p-body-font-family: var(--font-sans);
+  --p-body-color-bg: var(--background);
+  --p-body-color-text: var(--foreground);
+  --p-h1-font-family: var(--font-heading);
+  --p-h2-font-family: var(--font-heading);
+  --p-h3-font-family: var(--font-heading);
+  --p-h4-font-family: var(--font-heading);
+  --p-h5-font-family: var(--font-heading);
+  --p-h6-font-family: var(--font-heading);
+  --p-link-text-color: var(--primary);
+  --p-link-text-decoration-color: color-mix(
+    in oklch,
+    var(--primary) 35%,
+    transparent
+  );
+  --p-code-block-color-bg: var(--muted);
+  --p-code-block-color-text: var(--foreground);
+}
+
+.prose-ui pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
