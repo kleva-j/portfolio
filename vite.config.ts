@@ -21,6 +21,7 @@ const threeuiStyle = fileURLToPath(
 // from import.meta.url avoids referencing the Node `process` global, which isn't
 // typed under `types: ["vite/client"]`.
 const envDir = fileURLToPath(new URL(".", import.meta.url));
+const defaultSiteUrl = "https://portfolio.kasmickleva.workers.dev";
 
 // Deployment platforms expose the assigned origin under different names. Fall
 // back through them so the client bundle carries the correct canonical/OG origin
@@ -37,6 +38,13 @@ function platformSiteUrl(
   );
 }
 
+function normalizeSiteUrl(value: string): string {
+  const withProtocol = /^[a-z][a-z0-9+.-]*:\/\//i.test(value)
+    ? value
+    : `https://${value}`;
+  return withProtocol.replace(/\/+$/, "");
+}
+
 const config = defineConfig(({ mode }) => {
   // loadEnv(mode, dir, "") loads every key from the mode's .env* files AND merges
   // all of process.env (an empty prefix matches everything), so an explicit
@@ -44,7 +52,13 @@ const config = defineConfig(({ mode }) => {
   // always wins. Only inject the platform fallback when none is present; the
   // widened annotation keeps index access typed as string | undefined.
   const env: Record<string, string | undefined> = loadEnv(mode, envDir, "");
-  const siteUrl = env.VITE_SITE_URL ? undefined : platformSiteUrl(env);
+  const platformUrl = platformSiteUrl(env);
+  const siteUrl = env.VITE_SITE_URL
+    ? undefined
+    : (platformUrl ?? (mode === "production" ? defaultSiteUrl : undefined));
+  const sitemapHost = normalizeSiteUrl(
+    env.VITE_SITE_URL ?? platformUrl ?? defaultSiteUrl,
+  );
 
   return {
     define: siteUrl
@@ -63,14 +77,21 @@ const config = defineConfig(({ mode }) => {
       tailwindcss(),
       cloudflare({ viteEnvironment: { name: "ssr" } }),
       tanstackStart({
+        pages: [
+          {
+            path: "/rss.xml",
+            sitemap: { exclude: true },
+            prerender: { enabled: false },
+          },
+          { path: "/writing/", sitemap: { exclude: true } },
+        ],
         prerender: {
           enabled: true,
           crawlLinks: true, // Discovers all linkable pages
         },
         sitemap: {
           enabled: true,
-          host:
-            platformSiteUrl(env) ?? "https://portfolio.kasmickleva.workers.dev",
+          host: sitemapHost,
         },
       }),
       viteReact(),

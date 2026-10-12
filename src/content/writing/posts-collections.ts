@@ -2,7 +2,21 @@ import type { Post as PostMeta } from "content-collections";
 
 import { allPosts } from "content-collections";
 
-export type Post = Omit<PostMeta, "html" | "isMdx" | "mdx">;
+export type Post = Pick<
+  PostMeta,
+  | "slug"
+  | "title"
+  | "date"
+  | "dateTime"
+  | "category"
+  | "description"
+  | "seoTitle"
+  | "seoDescription"
+  | "socialImage"
+  | "readingTime"
+  | "demo"
+  | "draft"
+>;
 
 export function getPosts(): Post[] {
   return allPosts
@@ -14,6 +28,9 @@ export function getPosts(): Post[] {
       dateTime: post.dateTime,
       category: post.category,
       description: post.description,
+      seoTitle: post.seoTitle,
+      seoDescription: post.seoDescription,
+      socialImage: post.socialImage,
       readingTime: post.readingTime,
       demo: post.demo,
       draft: post.draft,
@@ -24,5 +41,5 @@ export function getPosts(): Post[] {
 export function getPost(slug: string): PostMeta | undefined {
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) return undefined;
-  return {...post };
+  return { ...post };
 }
