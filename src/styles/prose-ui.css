@@ -1,0 +1,437 @@
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.css";
+
+.prose-ui {
+  --p-content-gap: 1.25rem;
+  --p-content-gap-heading: 2.75rem;
+  --p-content-gap-cluster: 0.75rem;
+  --p-font-family: var(--font-sans);
+  --p-font-family-heading: var(--font-heading);
+  --p-font-family-mono: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace
+  );
+  --p-color-text-strong: var(--foreground);
+  --p-color-text: var(--foreground);
+  --p-color-text-muted: var(--muted-foreground);
+  --p-color-text-xmuted: var(--muted-foreground);
+  --p-color-text-disabled: var(--muted-foreground);
+  --p-color-text-accent: var(--primary);
+  --p-color-text-note: var(--foreground);
+  --p-color-text-info: var(--foreground);
+  --p-color-text-warning: var(--foreground);
+  --p-color-text-success: var(--foreground);
+  --p-color-text-danger: var(--foreground);
+  --p-color-bg: var(--background);
+  --p-color-bg-surface1: var(--muted);
+  --p-color-bg-surface2: var(--muted);
+  --p-color-bg-accent: color-mix(in oklch, var(--primary) 10%, transparent);
+  --p-color-bg-note: color-mix(in oklch, var(--primary) 5%, transparent);
+  --p-color-bg-info: color-mix(in oklch, var(--primary) 5%, transparent);
+  --p-color-bg-warning: color-mix(in oklch, var(--primary) 8%, transparent);
+  --p-color-bg-success: color-mix(in oklch, var(--primary) 5%, transparent);
+  --p-color-bg-danger: color-mix(in oklch, var(--destructive) 7%, transparent);
+  --p-color-border: var(--border);
+  --p-color-border-subtle: var(--border);
+  --p-border-radius: var(--radius);
+  --p-body-font-family: var(--font-sans);
+  --p-body-color-bg: var(--background);
+  --p-body-color-text: var(--foreground);
+  --p-h1-font-family: var(--font-heading);
+  --p-h2-font-family: var(--font-heading);
+  --p-h3-font-family: var(--font-heading);
+  --p-h4-font-family: var(--font-heading);
+  --p-h5-font-family: var(--font-heading);
+  --p-h6-font-family: var(--font-heading);
+  --p-link-text-color: var(--primary);
+  --p-link-text-decoration-color: color-mix(
+    in oklch,
+    var(--primary) 35%,
+    transparent
+  );
+  --p-code-block-color-bg: var(--th-background, var(--muted));
+  --p-code-block-color-text: var(--foreground);
+  --p-code-block-color-constant: var(--th-literal, var(--primary));
+  --p-code-block-color-string: var(--th-string, var(--foreground));
+  --p-code-block-color-comment: var(--th-comment, var(--muted-foreground));
+  --p-code-block-color-keyword: var(--th-keyword, var(--primary));
+  --p-code-block-color-parameter: var(--th-attr, var(--foreground));
+  --p-code-block-color-function: var(--th-function, var(--primary));
+  --p-code-block-color-string-expression: var(--th-string, var(--foreground));
+  --p-code-block-color-punctuation: var(--th-token, var(--foreground));
+  --p-code-block-color-link: var(--th-link, var(--primary));
+  --p-code-block-line-number-color-text: var(--muted-foreground);
+  --p-callout-note-color-text: var(--foreground);
+  --p-callout-info-color-text: var(--foreground);
+  --p-callout-warning-color-text: var(--foreground);
+  --p-callout-success-color-text: var(--foreground);
+  --p-callout-danger-color-text: var(--foreground);
+  --p-callout-note-color-bg: var(--p-color-bg-note);
+  --p-callout-info-color-bg: var(--p-color-bg-info);
+  --p-callout-warning-color-bg: var(--p-color-bg-warning);
+  --p-callout-success-color-bg: var(--p-color-bg-success);
+  --p-callout-danger-color-bg: var(--p-color-bg-danger);
+  --p-steps-indicator-bg: var(--background);
+  --p-steps-indicator-text: var(--primary);
+  --p-steps-indicator-outline: var(--border);
+  --p-steps-connector: var(--border);
+  --p-steps-body-color: var(--muted-foreground);
+  --p-frame-caption-color-text: var(--muted-foreground);
+  --p-frame-caption-font-weight: 400;
+  --p-frame-caption-font-style: normal;
+}
+
+.prose-ui > :first-child {
+  margin-top: 0;
+}
+
+.prose-ui > :last-child {
+  margin-bottom: 0;
+}
+
+.prose-ui :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--foreground);
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
+}
+
+.prose-ui h1 {
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.125rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.prose-ui h2 {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.prose-ui h3,
+.prose-ui h4,
+.prose-ui h5,
+.prose-ui h6 {
+  font-weight: 500;
+}
+
+.prose-ui .subtitle {
+  max-width: 60ch;
+  color: var(--muted-foreground);
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.prose-ui .callout {
+  --callout-accent: var(--primary);
+
+  gap: 0.625rem;
+  border: 0;
+  border-inline-start: 2px solid var(--callout-accent);
+  padding: 1rem 1.125rem;
+  background: color-mix(in oklch, var(--callout-accent) 5%, transparent);
+}
+
+.prose-ui .callout[data-variant="warning"] {
+  --callout-accent: var(--primary);
+}
+
+.prose-ui .callout[data-variant="danger"] {
+  --callout-accent: var(--destructive);
+}
+
+.prose-ui .callout .callout-title {
+  gap: 0.5rem;
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.prose-ui .callout .callout-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--callout-accent);
+}
+
+.prose-ui .callout .callout-body-container {
+  color: var(--foreground);
+}
+
+.prose-ui .code-block,
+.prose-ui .code-group {
+  border-color: var(--border);
+  border-radius: var(--radius-soft);
+  background-color: var(--th-background, var(--muted));
+}
+
+.prose-ui .code-block .code-block-header,
+.prose-ui .code-group .code-group-header {
+  min-width: 0;
+  border-color: var(--border);
+  padding: 0.5rem 0.75rem;
+}
+
+.prose-ui .code-group .code-group-header .code-group-tabs-list {
+  min-width: 0;
+  gap: 0.75rem;
+  margin-inline-start: 0;
+  overflow-x: auto;
+}
+
+.prose-ui
+  .code-group
+  .code-group-header
+  .code-group-tabs-list
+  .code-group-tab-trigger {
+  flex: 0 0 auto;
+  border-bottom: 1px solid transparent;
+  padding: 0.5rem 0.125rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  white-space: nowrap;
+}
+
+.prose-ui
+  .code-group
+  .code-group-header
+  .code-group-tabs-list
+  .code-group-tab-trigger:hover,
+.prose-ui
+  .code-group
+  .code-group-header
+  .code-group-tabs-list
+  .code-group-tab-trigger[data-state="active"] {
+  color: var(--foreground);
+}
+
+.prose-ui
+  .code-group
+  .code-group-header
+  .code-group-tabs-list
+  .code-group-tab-trigger[data-state="active"] {
+  border-color: var(--primary);
+  box-shadow: none;
+}
+
+.prose-ui .code-group .code-group-header-actions {
+  flex: 0 0 auto;
+}
+
+.prose-ui pre.tm-code {
+  background: var(--th-background, var(--muted));
+}
+
+.prose-ui .cards {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.prose-ui .cards > .card {
+  min-width: 0;
+  gap: 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-soft);
+  padding: 1rem 1.125rem;
+  background: color-mix(in oklch, var(--muted) 42%, var(--background));
+  color: var(--foreground);
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.prose-ui .cards > .card:hover {
+  border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
+  background: color-mix(in oklch, var(--muted) 68%, var(--background));
+  color: var(--foreground);
+  transform: translateY(-1px);
+}
+
+.prose-ui .cards > .card:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.prose-ui .cards > .card .card-title {
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.prose-ui .cards > .card .card-body {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.prose-ui .cards > .card .card-footer {
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: 0.125rem;
+  color: var(--primary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.prose-ui .cards > .card .card-arrow {
+  transition: transform 150ms ease;
+}
+
+.prose-ui .cards > .card:hover .card-arrow {
+  transform: translateX(0.2rem);
+}
+
+.prose-ui .steps {
+  --step-gap: 1rem;
+  --step-connector-gap: 0.25rem;
+}
+
+.prose-ui .step-indicator {
+  border-radius: 0;
+  background: var(--background);
+  color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--border);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-ui .step-title {
+  line-height: 1.5;
+}
+
+.prose-ui .step-body {
+  color: var(--muted-foreground);
+}
+
+.prose-ui .tabs .tabs-header {
+  min-width: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose-ui .tabs .tabs-header .tabs-list {
+  max-width: 100%;
+  gap: 0.75rem;
+  overflow-x: auto;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.prose-ui .tabs .tabs-header .tabs-list .tab-trigger {
+  flex: 0 0 auto;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 0.625rem 0.125rem;
+  background: transparent;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.prose-ui .tabs .tabs-header .tabs-list .tab-trigger:hover {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.prose-ui .tabs .tabs-header .tabs-list .tab-trigger[data-state="active"] {
+  border-color: var(--primary);
+  background: transparent;
+  box-shadow: none;
+  color: var(--foreground);
+}
+
+.prose-ui .tabs .tab-content {
+  border: 0;
+  padding: 1rem 0 0;
+}
+
+.prose-ui .frame {
+  gap: 0.5rem;
+  margin-block: 1.75rem;
+}
+
+.prose-ui .frame img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-soft);
+}
+
+.prose-ui .frame .caption,
+.prose-ui > .caption {
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.prose-ui .block-math {
+  max-width: 100%;
+  margin-block: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.5rem;
+}
+
+.prose-ui .inline-math {
+  white-space: normal;
+}
+
+.prose-ui pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose-ui .code-group .code-group-header {
+  padding-block: 0px;
+}
+
+@media (max-width: 639px) {
+  .prose-ui .callout {
+    padding: 0.875rem 1rem;
+  }
+
+  .prose-ui .tabs .tabs-header {
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 640px) {
+  .prose-ui .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 379px) {
+  .prose-ui .code-group .code-group-header {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+
+  .prose-ui .code-group .code-group-header .code-group-tabs-list {
+    flex: 1 0 100%;
+  }
+
+  .prose-ui .code-group .code-group-header-actions {
+    margin-inline-start: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose-ui .cards > .card,
+  .prose-ui .cards > .card .card-arrow,
+  .prose-ui .code-group .code-group-tab-trigger {
+    transition: none;
+  }
+}

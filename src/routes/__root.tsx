@@ -4,7 +4,7 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { ConstructionBanner } from "@/components/construction-banner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NotFoundPage } from "@/components/not-found";
-import { siteConfig } from "@/lib/site.config";
+import { absoluteUrl, siteConfig } from "@/lib/site.config";
 
 import interLatinWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import appCss from "../styles.css?url";
@@ -12,7 +12,7 @@ import appCss from "../styles.css?url";
 const siteTitle = "Michael Obasi — Software Engineer";
 const siteDescription =
   "Michael Obasi is a software engineer. Selected work, writing, and a few interactive experiments.";
-const ogImage = "/og.svg";
+const ogImage = absoluteUrl("/og.svg");
 
 export const Route = createRootRoute({
   head: () => ({
@@ -43,6 +43,12 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: `${siteConfig.name} — Writing`,
+        href: absoluteUrl("/rss.xml"),
+      },
     ],
   }),
   notFoundComponent: () => <NotFoundPage />,

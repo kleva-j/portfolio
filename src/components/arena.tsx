@@ -1,41 +1,10 @@
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 
+import type { ArenaShowcase } from "@/content/portfolio-data";
+
+import { arenaShowcases } from "@/content/portfolio-data";
 import { FeatureCard } from "@/components/feature-card";
-
-type Showcase = {
-  name: string;
-  tagline: string;
-  to:
-    | "/arena/design-arena"
-    | "/arena/canvas-crowd"
-    | "/arena/activity-heatmap"
-    | "/arena/periodic-table";
-};
-
-const showcases: Showcase[] = [
-  {
-    name: "Design Arena",
-    tagline:
-      "Interactive 3D bookshelf — WebGL, instanced geometry, camera work.",
-    to: "/arena/design-arena",
-  },
-  {
-    name: "Canvas Crowd",
-    tagline: "A living crowd rendered to canvas from a single sprite sheet.",
-    to: "/arena/canvas-crowd",
-  },
-  {
-    name: "Activity Heatmap",
-    tagline: "Animated contribution grid with per-tile metrics on hover.",
-    to: "/arena/activity-heatmap",
-  },
-  {
-    name: "Periodic Table",
-    tagline: "All 118 elements with spring-physics detail cards on hover.",
-    to: "/arena/periodic-table",
-  },
-];
 
 export const Arena = () => {
   return (
@@ -48,7 +17,7 @@ export const Arena = () => {
           </p>
         </div>
         <ul className="grid grid-cols-1 gap-px border-t border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {showcases.map((showcase) => (
+          {arenaShowcases.map((showcase) => (
             <li key={showcase.name} className="bg-background">
               <ShowcaseCard showcase={showcase} />
             </li>
@@ -59,7 +28,7 @@ export const Arena = () => {
   );
 };
 
-function ShowcaseCard({ showcase }: { showcase: Showcase }) {
+function ShowcaseCard({ showcase }: { showcase: ArenaShowcase }) {
   const { name, tagline, to } = showcase;
 
   return (

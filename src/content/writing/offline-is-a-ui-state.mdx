@@ -1,0 +1,211 @@
+---
+title: "Offline is a UI state, not an error"
+date: "Oct 2026"
+dateTime: "2026-10-12"
+category: "Engineering"
+description: "A practical field guide to designing honest offline interfaces: save locally, explain what is waiting, and make recovery predictable."
+seoTitle: "Offline is a UI state, not an error | Michael Kleva"
+seoDescription: "Design a reliable offline experience with clear save states, useful recovery steps, and interface language that tells the truth."
+demo: false
+draft: false
+---
+
+The network is not a button the person can press. It is a condition the interface has to account for.
+
+When a connection drops, the useful question is not _“How do we show an error?”_ It is _“What can the person still do, and how will they know what happened?”_ That shift turns offline support from a red banner into a product promise: keep work safe, make the state legible, and resume without asking someone to start over.
+
+<Subtitle>
+  A field guide to the small decisions that make an unreliable connection feel
+  manageable.
+</Subtitle>
+
+## Start with a truthful promise
+
+An offline interface should distinguish three events that are easy to blur together:
+
+- **Saved here:** the device has a durable copy.
+- **Waiting to sync:** the server has not confirmed the change.
+- **Synced:** the server has accepted it.
+
+“Saved” should mean the first thing, not the third. If the product cannot make that promise, say what it can do instead. Familiar labels are only useful when they describe a state the system can prove.
+
+<Callout variant="tip" title="Name the receipt">
+  Show “Saved on this device” as soon as the local write completes. Change it to
+  “Synced” only after the server confirms the update.
+</Callout>
+
+The distinction can be expressed as a small reliability budget: the interface becomes trustworthy when a local save is fast and its explanation is clear.
+
+$T_{\text{reassurance}} = T_{\text{local save}} + T_{\text{clear signal}}$
+
+These equations are models, not guarantees. They make two separate failure points visible: keeping a copy and delivering that copy later. Let $w$ be a successful local write, $q$ be eventual delivery conditional on that write, and $s$ be the chance the edit survives both steps:
+
+$$
+s = w \cdot q
+$$
+
+<Callout variant="note" title="A useful boundary">
+  A queued update is not a confirmed update. Keep those states distinct in the
+  interface and in the data model.
+</Callout>
+
+<Callout variant="info" title="When the network returns">
+  Let the product retry in the background, then confirm the result in place.
+  Avoid interrupting someone who has already moved on.
+</Callout>
+
+## Keep the work close at hand
+
+A trustworthy offline flow needs a durable local record and a clear way to replay it. The exact storage mechanism depends on the product, but the interaction should survive a refresh and explain which changes are still waiting.
+
+The illustration below is a contact sheet of character studies. The same principle applies to empty states: use imagery to make a quiet screen feel considered, while letting the words explain what the person can do next.
+
+<Frame
+  align="center"
+  caption="Character studies for states that should feel human, not alarming."
+>
+  <Image
+    src="/images/peeps/all-peeps.png"
+    alt="A contact sheet of illustrated characters with distinct expressions and poses."
+    width="3600"
+    height="2268"
+    zoom="true"
+  />
+</Frame>
+
+<Caption>
+  The image is decorative context; the saved and pending labels carry the
+  operational meaning.
+</Caption>
+
+<Callout variant="warning" title="Do not promise what storage cannot keep">
+  Browser storage can be cleared or evicted. If losing the local copy would be
+  serious, make that limitation visible and offer an export or recovery path.
+</Callout>
+
+## Make the queue explain itself
+
+An offline queue is easier to reason about when a person can see what is waiting and what will happen next. For a small sync client, the record might be as plain as:
+
+<CodeBlock
+  language="ts"
+  code="type PendingChange = { id: string; savedAt: number; attempts: number; };"
+  showLineNumbers="true"
+/>
+
+```tsx title="my-component.tsx" showLineNumbers
+const MyComponent = () => {
+  return <div>Hello Universe</div>;
+};
+```
+
+For comparison, the same record serialized for inspection looks like:
+
+<CodeGroup groupId="offline-record">
+
+```ts title="Pending change"
+type PendingChange = {
+  id: string;
+  savedAt: number;
+  attempts: number;
+};
+```
+
+```json title="Pending change"
+{
+  "id": "change-42",
+  "savedAt": 1791788400000,
+  "attempts": 1
+}
+```
+
+```ts title="Retry decision"
+const shouldRetry = (online: boolean, attempts: number) =>
+  online && attempts < 5;
+```
+
+```json title="Retry decision"
+{
+  "online": true,
+  "attempts": 1,
+  "shouldRetry": true
+}
+```
+
+</CodeGroup>
+
+The tabs let a reader compare the type and the persisted value without repeating the surrounding explanation. Keep the interaction optional: a person should still understand the idea without opening every variant.
+
+<Callout variant="danger" title="Treat conflicts as data, not surprises">
+  If two devices can edit the same record, a retry alone cannot decide which
+  version should win. Preserve enough history to explain the conflict and let
+  the person choose when automatic merging is unsafe.
+</Callout>
+
+## Give recovery a sequence
+
+Retries should be bounded, observable, and safe to repeat. A simple recovery path gives each step one job:
+
+<Steps>
+  <Step title="Persist the change">
+    Write the update locally before showing that it is saved.
+  </Step>
+  <Step title="Wait without losing context">
+    Keep the pending item visible while the connection is unavailable.
+  </Step>
+  <Step title="Retry with a limit">
+    Use backoff and an idempotency key so repeating a request does not create a
+    duplicate.
+  </Step>
+  <Step title="Confirm or explain">
+    Mark the update as synced after confirmation; otherwise show a specific next
+    action.
+  </Step>
+</Steps>
+
+## Let the person inspect the state
+
+The same update can be explained in different ways depending on what someone needs to know first:
+
+<Tabs>
+  <Tab value="On this device">
+    The change is stored locally. It is safe on this device, but it has not
+    reached the server yet.
+  </Tab>
+  <Tab value="Syncing">
+    The connection is back. The app is sending the queued change and will keep
+    it visible until the server responds.
+  </Tab>
+  <Tab value="Needs attention">
+    The server rejected the update. Show the reason, keep the local copy, and
+    offer a clear recovery action.
+  </Tab>
+</Tabs>
+
+These descriptions should match real states rather than optimistic guesses. The [web platform's online and offline events](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) can help update the display, but a network signal alone does not prove that your server is reachable.
+
+<Cards>
+  <Card
+    title="Design for the interruption"
+    href="/writing/pairsync-sync-protocol"
+    cta="Read the sync protocol"
+    arrow="true"
+  >
+    See how an outbox, idempotency, and explicit conflict policy fit together.
+  </Card>
+  <Card
+    title="Keep the feedback local"
+    href="/writing"
+    cta="Browse the writing archive"
+    arrow="true"
+  >
+    Continue with other notes on interfaces, systems, and the trade-offs between
+    them.
+  </Card>
+</Cards>
+
+## Make uncertainty readable
+
+Good offline UX does not pretend the connection is reliable. It makes uncertainty small enough to act on: the person can tell what is saved, what is waiting, and what needs attention. That is a more useful promise than “works offline” on its own.
+
+When a change is safe locally but still pending, say so plainly. When it syncs, close the loop. When it cannot, keep the work and show a way forward. A calm interface is not one that hides failure; it is one that leaves no mystery about what happens next.

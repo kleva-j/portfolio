@@ -13,7 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as HowIWorkRouteImport } from './routes/how-i-work'
+import { Route as PlanRouteImport } from './routes/plan'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
+import { Route as WritingRouteImport } from './routes/writing'
 import { Route as ArenaActivityHeatmapRouteImport } from './routes/arena/activity-heatmap'
 import { Route as ArenaCanvasCrowdRouteImport } from './routes/arena/canvas-crowd'
 import { Route as ArenaDesignArenaRouteImport } from './routes/arena/design-arena'
@@ -41,9 +44,24 @@ const HowIWorkRoute = HowIWorkRouteImport.update({
   path: '/how-i-work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WritingRoute = WritingRouteImport.update({
+  id: '/writing',
+  path: '/writing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArenaActivityHeatmapRoute = ArenaActivityHeatmapRouteImport.update({
@@ -67,14 +85,14 @@ const ArenaPeriodicTableRoute = ArenaPeriodicTableRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const WritingIndexRoute = WritingIndexRouteImport.update({
-  id: '/writing/',
-  path: '/writing/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => WritingRoute,
 } as any)
 const WritingSlugRoute = WritingSlugRouteImport.update({
-  id: '/writing/$slug',
-  path: '/writing/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => WritingRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -82,7 +100,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/cv': typeof CvRoute
   '/how-i-work': typeof HowIWorkRoute
+  '/plan': typeof PlanRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/writing': typeof WritingRouteWithChildren
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -95,7 +116,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/cv': typeof CvRoute
   '/how-i-work': typeof HowIWorkRoute
+  '/plan': typeof PlanRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -109,7 +132,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/cv': typeof CvRoute
   '/how-i-work': typeof HowIWorkRoute
+  '/plan': typeof PlanRoute
   '/projects': typeof ProjectsRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/writing': typeof WritingRouteWithChildren
   '/arena/activity-heatmap': typeof ArenaActivityHeatmapRoute
   '/arena/canvas-crowd': typeof ArenaCanvasCrowdRoute
   '/arena/design-arena': typeof ArenaDesignArenaRoute
@@ -124,7 +150,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/cv'
     | '/how-i-work'
+    | '/plan'
     | '/projects'
+    | '/rss.xml'
+    | '/writing'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -137,7 +166,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/cv'
     | '/how-i-work'
+    | '/plan'
     | '/projects'
+    | '/rss.xml'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -150,7 +181,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/cv'
     | '/how-i-work'
+    | '/plan'
     | '/projects'
+    | '/rss.xml'
+    | '/writing'
     | '/arena/activity-heatmap'
     | '/arena/canvas-crowd'
     | '/arena/design-arena'
@@ -164,13 +198,14 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CvRoute: typeof CvRoute
   HowIWorkRoute: typeof HowIWorkRoute
+  PlanRoute: typeof PlanRoute
   ProjectsRoute: typeof ProjectsRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
+  WritingRoute: typeof WritingRouteWithChildren
   ArenaActivityHeatmapRoute: typeof ArenaActivityHeatmapRoute
   ArenaCanvasCrowdRoute: typeof ArenaCanvasCrowdRoute
   ArenaDesignArenaRoute: typeof ArenaDesignArenaRoute
   ArenaPeriodicTableRoute: typeof ArenaPeriodicTableRoute
-  WritingSlugRoute: typeof WritingSlugRoute
-  WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -203,11 +238,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowIWorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing': {
+      id: '/writing'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof WritingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/arena/activity-heatmap': {
@@ -240,33 +296,47 @@ declare module '@tanstack/react-router' {
     }
     '/writing/': {
       id: '/writing/'
-      path: '/writing'
+      path: '/'
       fullPath: '/writing/'
       preLoaderRoute: typeof WritingIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof WritingRoute
     }
     '/writing/$slug': {
       id: '/writing/$slug'
-      path: '/writing/$slug'
+      path: '/$slug'
       fullPath: '/writing/$slug'
       preLoaderRoute: typeof WritingSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof WritingRoute
     }
   }
 }
+
+interface WritingRouteChildren {
+  WritingSlugRoute: typeof WritingSlugRoute
+  WritingIndexRoute: typeof WritingIndexRoute
+}
+
+const WritingRouteChildren: WritingRouteChildren = {
+  WritingSlugRoute: WritingSlugRoute,
+  WritingIndexRoute: WritingIndexRoute,
+}
+
+const WritingRouteWithChildren =
+  WritingRoute._addFileChildren(WritingRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CvRoute: CvRoute,
   HowIWorkRoute: HowIWorkRoute,
+  PlanRoute: PlanRoute,
   ProjectsRoute: ProjectsRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
+  WritingRoute: WritingRouteWithChildren,
   ArenaActivityHeatmapRoute: ArenaActivityHeatmapRoute,
   ArenaCanvasCrowdRoute: ArenaCanvasCrowdRoute,
   ArenaDesignArenaRoute: ArenaDesignArenaRoute,
   ArenaPeriodicTableRoute: ArenaPeriodicTableRoute,
-  WritingSlugRoute: WritingSlugRoute,
-  WritingIndexRoute: WritingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

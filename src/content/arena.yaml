@@ -1,0 +1,21 @@
+items:
+  - name: Design Arena
+    tagline: Interactive 3D bookshelf — WebGL, instanced geometry, camera work.
+    to: /arena/design-arena
+    order: 1
+    status: published
+  - name: Canvas Crowd
+    tagline: A living crowd rendered to canvas from a single sprite sheet.
+    to: /arena/canvas-crowd
+    order: 2
+    status: published
+  - name: Activity Heatmap
+    tagline: Animated contribution grid with per-tile metrics on hover.
+    to: /arena/activity-heatmap
+    order: 3
+    status: published
+  - name: Periodic Table
+    tagline: All 118 elements with spring-physics detail cards on hover.
+    to: /arena/periodic-table
+    order: 4
+    status: published

@@ -1,11 +1,11 @@
 import { FullWidthDivider } from "@/components/full-width-divider";
+import { getPosts } from "@/content/writing/posts-collections";
 import { AsciiPortrait } from "@/components/ascii-portrait";
 import { createFileRoute } from "@tanstack/react-router";
 import { CareerCard } from "@/components/career-card";
 import { DecorIcon } from "@/components/decor-icon";
 import { Projects } from "@/components/projects";
 import { Writings } from "@/components/writings";
-import { getPosts } from "@/content/writing/posts";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -37,7 +37,7 @@ const heroLinks = [
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta }),
-  loader: async () => ({ posts: await getPosts() }),
+  loader: () => ({ posts: getPosts() }),
   component: App,
 });
 

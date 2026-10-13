@@ -1,10 +1,10 @@
-import type { Project } from "@/content/projects";
+import type { Project } from "@/content/portfolio-data";
 
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 import { FullWidthDivider } from "@/components/full-width-divider";
-import { projects } from "@/content/projects";
+import { projects } from "@/content/portfolio-data";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 

@@ -1,0 +1,11 @@
+items:
+  - name: Michael Obasi
+    slug: michael-obasi
+    role: Product-focused Software Engineer
+    location: Lagos, Nigeria / Remote
+    bio: Software engineer focused on thoughtful product engineering, UI systems, and full-stack delivery.
+    website: https://portfolio.kasmickleva.workers.dev
+    github: https://github.com/kleva-j
+    linkedin: https://www.linkedin.com/in/michael-obasi-808806140/
+    featured: true
+    order: 1

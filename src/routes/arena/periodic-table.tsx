@@ -5,6 +5,8 @@ import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
+import "@/styles/bjork-ui.css";
+
 import { PeriodicTable } from "@/components/ui/bjork-ui/periodic-table";
 
 export const Route = createFileRoute("/arena/periodic-table")({

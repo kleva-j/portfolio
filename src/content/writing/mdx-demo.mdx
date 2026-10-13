@@ -1,0 +1,72 @@
+---
+title: "MDX + Prose UI, without runtime evaluation"
+date: "Oct 2026"
+dateTime: "2026-10-09"
+category: "Engineering"
+description: "An AST-based MDX pipeline that keeps interactive prose, site-native styling, and server rendering working together."
+demo: false
+draft: false
+---
+
+MDX earns its place in a portfolio when it can do more than format paragraphs: an article should be able to use real React components without turning the body into a client-only island.
+
+This setup follows the referenced TanStack Start blog template: Content Collections parses each `.mdx` file into an AST at build time, serializes it as JSON-safe content, and the route renders that tree with `safe-mdx`. The renderer does not evaluate MDX source strings with `eval` or `new Function`, which keeps server rendering compatible with Cloudflare Workers.
+
+## Parse MDX into collection data
+
+The collection transform uses Remark with Prose UI's content plugins, `remark-mdx`, and `remarkMarkAndUnravel` from `safe-mdx/parse`. It deliberately excludes Prose UI's Shiki code-block plugin so fenced code remains a standard MDX AST node. The renderer sends those nodes through the same TanStack Highlight pipeline used by Markdown posts. YAML frontmatter is recognized during parsing, and the resulting AST is JSON-round-tripped before it enters generated collection data.
+
+```ts
+import remarkCodeBlock from "@prose-ui/core/remark-code-block";
+
+const proseRemarkPlugins = remarkPlugins().filter(
+  (plugin) => plugin !== remarkCodeBlock,
+);
+
+const mdxProcessor = remark()
+  .use(remarkMdx)
+  .use(remarkFrontmatter, ["yaml"])
+  .use(proseRemarkPlugins)
+  .use(remarkMarkAndUnravel)
+  .use(() => (tree, file) => {
+    file.data.ast = tree;
+  });
+```
+
+Here, `proseRemarkPlugins` is `remarkPlugins()` with `remarkCodeBlock` removed. Content Collections continues to validate post metadata and calculate reading time. Regular `.md` posts still go through the existing HTML compiler; only `.mdx` posts carry the source and serialized AST needed by the renderer.
+
+## Render with Prose UI
+
+The article route passes the collection's original MDX source, its AST, and Prose UI's `createMdxComponents()` map to `SafeMdxRenderer`. Its `renderNode` hook sends fenced blocks through the shared TanStack highlighter; Prose UI continues to supply the other content components:
+
+```tsx
+<div className="prose-ui">
+  <SafeMdxRenderer
+    markdown={post.content}
+    mdast={post.mdast}
+    components={createMdxComponents()}
+    renderNode={(node) => {
+      if (node.type !== "code") return undefined;
+      const language = node.lang ?? undefined;
+      return (
+        <pre className="tm-code tm-code--line-numbers" data-lang={language}>
+          <code
+            className={language ? `language-${language}` : undefined}
+            dangerouslySetInnerHTML={{
+              __html: highlightMarkdownCode(node.value, language, {
+                lineNumbers: true,
+              }),
+            }}
+          />
+        </pre>
+      );
+    }}
+  />
+</div>
+```
+
+The component map sends Prose UI's explicit `CodeBlock` component through the same TanStack highlighter as ordinary fences; CodeGroup keeps its language and snippet tabs. Prose UI also supplies callouts, images, and standard Markdown elements. The portfolio maps Prose UI's text, surfaces, borders, accents, and type to the existing theme tokens, so the same content follows both light and dark themes.
+
+## Preserve the page boundary
+
+The article shell owns the title, summary, date, reading time, and navigation. MDX stays in the content layer, renders as part of the server response, and does not require a client-only article body. Code fences keep their own horizontal scroll area on narrow screens rather than widening the page.

@@ -12,12 +12,19 @@
     "check": "prettier --check \"**/*.{ts,tsx,js,jsx}\"",
     "typecheck": "tsc --noEmit",
     "deploy": "pnpm typecheck && pnpm build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "og:all-posts": "node --experimental-strip-types scripts/generate-og.ts"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
     "@fontsource-variable/inter": "^5.3.0",
     "@phosphor-icons/react": "^2.1.10",
+    "@prose-ui/core": "^2.0.8",
+    "@prose-ui/react": "^2.0.8",
+    "@prose-ui/style": "^2.0.8",
     "@tailwindcss/vite": "^4",
     "@tanstack/highlight": "0.1.0",
     "@tanstack/markdown": "0.0.15",
@@ -35,13 +42,20 @@
     "nitro": "3.0.260903-beta",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "safe-mdx": "^1.14.0",
     "shadcn": "^4.21.0",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4",
-    "tw-animate-css": "^1.4.0"
+    "tw-animate-css": "^1.4.0",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.62.5",
+    "@content-collections/core": "^0.15.3",
+    "@content-collections/vite": "^0.3.1",
+    "@remotion/bundler": "^4.0.534",
+    "@remotion/renderer": "^4.0.534",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
     "@testing-library/dom": "^10.4.1",
@@ -51,13 +65,19 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6",
     "eslint": "^9",
+    "gray-matter": "^4.0.3",
     "jiti": "^2.7.0",
     "jsdom": "^30",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "remark": "^15.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx": "^3.1.1",
+    "remotion": "^4.0.534",
     "typescript": "^6",
     "vite": "^8",
     "vitest": "^4",
-    "wrangler": "^4.147.0"
+    "wrangler": "^4.147.0",
+    "zod": "^4.6.5"
   }
 }

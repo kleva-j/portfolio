@@ -19,9 +19,9 @@ import { ts } from "@tanstack/highlight/languages/ts";
 import { markdownRendererClassName } from "@/lib/markdown-theme";
 
 // Heavy module: eagerly builds the highlighter at load. Import only from
-// `posts.server.ts` (server) or the lazy `streaming-demo.tsx` chunk, never the
-// eager client graph. Client code that only needs the class should import
-// `markdown-theme.ts` instead.
+// the content-collections transform (build time) or the lazy
+// `streaming-demo.tsx` chunk, never the eager client graph. Client code that
+// only needs the class should import `markdown-theme.ts` instead.
 
 // Only the languages this portfolio publishes are registered; an unknown fence
 // language degrades to escaped plain text.

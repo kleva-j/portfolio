@@ -10,6 +10,7 @@ signature interactive 3D showcase.
 - **Framework:** TanStack Start (SSR) + TanStack Router (file-based) + React 19 + Vite 8.
 - **Styling:** Tailwind CSS v4 (config-in-CSS) + shadcn/ui + Base UI. Design tokens
   live in `src/styles.css` as CSS custom properties.
+- **Content:** Content Collections (build-time static content processing with Zod validation).
 
 ## Commands
 

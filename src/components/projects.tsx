@@ -1,10 +1,10 @@
 import { ArrowUpRightIcon, ArrowRightIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 
-import type { Project } from "@/content/projects";
+import type { Project } from "@/content/portfolio-data";
 
+import { featuredProjects } from "@/content/portfolio-data";
 import { FeatureCard } from "@/components/feature-card";
-import { featuredProjects } from "@/content/projects";
 
 export const Projects = () => {
   return (
@@ -60,7 +60,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           <h4 className="text-sm font-medium text-foreground md:text-base">
             {name}
           </h4>
-          <span className="hidden text-[11px] tracking-[0.1em] text-muted-foreground uppercase sm:inline">
+          <span className="hidden text-[11px] tracking-widest text-muted-foreground uppercase sm:inline">
             {role}
           </span>
           <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 font-mono text-[11px] text-muted-foreground tabular-nums">
