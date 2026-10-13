@@ -1,6 +1,7 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { remarkMarkAndUnravel } from "safe-mdx/parse";
 import { remarkPlugins } from "@prose-ui/core";
+import { parse as parseYaml } from "yaml";
 import { remark } from "remark";
 import { z } from "zod";
 
@@ -30,6 +31,84 @@ const jsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
   ]),
 );
 
+const yamlDocumentSchema = z.object({ content: z.string() });
+
+const authorDataSchema = z.object({
+  items: z.array(
+    z.object({
+      name: z.string(),
+      slug: z.string(),
+      role: z.string().optional(),
+      location: z.string().optional(),
+      bio: z.string().optional(),
+      website: z.url().optional(),
+      github: z.url().optional(),
+      linkedin: z.url().optional(),
+      x: z.url().optional(),
+      avatar: z.string().optional(),
+      featured: z.boolean().default(false),
+      order: z.number(),
+    }),
+  ),
+});
+
+const projectDataSchema = z.object({
+  items: z.array(
+    z.object({
+      name: z.string(),
+      year: z.string(),
+      role: z.string(),
+      summary: z.string(),
+      stack: z.array(z.string()),
+      href: z.string(),
+      external: z.boolean().default(false),
+      featured: z.boolean().default(false),
+      featuredOrder: z.number().optional(),
+      order: z.number(),
+      status: z.enum(["active", "shipped", "archived", "draft"]).optional(),
+      collaborators: z.array(z.string()).optional(),
+    }),
+  ),
+});
+
+const arenaDataSchema = z.object({
+  items: z.array(
+    z.object({
+      name: z.string(),
+      tagline: z.string(),
+      to: z.enum([
+        "/arena/design-arena",
+        "/arena/canvas-crowd",
+        "/arena/activity-heatmap",
+        "/arena/periodic-table",
+      ]),
+      order: z.number(),
+      status: z.enum(["published", "draft"]).default("published"),
+    }),
+  ),
+});
+
+const careerDataSchema = z.object({
+  items: z.array(
+    z.object({
+      role: z.string(),
+      company: z.string().optional(),
+      period: z.string(),
+      date: z.string(),
+      current: z.boolean().default(false),
+      description: z.string().optional(),
+      stack: z.array(z.string()).default([]),
+      showInAbout: z.boolean().default(true),
+      showInTimeline: z.boolean().default(true),
+      order: z.number(),
+    }),
+  ),
+});
+
+function parseYamlData<T extends z.ZodType>(content: string, schema: T): z.output<T> {
+  return schema.parse(parseYaml(content));
+}
+
 const proseRemarkPlugins = remarkPlugins().filter(
   (plugin) => plugin !== remarkCodeBlock,
 );
@@ -53,6 +132,38 @@ async function parseMdxAst(content: string): Promise<JsonValue> {
 
   return jsonValueSchema.parse(JSON.parse(JSON.stringify(ast)));
 }
+
+const authors = defineCollection({
+  name: "authors",
+  directory: "src/content",
+  include: "authors.yaml",
+  schema: yamlDocumentSchema,
+  transform: (document) => parseYamlData(document.content, authorDataSchema),
+});
+
+const projects = defineCollection({
+  name: "projects",
+  directory: "src/content",
+  include: "projects.yaml",
+  schema: yamlDocumentSchema,
+  transform: (document) => parseYamlData(document.content, projectDataSchema),
+});
+
+const arena = defineCollection({
+  name: "arena",
+  directory: "src/content",
+  include: "arena.yaml",
+  schema: yamlDocumentSchema,
+  transform: (document) => parseYamlData(document.content, arenaDataSchema),
+});
+
+const career = defineCollection({
+  name: "career",
+  directory: "src/content",
+  include: "career.yaml",
+  schema: yamlDocumentSchema,
+  transform: (document) => parseYamlData(document.content, careerDataSchema),
+});
 
 const posts = defineCollection({
   name: "posts",
@@ -89,4 +200,6 @@ const posts = defineCollection({
   },
 });
 
-export default defineConfig({ content: [posts] });
+export default defineConfig({
+  content: [authors, projects, arena, career, posts],
+});

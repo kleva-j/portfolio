@@ -1,10 +1,12 @@
 import {
-  ArrowUpRightIcon,
   DownloadSimpleIcon,
   EnvelopeSimpleIcon,
+  ArrowUpRightIcon,
 } from "@phosphor-icons/react";
+
 import { FullWidthDivider } from "@/components/full-width-divider";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { aboutExperience } from "@/content/portfolio-data";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site.config";
 import { Header } from "@/components/header";
@@ -23,34 +25,6 @@ const focus = [
   ["Writing", "Occasional long-form on engineering decisions and tooling."],
 ] as const;
 
-type Role = {
-  period: string;
-  role: string;
-  company: string;
-  current?: boolean;
-};
-
-const experience: Role[] = [
-  {
-    period: "2026 – present",
-    role: "Independent Engineer",
-    company: "PairSync",
-    current: true,
-  },
-  {
-    period: "2026",
-    role: "Software Engineer (Contract)",
-    company: "Screenstack.tech",
-  },
-  {
-    period: "2023 – 2026",
-    role: "Freelance Software Engineer",
-    company: "Self-employed",
-  },
-  { period: "2022", role: "Software Engineer", company: "Aduro Creative" },
-  { period: "2021", role: "Frontend Engineer", company: "LawPavilion" },
-  { period: "2019", role: "Frontend Engineer", company: "Tulaa" },
-];
 
 const pageTitle = "About — Michael Obasi";
 const pageDescription =
@@ -196,9 +170,9 @@ function About() {
           <div className="mt-10 border-t border-border pt-8">
             <SectionLabel index="03">Experience</SectionLabel>
             <ul className="grid gap-5">
-              {experience.map(({ period, role, company, current }) => (
+              {aboutExperience.map(({ period, role, company, current }) => (
                 <li
-                  key={period}
+                  key={`${company}-${role}-${period}`}
                   className="grid gap-0.5 sm:grid-cols-[9rem_1fr] sm:items-baseline sm:gap-x-6"
                 >
                   <span
@@ -213,7 +187,7 @@ function About() {
                     <span className="font-medium text-foreground">{role}</span>
                     <span className="text-muted-foreground">
                       {" · "}
-                      {company}
+                      {company ?? "Independent"}
                     </span>
                   </p>
                 </li>

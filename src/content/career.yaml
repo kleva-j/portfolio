@@ -1,0 +1,54 @@
+items:
+  - role: Independent Engineer
+    company: PairSync
+    period: 2026 – present
+    date: Present
+    current: true
+    description: Building peer-to-peer file and clipboard sharing for desktop and mobile — no cloud, no accounts, no relay servers.
+    stack: [Rust, Tauri, React Native, Expo]
+    showInAbout: true
+    showInTimeline: true
+    order: 1
+  - role: Software Engineer
+    company: Screenstack.tech (Contract)
+    period: "2026"
+    date: "2026"
+    description: "Full-stack contractor working end to end: shipped frontend interfaces and backend services, designed and modeled the database, shaped the product's UI/UX, established engineering workflows, and mentored teammates."
+    stack: [React, Node.js, TypeScript, PostgreSQL]
+    showInAbout: true
+    showInTimeline: true
+    order: 2
+  - role: Freelance Software Engineer
+    company: Self-employed
+    period: 2023 – 2026
+    date: 2023 – 2026
+    showInAbout: true
+    showInTimeline: false
+    order: 3
+  - role: Software Engineer
+    company: Aduro Creative
+    period: "2022"
+    date: "2022"
+    description: Built React apps for clients including a medical-education platform, and drove accessibility initiatives across the UI.
+    stack: [React, TypeScript, Accessibility]
+    showInAbout: true
+    showInTimeline: true
+    order: 4
+  - role: Frontend Engineer
+    company: LawPavilion
+    period: "2021"
+    date: "2021"
+    description: Engineered a performance-focused Angular architecture with lazy-loading and web-worker offloading to bring down load times across the app.
+    stack: [Angular, TypeScript, RxJS]
+    showInAbout: true
+    showInTimeline: true
+    order: 5
+  - role: Frontend Engineer
+    company: Tulaa
+    period: "2019"
+    date: "2019"
+    description: Built an Angular CRM serving 25,000+ users and cut load time by ~30% with lazy-loaded microservices, while leading and mentoring the frontend team.
+    stack: [Angular 8, TypeScript, Data viz]
+    showInAbout: true
+    showInTimeline: true
+    order: 6
