@@ -11,7 +11,7 @@ value. `/design-arena` is exempt from everything below; it is governed by
 ## Direction
 
 Editorial, text-forward personal site — reads like a well-set magazine, not a web
-app. Warm near-black on warm near-white, one copper accent, square corners,
+app. Warm near-black on warm near-white, one copper accent, mostly square corners,
 hairline rules. Content leads; chrome recedes.
 
 ## Principles
@@ -67,7 +67,9 @@ needs both. Reserve copper — if everything is copper, nothing is.
 
 ## Shape & elevation
 
-- **Radius `--radius: 0`** — square corners everywhere.
+- **Radius `--radius: 0`** — the default is square. Use `--radius-soft` only for
+  distinct content surfaces such as linked cards, code panels, callouts, and framed
+  images; keep controls and editorial rules square.
 - Borders over shadows. Avoid drop shadows and heavy elevation.
 - Visible focus everywhere via `--ring` (`outline-ring/50`, applied globally).
   Never remove focus outlines.
@@ -117,7 +119,8 @@ actions.
 
 - Add a second accent color, gradients, or decorative shadows.
 - Introduce raw hex/RGB or arbitrary radius in components — add a token instead.
-- Round corners, box content in cards without cause, or crowd sections.
+- Add rounding beyond `--radius-soft`, box content in cards without cause, or crowd
+  sections.
 - Remove focus outlines or signal meaning with color alone.
 - Restyle `/design-arena` to match this system, or import these tokens into the
   vendored ThreeUI source.

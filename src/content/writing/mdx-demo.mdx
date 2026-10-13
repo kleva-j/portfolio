@@ -65,7 +65,7 @@ The article route passes the collection's original MDX source, its AST, and Pros
 </div>
 ```
 
-The component map supplies Prose UI's code blocks, callouts, images, and standard Markdown elements. The portfolio maps Prose UI's text, surfaces, borders, accents, and type to the existing theme tokens, so the same content follows both light and dark themes.
+The component map sends Prose UI's explicit `CodeBlock` component through the same TanStack highlighter as ordinary fences; CodeGroup keeps its language and snippet tabs. Prose UI also supplies callouts, images, and standard Markdown elements. The portfolio maps Prose UI's text, surfaces, borders, accents, and type to the existing theme tokens, so the same content follows both light and dark themes.
 
 ## Preserve the page boundary
 

@@ -1,13 +1,37 @@
 import type { ComponentProps } from "react";
 
 import { createMdxComponents } from "@prose-ui/react";
+import type { CodeBlock as ProseCodeBlock } from "@prose-ui/react";
 import { SafeMdxRenderer } from "safe-mdx";
 
 import { highlightMarkdownCode } from "@/lib/markdown-highlighter";
 
 type SafeMdxAst = NonNullable<ComponentProps<typeof SafeMdxRenderer>["mdast"]>;
 
-const mdxComponents = createMdxComponents();
+function SiteCodeBlock({
+  code,
+  language,
+  showLineNumbers,
+}: ComponentProps<typeof ProseCodeBlock>) {
+  const source = code ?? "";
+  const lineNumbers = showLineNumbers ?? false;
+
+  return (
+    <pre
+      className={lineNumbers ? "tm-code tm-code--line-numbers" : "tm-code"}
+      data-lang={language}
+    >
+      <code
+        className={language ? `language-${language}` : undefined}
+        dangerouslySetInnerHTML={{
+          __html: highlightMarkdownCode(source, language, { lineNumbers }),
+        }}
+      />
+    </pre>
+  );
+}
+
+const mdxComponents = createMdxComponents({ CodeBlock: SiteCodeBlock });
 
 type MdxContentProps = {
   slug: string;
